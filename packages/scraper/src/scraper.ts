@@ -2,12 +2,17 @@ import queryString from 'query-string';
 
 export type ScraperOptions = {
   apiKey: string;
+  basePath?: string;
 };
 
 export class BaseScraper {
   private apiBasePath = 'https://harvestapi.net/api';
 
-  constructor(private options: ScraperOptions) {}
+  constructor(private options: ScraperOptions) {
+    if (options.basePath) {
+      this.apiBasePath = options.basePath;
+    }
+  }
 
   async fetchApi({ path, params }: { path: string; params?: any }) {
     if (!this.options.apiKey) {
