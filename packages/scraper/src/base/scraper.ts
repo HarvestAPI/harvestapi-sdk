@@ -1,9 +1,5 @@
 import queryString from 'query-string';
-
-export type ScraperOptions = {
-  apiKey: string;
-  basePath?: string;
-};
+import { ScraperOptions } from './types';
 
 export class BaseScraper {
   private apiBasePath = 'https://harvestapi.net/api';

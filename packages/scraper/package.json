@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "jest",
+    "test:concurrency": "npx tsx src/test/concurrency.ts -- --run",
     "fix:lint": "eslint \"{src,test}/**/*.ts\" --fix"
   },
   "keywords": [],
@@ -11,7 +12,9 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "22.13.4",
+    "@types/sqlite3": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "6.15.0",
     "@typescript-eslint/parser": "6.15.0",
     "eslint": "8.56.0",
@@ -27,7 +30,11 @@
     "@swc/jest": "^0.2.37",
     "@types/jest": "^29.5.14",
     "dotenv": "^16.4.7",
+    "fs-extra": "^11.3.0",
     "jest": "^29.7.0",
-    "query-string": "9.1.1"
+    "nanoid": "^5.1.0",
+    "query-string": "9.1.1",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
   }
 }

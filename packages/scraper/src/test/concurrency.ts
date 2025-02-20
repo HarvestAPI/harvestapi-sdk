@@ -33,6 +33,7 @@ export function testConcurrentRequests({
 }: {
   method?: 'getCompany' | 'test';
   instances: {
+    name?: string;
     method?: 'getCompany' | 'test';
     apiKey: string;
     requests: number;
@@ -40,7 +41,7 @@ export function testConcurrentRequests({
 }) {
   instances.forEach((instance, i) => {
     const promises: Promise<any>[] = [];
-    const userKey = `instance_${i}`;
+    const userKey = `instance_${instance.name || i}`;
 
     const scraper = new LinkedinScraper({
       apiKey: instance.apiKey,
@@ -77,5 +78,18 @@ export function testConcurrentRequests({
 
       console.info(userKey, 'requests per minute:', requestsPerSecond * 60);
     });
+  });
+}
+
+if (process.argv.includes('--run')) {
+  require('dotenv').config();
+
+  const instances = JSON.parse(process.env.API_TEST_ACCOUNTS || '[]');
+  console.info(`instances`, instances);
+
+  testConcurrentRequests({
+    method: 'getCompany',
+    // method: 'test',
+    instances,
   });
 }

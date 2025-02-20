@@ -1,28 +1,3 @@
-export interface ApiItemResponse<TItem> {
-  id: string | null;
-  element: TItem;
-  status: string;
-  error: any;
-  query: Record<string, any>;
-  liUrl?: string;
-}
-
-export interface ApiListResponse<TItem> {
-  id: string | null;
-  pagination: {
-    totalPages: number;
-    totalElements: number;
-    pageNumber: number;
-    previousElements: number;
-    pageSize: number;
-  } | null;
-  elements: TItem[];
-  status: string;
-  error: any;
-  query: Record<string, any>;
-  liUrl?: string;
-}
-
 export interface ErrorResponse {
   error: string;
   message: string;
@@ -46,7 +21,6 @@ export type SearchLinkedInProfilesParams = {
 export type GetCompanyParams = {
   universalName?: string;
   url?: string;
-  companyId?: string | null;
 };
 
 export type CompanySize =
@@ -196,7 +170,7 @@ export interface ProfileShort {
   };
   url?: string;
   photo?: string;
-  hiddenDueToPrivacySettings?: boolean;
+  hidden?: boolean;
 }
 
 export interface Company {
