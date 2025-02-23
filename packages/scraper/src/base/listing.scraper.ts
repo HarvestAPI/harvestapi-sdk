@@ -1,12 +1,12 @@
 import fs from 'fs-extra';
 import { resolve } from 'path';
 import type { Database } from 'sqlite';
-import { ApiListResponse } from '../types';
+import { ApiItemResponse, ApiListResponse } from '../types';
 import { createConcurrentQueues } from '../utils';
 import { ListingScraperOptions } from './types';
 import { randomUUID } from 'crypto';
 
-export class ListingScraper<TItemShort, TItemDetail> {
+export class ListingScraper<TItemShort extends { id: string }, TItemDetail extends { id: string }> {
   private id = randomUUID();
   private startTime = new Date();
   private inMemoryItems: TItemDetail[] = [];
@@ -134,13 +134,26 @@ export class ListingScraper<TItemShort, TItemDetail> {
     const details: TItemDetail[] = [];
 
     for (const item of list.elements) {
-      const itemDetails = await this.options.fetchItem({ item })?.catch((error) => {
-        console.error('Error scraping item', error);
-        return null;
-      });
+      let itemDetails: ApiItemResponse<TItemDetail> | null | undefined = null;
+
+      if (this.options.scrapeDetails) {
+        itemDetails = await this.options.fetchItem({ item })?.catch((error) => {
+          console.error('Error scraping item', error);
+          return null;
+        });
+      } else {
+        itemDetails = {
+          id: item?.id,
+          element: item as any,
+          status: list.status,
+          error: list.error,
+          query: list.query,
+        };
+      }
+
       this.stats.items++;
 
-      if (!this.options.skipItemRequestsStats) {
+      if (this.options.scrapeDetails) {
         this.stats.requests++;
       }
 

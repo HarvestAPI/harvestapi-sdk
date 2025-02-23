@@ -160,7 +160,7 @@ export type Profile = {
 };
 
 export type ProfileShort = {
-  id?: string;
+  id: string;
   publicIdentifier: string;
   name?: string;
   position?: string;
@@ -173,7 +173,7 @@ export type ProfileShort = {
 };
 
 export type Company = {
-  id?: string;
+  id: string;
   universalName: string;
   name?: string;
   tagline?: string;
@@ -264,7 +264,7 @@ export type Company = {
 };
 
 export type CompanyShort = {
-  id?: string;
+  id: string;
   name?: string;
   industry?: string;
   location?: {

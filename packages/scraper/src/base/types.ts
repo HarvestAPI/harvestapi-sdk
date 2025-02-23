@@ -4,7 +4,15 @@ export type ListingScraperConfig = {
   outputType?: 'json' | 'sqlite';
   outputDir?: string;
   filename?: string;
+  /**
+   * Table name for SQLite output.
+   */
   tableName?: string;
+  /**
+   * Whether to make an additional request for each item details.
+   * @default true
+   */
+  scrapeDetails?: boolean;
 };
 
 export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfig & {
@@ -16,7 +24,6 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
   }) => Promise<ApiItemResponse<TItemDetails> | null> | null;
   maxPages?: number;
   entityName: string;
-  skipItemRequestsStats?: boolean;
 };
 
 export type ScraperOptions = {

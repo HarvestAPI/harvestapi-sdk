@@ -66,9 +66,10 @@ export class LinkedinScraper {
     return new ListingScraper<JobShort, Job>({
       fetchList: ({ page }) => this.searchJobs({ ...query, page }),
       fetchItem: ({ item }) => (item?.id ? this.getJob({ jobId: item.id }) : null),
+      scrapeDetails: true,
+      entityName: 'jobs',
       ...options,
       maxPages: 40,
-      entityName: 'jobs',
     }).scrapeStart();
   }
 
@@ -77,9 +78,10 @@ export class LinkedinScraper {
       fetchList: ({ page }) => this.searchCompanies({ ...query, page }),
       fetchItem: ({ item }) =>
         item?.universalName ? this.getCompany({ universalName: item.universalName }) : null,
+      scrapeDetails: true,
+      entityName: 'companies',
       ...options,
       maxPages: 100,
-      entityName: 'companies',
     }).scrapeStart();
   }
 
@@ -90,9 +92,10 @@ export class LinkedinScraper {
         item?.publicIdentifier
           ? this.getProfile({ publicIdentifier: item.publicIdentifier })
           : null,
+      scrapeDetails: true,
+      entityName: 'profiles',
       ...options,
       maxPages: 100,
-      entityName: 'profiles',
     }).scrapeStart();
   }
 
@@ -101,10 +104,10 @@ export class LinkedinScraper {
       fetchList: ({ page }) => this.searchPosts({ ...query, page }),
       fetchItem: async ({ item }) =>
         item?.id ? ({ id: item?.id, element: item } as ApiItemResponse<PostShort>) : null,
+      scrapeDetails: false,
+      entityName: 'posts',
       ...options,
       maxPages: 100,
-      entityName: 'posts',
-      skipItemRequestsStats: true,
     }).scrapeStart();
   }
 

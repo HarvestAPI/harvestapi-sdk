@@ -2,12 +2,13 @@ import typescript from 'rollup-plugin-typescript2';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 
-const bundlePackages = ['query-string'];
+const bundlePackages = ['query-string', 'decode-uri-component', 'filter-obj', 'split-on-first'];
 
-const matchPackage = (id) =>
-  bundlePackages.some((pkg) => {
-    return id.includes('/' + pkg);
+const matchPackage = (id) => {
+  return bundlePackages.some((pkg) => {
+    return id.includes(pkg);
   });
+};
 
 export default {
   input: 'src/index.ts',
@@ -25,7 +26,7 @@ export default {
   ],
   plugins: [
     nodeResolve(),
-    commonjs(),
+    commonjs({}),
     typescript({
       tsconfig: './tsconfig.json',
       useTsconfigDeclarationDir: true,
