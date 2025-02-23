@@ -23,7 +23,12 @@
     "prepublishOnly": "npm run build && npm run generate:docs",
     "run:publish": "npm publish --access public"
   },
-  "keywords": [],
+  "keywords": [
+    "harvestapi",
+    "harvest",
+    "linkedin",
+    "scraper"
+  ],
   "author": "xorcuit",
   "license": "MIT",
   "description": "",
