@@ -6,4 +6,5 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
+  ignorePatterns: [...rootOptions.ignorePatterns, 'build.ts'],
 };

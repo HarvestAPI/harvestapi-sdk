@@ -7,7 +7,14 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js', 'temp', 'node_modules', 'prettier.config.js', 'jest.config.js'],
+  ignorePatterns: [
+    '.eslintrc.js',
+    'temp',
+    'node_modules',
+    'prettier.config.js',
+    'jest.config.js',
+    'rollup.config.js',
+  ],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

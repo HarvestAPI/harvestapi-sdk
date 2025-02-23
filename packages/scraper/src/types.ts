@@ -1,8 +1,9 @@
-type BaseApiResponse = {
+export interface BaseApiResponse {
   id: string | null;
   status: string;
   error: any;
   query: Record<string, any>;
+  /** @internal */
   liUrl?: string;
   user?: {
     subscriptionPlan: string;
@@ -11,7 +12,7 @@ type BaseApiResponse = {
     requestsUsedThisCycle: number;
     requestsConcurrency: number;
   };
-};
+}
 
 export type ApiItemResponse<TItem> = BaseApiResponse & {
   element: TItem;

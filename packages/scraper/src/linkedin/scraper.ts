@@ -1,29 +1,35 @@
-import { BaseScraper, ListingScraperConfig, ScraperOptions } from '../base';
+import { BaseScraper, ScraperOptions } from '../base';
 import { ListingScraper } from '../base/listing.scraper';
 import { ApiItemResponse, ApiListResponse } from '../types';
 import {
   Company,
   CompanyShort,
-  GetCompanyParams,
-  GetJobParams,
+  GetLinkedinCompanyParams,
+  GetLinkedinJobParams,
   GetLinkedInProfileParams,
   Job,
   JobShort,
   PostShort,
   Profile,
   ProfileShort,
-  SearchCompaniesParams,
-  SearchJobsParams,
+  ScrapeLinkedinCompaniesParams,
+  ScrapeLinkedinJobsParams,
+  ScrapeLinkedinPostsParams,
+  ScrapeLinkedinProfilesParams,
+  SearchLinkedinCompaniesParams,
+  SearchLinkedinJobsParams,
+  SearchLinkedinPostsParams,
   SearchLinkedInProfilesParams,
-  SearchPostsParams,
 } from './types';
 
 export class LinkedinScraper {
-  scraper: BaseScraper;
+  private scraper: BaseScraper;
 
+  /** @internal */
   constructor(private options: ScraperOptions) {
     this.scraper = new BaseScraper(options);
   }
+
   async getProfile(params: GetLinkedInProfileParams): Promise<ApiItemResponse<Profile>> {
     return this.scraper.fetchApi({ path: 'linkedin/profile', params });
   }
@@ -34,88 +40,76 @@ export class LinkedinScraper {
     return this.scraper.fetchApi({ path: 'linkedin/profile-search', params });
   }
 
-  async getCompany(params: GetCompanyParams): Promise<ApiItemResponse<Company>> {
+  async getCompany(params: GetLinkedinCompanyParams): Promise<ApiItemResponse<Company>> {
     return this.scraper.fetchApi({ path: 'linkedin/company', params });
   }
 
-  async searchCompanies(params: SearchCompaniesParams): Promise<ApiListResponse<CompanyShort>> {
+  async searchCompanies(
+    params: SearchLinkedinCompaniesParams,
+  ): Promise<ApiListResponse<CompanyShort>> {
     return this.scraper.fetchApi({ path: 'linkedin/company-search', params });
   }
 
-  async getJob(params: GetJobParams): Promise<ApiItemResponse<Job>> {
+  async getJob(params: GetLinkedinJobParams): Promise<ApiItemResponse<Job>> {
     return this.scraper.fetchApi({ path: 'linkedin/job', params });
   }
 
-  async searchJobs(params: SearchJobsParams): Promise<ApiListResponse<JobShort>> {
+  async searchJobs(params: SearchLinkedinJobsParams): Promise<ApiListResponse<JobShort>> {
     return this.scraper.fetchApi({ path: 'linkedin/job-search', params });
   }
 
-  async searchPosts(params: SearchPostsParams): Promise<ApiListResponse<PostShort>> {
+  async searchPosts(params: SearchLinkedinPostsParams): Promise<ApiListResponse<PostShort>> {
     return this.scraper.fetchApi({ path: 'linkedin/post-search', params });
   }
 
-  async test() {
-    return this.scraper.fetchApi({ path: 'linkedin/test' });
-  }
-
-  async scrapeJobs({
-    query,
-    ...options
-  }: {
-    query: SearchJobsParams;
-  } & ListingScraperConfig) {
-    new ListingScraper<JobShort, Job>({
+  async scrapeJobs({ query, ...options }: ScrapeLinkedinJobsParams) {
+    return new ListingScraper<JobShort, Job>({
       fetchList: ({ page }) => this.searchJobs({ ...query, page }),
-      fetchItem: ({ item }) => this.getJob({ jobId: item.id }),
+      fetchItem: ({ item }) => (item?.id ? this.getJob({ jobId: item.id }) : null),
       ...options,
       maxPages: 40,
       entityName: 'jobs',
-    });
+    }).scrapeStart();
   }
 
-  async scrapeCompanies({
-    query,
-    ...options
-  }: {
-    query: SearchCompaniesParams;
-  } & ListingScraperConfig) {
-    new ListingScraper<CompanyShort, Company>({
+  async scrapeCompanies({ query, ...options }: ScrapeLinkedinCompaniesParams) {
+    return new ListingScraper<CompanyShort, Company>({
       fetchList: ({ page }) => this.searchCompanies({ ...query, page }),
-      fetchItem: ({ item }) => this.getCompany({ universalName: item.universalName }),
+      fetchItem: ({ item }) =>
+        item?.universalName ? this.getCompany({ universalName: item.universalName }) : null,
       ...options,
       maxPages: 100,
       entityName: 'companies',
-    });
+    }).scrapeStart();
   }
 
-  async scrapeProfiles({
-    query,
-    ...options
-  }: {
-    query: SearchLinkedInProfilesParams;
-  } & ListingScraperConfig) {
-    new ListingScraper<ProfileShort, Profile>({
+  async scrapeProfiles({ query, ...options }: ScrapeLinkedinProfilesParams) {
+    return new ListingScraper<ProfileShort, Profile>({
       fetchList: ({ page }) => this.searchProfiles({ ...query, page }),
-      fetchItem: ({ item }) => this.getProfile({ publicIdentifier: item.publicIdentifier }),
+      fetchItem: ({ item }) =>
+        item?.publicIdentifier
+          ? this.getProfile({ publicIdentifier: item.publicIdentifier })
+          : null,
       ...options,
       maxPages: 100,
       entityName: 'profiles',
-    });
+    }).scrapeStart();
   }
 
-  async scrapePosts({
-    query,
-    ...options
-  }: {
-    query: SearchPostsParams;
-  } & ListingScraperConfig) {
-    new ListingScraper<PostShort, PostShort>({
+  async scrapePosts({ query, ...options }: ScrapeLinkedinPostsParams) {
+    return new ListingScraper<PostShort, PostShort>({
       fetchList: ({ page }) => this.searchPosts({ ...query, page }),
-      fetchItem: async ({ item }) => ({ id: item.id, element: item }) as ApiItemResponse<PostShort>,
+      fetchItem: async ({ item }) =>
+        item?.id ? ({ id: item?.id, element: item } as ApiItemResponse<PostShort>) : null,
       ...options,
       maxPages: 100,
       entityName: 'posts',
       skipItemRequestsStats: true,
-    });
+    }).scrapeStart();
+  }
+
+  /** @internal */
+  async test() {
+    return this.scraper.fetchApi({ path: 'linkedin/test' });
   }
 }

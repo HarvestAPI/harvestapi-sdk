@@ -1,29 +1,25 @@
-export interface ErrorResponse {
-  error: string;
-  message: string;
-  status: number;
-}
+import { ListingScraperConfig } from '../base';
 
-export type GetLinkedInProfileParams = {
+export interface GetLinkedInProfileParams {
   url?: string;
   publicIdentifier?: string;
   profileId?: string;
-};
+}
 
-export type SearchLinkedInProfilesParams = {
+export interface SearchLinkedInProfilesParams {
   companyId?: string;
   geoId?: string;
   location?: string;
   search?: string;
   page?: number;
-};
+}
 
-export type GetCompanyParams = {
+export interface GetLinkedinCompanyParams {
   universalName?: string;
   url?: string;
-};
+}
 
-export type CompanySize =
+export type LinkedinCompanySize =
   | '1-10'
   | '11-50'
   | '51-200'
@@ -33,20 +29,20 @@ export type CompanySize =
   | '5001-10000'
   | '10001+';
 
-export type SearchCompaniesParams = {
+export interface SearchLinkedinCompaniesParams {
   geoId?: string;
   location?: string;
   search?: string;
   page?: number;
-  companySize?: CompanySize;
-};
+  companySize?: LinkedinCompanySize;
+}
 
-export type GetJobParams = {
+export interface GetLinkedinJobParams {
   jobId?: string;
   url?: string;
-};
+}
 
-export type SalaryRange =
+export type LinkedinSalaryRange =
   | '40k+'
   | '60k+'
   | '80k+'
@@ -57,29 +53,32 @@ export type SalaryRange =
   | '180k+'
   | '200k+';
 
-export type SearchJobsParams = {
+export type LinkedinJobType = 'full-time' | 'part-time' | 'contract' | 'internship';
+export type LinkedinWorkplaceType = 'office' | 'hybrid' | 'remote';
+
+export interface SearchLinkedinJobsParams {
   search?: string;
   companyId?: string | string[];
   location?: string;
   geoId?: string;
   sortBy?: 'date' | 'relevance';
-  workplaceType?: ('office' | 'hybrid' | 'remote')[];
-  employmentType?: ('full-time' | 'part-time' | 'contract' | 'internship')[];
+  workplaceType?: LinkedinWorkplaceType | LinkedinWorkplaceType[];
+  employmentType?: LinkedinJobType | LinkedinJobType[];
   postedLimit?: '24h' | 'week' | 'month';
   page?: number;
-  salary?: SalaryRange | SalaryRange[];
-};
+  salary?: LinkedinSalaryRange | LinkedinSalaryRange[];
+}
 
-export type SearchPostsParams = {
+export interface SearchLinkedinPostsParams {
   search?: string;
   page?: number;
   sortBy?: 'date' | 'relevance';
   postedLimit?: '24h' | 'week' | 'month';
   companyId?: string;
   profileId?: string;
-};
+}
 
-export interface Profile {
+export type Profile = {
   id: string;
   publicIdentifier: string;
   lastName: string;
@@ -158,9 +157,9 @@ export interface Profile {
     subtitle: string;
   };
   verified: boolean;
-}
+};
 
-export interface ProfileShort {
+export type ProfileShort = {
   id?: string;
   publicIdentifier: string;
   name?: string;
@@ -171,9 +170,9 @@ export interface ProfileShort {
   url?: string;
   photo?: string;
   hidden?: boolean;
-}
+};
 
-export interface Company {
+export type Company = {
   id?: string;
   universalName: string;
   name?: string;
@@ -262,9 +261,9 @@ export interface Company {
     fundingRoundsUrl?: string;
   };
   pageVerified?: boolean;
-}
+};
 
-export interface CompanyShort {
+export type CompanyShort = {
   id?: string;
   name?: string;
   industry?: string;
@@ -276,9 +275,9 @@ export interface CompanyShort {
   logo?: string;
   url?: string;
   universalName: string;
-}
+};
 
-export interface Job {
+export type Job = {
   id: string;
   title?: string;
   url?: string;
@@ -317,9 +316,9 @@ export interface Job {
   new?: boolean;
   jobApplicationLimitReached?: boolean;
   applicantTrackingSystem?: string;
-}
+};
 
-export interface JobShort {
+export type JobShort = {
   id: string;
   url?: string;
   title?: string;
@@ -331,50 +330,9 @@ export interface JobShort {
     linkedinText?: string;
   };
   easyApply?: boolean;
-}
+};
 
-interface AuthorAvatar {
-  url: string;
-  width: number;
-  height: number;
-  expiresAt: number;
-}
-
-interface PostImage {
-  url: string;
-  width: number;
-  height: number;
-  expiresAt: number;
-}
-
-interface Reaction {
-  type: string;
-  count: number;
-}
-
-interface Engagement {
-  likes: number;
-  comments: number;
-  shares: number;
-  reactions: Reaction[];
-}
-
-interface SocialContent {
-  hideCommentsCount: boolean;
-  hideReactionsCount: boolean;
-  hideSocialActivityCounts: boolean;
-  hideShareAction: boolean;
-  hideSendAction: boolean;
-  hideRepostsCount: boolean;
-  hideViewsCount: boolean;
-  hideReactAction: boolean;
-  hideCommentAction: boolean;
-  shareUrl: string;
-  showContributionExperience: boolean;
-  showSocialDetail: boolean;
-}
-
-export interface PostShort {
+export type PostShort = {
   id: string;
   content?: string;
   title?: string;
@@ -390,13 +348,66 @@ export interface PostShort {
   authorPosition?: string;
   authorWebsite?: string | null;
   authorWebsiteLabel?: string | null;
-  authorAvatar?: AuthorAvatar;
+  authorAvatar?: {
+    url: string;
+    width: number;
+    height: number;
+    expiresAt: number;
+  };
   postedAgo?: string;
-  postImage?: PostImage;
+  postImage?: {
+    url: string;
+    width: number;
+    height: number;
+    expiresAt: number;
+  };
   repostId?: string | null;
   repost?: PostShort;
   newsletterUrl?: string;
   newsletterTitle?: string;
-  socialContent?: SocialContent;
-  engagement?: Engagement;
-}
+  socialContent?: {
+    hideCommentsCount: boolean;
+    hideReactionsCount: boolean;
+    hideSocialActivityCounts: boolean;
+    hideShareAction: boolean;
+    hideSendAction: boolean;
+    hideRepostsCount: boolean;
+    hideViewsCount: boolean;
+    hideReactAction: boolean;
+    hideCommentAction: boolean;
+    shareUrl: string;
+    showContributionExperience: boolean;
+    showSocialDetail: boolean;
+  };
+  engagement?: {
+    likes: number;
+    comments: number;
+    shares: number;
+    reactions: {
+      type: string;
+      count: number;
+    }[];
+  };
+};
+
+export type ScrapeLinkedinJobsParams = {
+  query: SearchLinkedinJobsParams;
+} & ListingScraperConfig;
+
+export type ScrapeLinkedinCompaniesParams = {
+  query: SearchLinkedinCompaniesParams;
+} & ListingScraperConfig;
+
+export type ScrapeLinkedinProfilesParams = {
+  query: SearchLinkedInProfilesParams;
+} & ListingScraperConfig;
+
+export type ScrapeLinkedinPostsParams = {
+  query: SearchLinkedinPostsParams;
+} & ListingScraperConfig;
+
+export type ErrorResponse = {
+  error: string;
+  message: string;
+  status: number;
+};

@@ -1,0 +1,12 @@
+{
+  "entryPoints": ["./src/index.ts"],
+  "out": "./gen-docs",
+  "plugin": ["typedoc-plugin-markdown"],
+  "entryFileName": "README.md",
+  "outputFileStrategy": "modules",
+  "excludeInternal": true,
+  "excludePrivate": true,
+  "readme": "none",
+  "sort": ["source-order"],
+  "groupOrder": ["Variables", "Functions", "Classes", "Interfaces", "*"]
+}

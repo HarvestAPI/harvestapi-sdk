@@ -1,13 +1,13 @@
 import fs from 'fs-extra';
-import { nanoid } from 'nanoid';
 import { resolve } from 'path';
 import type { Database } from 'sqlite';
 import { ApiListResponse } from '../types';
 import { createConcurrentQueues } from '../utils';
 import { ListingScraperOptions } from './types';
+import { randomUUID } from 'crypto';
 
 export class ListingScraper<TItemShort, TItemDetail> {
-  private id = nanoid();
+  private id = randomUUID();
   private startTime = new Date();
   private inMemoryItems: TItemDetail[] = [];
   private stats = {
@@ -36,8 +36,6 @@ export class ListingScraper<TItemShort, TItemDetail> {
           this.options.entityName
         }_${this.id}`,
     );
-
-    this.scrapeStart();
   }
 
   private scrapePageQueue!: (args: {
@@ -45,7 +43,7 @@ export class ListingScraper<TItemShort, TItemDetail> {
     scrapedList?: ApiListResponse<TItemShort>;
   }) => Promise<void>;
 
-  private async scrapeStart() {
+  async scrapeStart() {
     const firstPage = await this.fetchPage({ page: 1 });
 
     let totalPages = firstPage?.pagination?.totalPages || 0;
@@ -87,6 +85,8 @@ export class ListingScraper<TItemShort, TItemDetail> {
     console.info(
       `Finished ${this.options.entityName}. Scraped pages: ${this.stats.pages}. Scraped items: ${this.stats.itemsSuccess}. Total requests: ${this.stats.requests}.`,
     );
+
+    return this.stats;
   }
 
   private async scrapePage({
@@ -134,7 +134,7 @@ export class ListingScraper<TItemShort, TItemDetail> {
     const details: TItemDetail[] = [];
 
     for (const item of list.elements) {
-      const itemDetails = await this.options.fetchItem({ item }).catch((error) => {
+      const itemDetails = await this.options.fetchItem({ item })?.catch((error) => {
         console.error('Error scraping item', error);
         return null;
       });
