@@ -65,151 +65,131 @@ For more detailed information on the available methods and their parameters, che
 
 ### createLinkedinScraper()
 
-> **createLinkedinScraper**(`options`): [`LinkedinScraper`](README.md#linkedinscraper)
-
-Defined in: [linkedin/utils.ts:4](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/utils.ts#L4)
+> **createLinkedinScraper**(`options`): [`LinkedinScraper`](#linkedinscraper)
 
 #### Parameters
 
 ##### options
 
-[`ScraperOptions`](README.md#scraperoptions)
+[`ScraperOptions`](#scraperoptions)
 
 #### Returns
 
-[`LinkedinScraper`](README.md#linkedinscraper)
+[`LinkedinScraper`](#linkedinscraper)
 
 ## Classes
 
 ### LinkedinScraper
 
-Defined in: [linkedin/scraper.ts:25](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L25)
-
 #### Methods
 
 ##### getProfile()
 
-> **getProfile**(`params`): `Promise`\<[`ApiItemResponse`](README.md#apiitemresponsetitem)\<[`Profile`](README.md#profile)\>\>
-
-Defined in: [linkedin/scraper.ts:33](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L33)
+> **getProfile**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile)\>\>
 
 ###### Parameters
 
 ###### params
 
-[`GetLinkedInProfileParams`](README.md#getlinkedinprofileparams)
+[`GetLinkedInProfileParams`](#getlinkedinprofileparams)
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](README.md#apiitemresponsetitem)\<[`Profile`](README.md#profile)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile)\>\>
 
 ##### searchProfiles()
 
-> **searchProfiles**(`params`): `Promise`\<[`ApiListResponse`](README.md#apilistresponsetitem)\<[`ProfileShort`](README.md#profileshort)\>\>
-
-Defined in: [linkedin/scraper.ts:37](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L37)
+> **searchProfiles**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
 
 ###### Parameters
 
 ###### params
 
-[`SearchLinkedInProfilesParams`](README.md#searchlinkedinprofilesparams)
+[`SearchLinkedInProfilesParams`](#searchlinkedinprofilesparams)
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](README.md#apilistresponsetitem)\<[`ProfileShort`](README.md#profileshort)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
 
 ##### getCompany()
 
-> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](README.md#apiitemresponsetitem)\<[`Company`](README.md#company)\>\>
-
-Defined in: [linkedin/scraper.ts:43](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L43)
+> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company)\>\>
 
 ###### Parameters
 
 ###### params
 
-[`GetLinkedinCompanyParams`](README.md#getlinkedincompanyparams)
+[`GetLinkedinCompanyParams`](#getlinkedincompanyparams)
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](README.md#apiitemresponsetitem)\<[`Company`](README.md#company)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company)\>\>
 
 ##### searchCompanies()
 
-> **searchCompanies**(`params`): `Promise`\<[`ApiListResponse`](README.md#apilistresponsetitem)\<[`CompanyShort`](README.md#companyshort)\>\>
-
-Defined in: [linkedin/scraper.ts:47](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L47)
+> **searchCompanies**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`CompanyShort`](#companyshort)\>\>
 
 ###### Parameters
 
 ###### params
 
-[`SearchLinkedinCompaniesParams`](README.md#searchlinkedincompaniesparams)
+[`SearchLinkedinCompaniesParams`](#searchlinkedincompaniesparams)
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](README.md#apilistresponsetitem)\<[`CompanyShort`](README.md#companyshort)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`CompanyShort`](#companyshort)\>\>
 
 ##### getJob()
 
-> **getJob**(`params`): `Promise`\<[`ApiItemResponse`](README.md#apiitemresponsetitem)\<[`Job`](README.md#job)\>\>
-
-Defined in: [linkedin/scraper.ts:53](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L53)
+> **getJob**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Job`](#job)\>\>
 
 ###### Parameters
 
 ###### params
 
-[`GetLinkedinJobParams`](README.md#getlinkedinjobparams)
+[`GetLinkedinJobParams`](#getlinkedinjobparams)
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](README.md#apiitemresponsetitem)\<[`Job`](README.md#job)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Job`](#job)\>\>
 
 ##### searchJobs()
 
-> **searchJobs**(`params`): `Promise`\<[`ApiListResponse`](README.md#apilistresponsetitem)\<[`JobShort`](README.md#jobshort)\>\>
-
-Defined in: [linkedin/scraper.ts:57](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L57)
+> **searchJobs**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`JobShort`](#jobshort)\>\>
 
 ###### Parameters
 
 ###### params
 
-[`SearchLinkedinJobsParams`](README.md#searchlinkedinjobsparams)
+[`SearchLinkedinJobsParams`](#searchlinkedinjobsparams)
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](README.md#apilistresponsetitem)\<[`JobShort`](README.md#jobshort)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`JobShort`](#jobshort)\>\>
 
 ##### searchPosts()
 
-> **searchPosts**(`params`): `Promise`\<[`ApiListResponse`](README.md#apilistresponsetitem)\<[`PostShort`](README.md#postshort)\>\>
-
-Defined in: [linkedin/scraper.ts:61](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L61)
+> **searchPosts**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
 
 ###### Parameters
 
 ###### params
 
-[`SearchLinkedinPostsParams`](README.md#searchlinkedinpostsparams)
+[`SearchLinkedinPostsParams`](#searchlinkedinpostsparams)
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](README.md#apilistresponsetitem)\<[`PostShort`](README.md#postshort)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
 
 ##### scrapeJobs()
 
 > **scrapeJobs**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
-Defined in: [linkedin/scraper.ts:65](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L65)
-
 ###### Parameters
 
 ###### \_\_namedParameters
 
-[`ScrapeLinkedinJobsParams`](README.md#scrapelinkedinjobsparams)
+[`ScrapeLinkedinJobsParams`](#scrapelinkedinjobsparams)
 
 ###### Returns
 
@@ -219,13 +199,11 @@ Defined in: [linkedin/scraper.ts:65](https://github.com/xorcuit/harvestapi-sdk/b
 
 > **scrapeCompanies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
-Defined in: [linkedin/scraper.ts:76](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L76)
-
 ###### Parameters
 
 ###### \_\_namedParameters
 
-[`ScrapeLinkedinCompaniesParams`](README.md#scrapelinkedincompaniesparams)
+[`ScrapeLinkedinCompaniesParams`](#scrapelinkedincompaniesparams)
 
 ###### Returns
 
@@ -235,13 +213,11 @@ Defined in: [linkedin/scraper.ts:76](https://github.com/xorcuit/harvestapi-sdk/b
 
 > **scrapeProfiles**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
-Defined in: [linkedin/scraper.ts:88](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L88)
-
 ###### Parameters
 
 ###### \_\_namedParameters
 
-[`ScrapeLinkedinProfilesParams`](README.md#scrapelinkedinprofilesparams)
+[`ScrapeLinkedinProfilesParams`](#scrapelinkedinprofilesparams)
 
 ###### Returns
 
@@ -251,13 +227,11 @@ Defined in: [linkedin/scraper.ts:88](https://github.com/xorcuit/harvestapi-sdk/b
 
 > **scrapePosts**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
-Defined in: [linkedin/scraper.ts:102](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/scraper.ts#L102)
-
 ###### Parameters
 
 ###### \_\_namedParameters
 
-[`ScrapeLinkedinPostsParams`](README.md#scrapelinkedinpostsparams)
+[`ScrapeLinkedinPostsParams`](#scrapelinkedinpostsparams)
 
 ###### Returns
 
@@ -267,33 +241,23 @@ Defined in: [linkedin/scraper.ts:102](https://github.com/xorcuit/harvestapi-sdk/
 
 ### GetLinkedInProfileParams
 
-Defined in: [linkedin/types.ts:3](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L3)
-
 #### Properties
 
 ##### url?
 
 > `optional` **url**: `string`
 
-Defined in: [linkedin/types.ts:4](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L4)
-
 ##### publicIdentifier?
 
 > `optional` **publicIdentifier**: `string`
-
-Defined in: [linkedin/types.ts:5](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L5)
 
 ##### profileId?
 
 > `optional` **profileId**: `string`
 
-Defined in: [linkedin/types.ts:6](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L6)
-
 ***
 
 ### SearchLinkedInProfilesParams
-
-Defined in: [linkedin/types.ts:9](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L9)
 
 #### Properties
 
@@ -301,37 +265,25 @@ Defined in: [linkedin/types.ts:9](https://github.com/xorcuit/harvestapi-sdk/blob
 
 > `optional` **companyId**: `string`
 
-Defined in: [linkedin/types.ts:10](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L10)
-
 ##### geoId?
 
 > `optional` **geoId**: `string`
-
-Defined in: [linkedin/types.ts:11](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L11)
 
 ##### location?
 
 > `optional` **location**: `string`
 
-Defined in: [linkedin/types.ts:12](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L12)
-
 ##### search?
 
 > `optional` **search**: `string`
-
-Defined in: [linkedin/types.ts:13](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L13)
 
 ##### page?
 
 > `optional` **page**: `number`
 
-Defined in: [linkedin/types.ts:14](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L14)
-
 ***
 
 ### GetLinkedinCompanyParams
-
-Defined in: [linkedin/types.ts:17](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L17)
 
 #### Properties
 
@@ -339,19 +291,13 @@ Defined in: [linkedin/types.ts:17](https://github.com/xorcuit/harvestapi-sdk/blo
 
 > `optional` **universalName**: `string`
 
-Defined in: [linkedin/types.ts:18](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L18)
-
 ##### url?
 
 > `optional` **url**: `string`
 
-Defined in: [linkedin/types.ts:19](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L19)
-
 ***
 
 ### SearchLinkedinCompaniesParams
-
-Defined in: [linkedin/types.ts:32](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L32)
 
 #### Properties
 
@@ -359,37 +305,25 @@ Defined in: [linkedin/types.ts:32](https://github.com/xorcuit/harvestapi-sdk/blo
 
 > `optional` **geoId**: `string`
 
-Defined in: [linkedin/types.ts:33](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L33)
-
 ##### location?
 
 > `optional` **location**: `string`
-
-Defined in: [linkedin/types.ts:34](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L34)
 
 ##### search?
 
 > `optional` **search**: `string`
 
-Defined in: [linkedin/types.ts:35](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L35)
-
 ##### page?
 
 > `optional` **page**: `number`
 
-Defined in: [linkedin/types.ts:36](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L36)
-
 ##### companySize?
 
-> `optional` **companySize**: [`LinkedinCompanySize`](README.md#linkedincompanysize)
-
-Defined in: [linkedin/types.ts:37](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L37)
+> `optional` **companySize**: [`LinkedinCompanySize`](#linkedincompanysize)
 
 ***
 
 ### GetLinkedinJobParams
-
-Defined in: [linkedin/types.ts:40](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L40)
 
 #### Properties
 
@@ -397,87 +331,59 @@ Defined in: [linkedin/types.ts:40](https://github.com/xorcuit/harvestapi-sdk/blo
 
 > `optional` **jobId**: `string`
 
-Defined in: [linkedin/types.ts:41](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L41)
-
 ##### url?
 
 > `optional` **url**: `string`
-
-Defined in: [linkedin/types.ts:42](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L42)
 
 ***
 
 ### SearchLinkedinJobsParams
 
-Defined in: [linkedin/types.ts:59](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L59)
-
 #### Properties
 
 ##### search?
 
 > `optional` **search**: `string`
-
-Defined in: [linkedin/types.ts:60](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L60)
 
 ##### companyId?
 
 > `optional` **companyId**: `string` \| `string`[]
 
-Defined in: [linkedin/types.ts:61](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L61)
-
 ##### location?
 
 > `optional` **location**: `string`
-
-Defined in: [linkedin/types.ts:62](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L62)
 
 ##### geoId?
 
 > `optional` **geoId**: `string`
 
-Defined in: [linkedin/types.ts:63](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L63)
-
 ##### sortBy?
 
 > `optional` **sortBy**: `"date"` \| `"relevance"`
 
-Defined in: [linkedin/types.ts:64](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L64)
-
 ##### workplaceType?
 
-> `optional` **workplaceType**: [`LinkedinWorkplaceType`](README.md#linkedinworkplacetype) \| [`LinkedinWorkplaceType`](README.md#linkedinworkplacetype)[]
-
-Defined in: [linkedin/types.ts:65](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L65)
+> `optional` **workplaceType**: [`LinkedinWorkplaceType`](#linkedinworkplacetype) \| [`LinkedinWorkplaceType`](#linkedinworkplacetype)[]
 
 ##### employmentType?
 
-> `optional` **employmentType**: [`LinkedinJobType`](README.md#linkedinjobtype) \| [`LinkedinJobType`](README.md#linkedinjobtype)[]
-
-Defined in: [linkedin/types.ts:66](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L66)
+> `optional` **employmentType**: [`LinkedinJobType`](#linkedinjobtype) \| [`LinkedinJobType`](#linkedinjobtype)[]
 
 ##### postedLimit?
 
 > `optional` **postedLimit**: `"24h"` \| `"week"` \| `"month"`
 
-Defined in: [linkedin/types.ts:67](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L67)
-
 ##### page?
 
 > `optional` **page**: `number`
 
-Defined in: [linkedin/types.ts:68](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L68)
-
 ##### salary?
 
-> `optional` **salary**: [`LinkedinSalaryRange`](README.md#linkedinsalaryrange) \| [`LinkedinSalaryRange`](README.md#linkedinsalaryrange)[]
-
-Defined in: [linkedin/types.ts:69](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L69)
+> `optional` **salary**: [`LinkedinSalaryRange`](#linkedinsalaryrange) \| [`LinkedinSalaryRange`](#linkedinsalaryrange)[]
 
 ***
 
 ### SearchLinkedinPostsParams
-
-Defined in: [linkedin/types.ts:72](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L72)
 
 #### Properties
 
@@ -485,43 +391,29 @@ Defined in: [linkedin/types.ts:72](https://github.com/xorcuit/harvestapi-sdk/blo
 
 > `optional` **search**: `string`
 
-Defined in: [linkedin/types.ts:73](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L73)
-
 ##### page?
 
 > `optional` **page**: `number`
-
-Defined in: [linkedin/types.ts:74](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L74)
 
 ##### sortBy?
 
 > `optional` **sortBy**: `"date"` \| `"relevance"`
 
-Defined in: [linkedin/types.ts:75](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L75)
-
 ##### postedLimit?
 
 > `optional` **postedLimit**: `"24h"` \| `"week"` \| `"month"`
-
-Defined in: [linkedin/types.ts:76](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L76)
 
 ##### companyId?
 
 > `optional` **companyId**: `string`
 
-Defined in: [linkedin/types.ts:77](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L77)
-
 ##### profileId?
 
 > `optional` **profileId**: `string`
 
-Defined in: [linkedin/types.ts:78](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L78)
-
 ***
 
 ### BaseApiResponse
-
-Defined in: [types.ts:1](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/types.ts#L1)
 
 #### Properties
 
@@ -529,31 +421,21 @@ Defined in: [types.ts:1](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548
 
 > **id**: `null` \| `string`
 
-Defined in: [types.ts:2](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/types.ts#L2)
-
 ##### status
 
 > **status**: `string`
-
-Defined in: [types.ts:3](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/types.ts#L3)
 
 ##### error
 
 > **error**: `any`
 
-Defined in: [types.ts:4](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/types.ts#L4)
-
 ##### query
 
 > **query**: `Record`\<`string`, `any`\>
 
-Defined in: [types.ts:5](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/types.ts#L5)
-
 ##### user?
 
 > `optional` **user**: `object`
-
-Defined in: [types.ts:8](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/types.ts#L8)
 
 ###### subscriptionPlan
 
@@ -580,8 +462,6 @@ Defined in: [types.ts:8](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548
 ### ListingScraperConfig
 
 > **ListingScraperConfig**: `object`
-
-Defined in: [base/types.ts:3](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/base/types.ts#L3)
 
 #### Type declaration
 
@@ -621,8 +501,6 @@ true
 
 > **ScraperOptions**: `object`
 
-Defined in: [base/types.ts:29](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/base/types.ts#L29)
-
 #### Type declaration
 
 ##### apiKey
@@ -639,15 +517,11 @@ Defined in: [base/types.ts:29](https://github.com/xorcuit/harvestapi-sdk/blob/e1
 
 > **LinkedinCompanySize**: `"1-10"` \| `"11-50"` \| `"51-200"` \| `"201-500"` \| `"501-1000"` \| `"1001-5000"` \| `"5001-10000"` \| `"10001+"`
 
-Defined in: [linkedin/types.ts:22](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L22)
-
 ***
 
 ### LinkedinSalaryRange
 
 > **LinkedinSalaryRange**: `"40k+"` \| `"60k+"` \| `"80k+"` \| `"100k+"` \| `"120k+"` \| `"140k+"` \| `"160k+"` \| `"180k+"` \| `"200k+"`
-
-Defined in: [linkedin/types.ts:45](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L45)
 
 ***
 
@@ -655,23 +529,17 @@ Defined in: [linkedin/types.ts:45](https://github.com/xorcuit/harvestapi-sdk/blo
 
 > **LinkedinJobType**: `"full-time"` \| `"part-time"` \| `"contract"` \| `"internship"`
 
-Defined in: [linkedin/types.ts:56](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L56)
-
 ***
 
 ### LinkedinWorkplaceType
 
 > **LinkedinWorkplaceType**: `"office"` \| `"hybrid"` \| `"remote"`
 
-Defined in: [linkedin/types.ts:57](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L57)
-
 ***
 
 ### Profile
 
 > **Profile**: `object`
-
-Defined in: [linkedin/types.ts:81](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L81)
 
 #### Type declaration
 
@@ -821,8 +689,6 @@ Defined in: [linkedin/types.ts:81](https://github.com/xorcuit/harvestapi-sdk/blo
 
 > **ProfileShort**: `object`
 
-Defined in: [linkedin/types.ts:162](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L162)
-
 #### Type declaration
 
 ##### id
@@ -866,8 +732,6 @@ Defined in: [linkedin/types.ts:162](https://github.com/xorcuit/harvestapi-sdk/bl
 ### Company
 
 > **Company**: `object`
-
-Defined in: [linkedin/types.ts:175](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L175)
 
 #### Type declaration
 
@@ -1117,8 +981,6 @@ Defined in: [linkedin/types.ts:175](https://github.com/xorcuit/harvestapi-sdk/bl
 
 > **CompanyShort**: `object`
 
-Defined in: [linkedin/types.ts:266](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L266)
-
 #### Type declaration
 
 ##### id
@@ -1166,8 +1028,6 @@ Defined in: [linkedin/types.ts:266](https://github.com/xorcuit/harvestapi-sdk/bl
 ### Job
 
 > **Job**: `object`
-
-Defined in: [linkedin/types.ts:280](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L280)
 
 #### Type declaration
 
@@ -1321,8 +1181,6 @@ Defined in: [linkedin/types.ts:280](https://github.com/xorcuit/harvestapi-sdk/bl
 
 > **JobShort**: `object`
 
-Defined in: [linkedin/types.ts:321](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L321)
-
 #### Type declaration
 
 ##### id
@@ -1370,8 +1228,6 @@ Defined in: [linkedin/types.ts:321](https://github.com/xorcuit/harvestapi-sdk/bl
 ### PostShort
 
 > **PostShort**: `object`
-
-Defined in: [linkedin/types.ts:335](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L335)
 
 #### Type declaration
 
@@ -1485,7 +1341,7 @@ Defined in: [linkedin/types.ts:335](https://github.com/xorcuit/harvestapi-sdk/bl
 
 ##### repost?
 
-> `optional` **repost**: [`PostShort`](README.md#postshort)
+> `optional` **repost**: [`PostShort`](#postshort)
 
 ##### newsletterUrl?
 
@@ -1571,65 +1427,55 @@ Defined in: [linkedin/types.ts:335](https://github.com/xorcuit/harvestapi-sdk/bl
 
 ### ScrapeLinkedinJobsParams
 
-> **ScrapeLinkedinJobsParams**: `object` & [`ListingScraperConfig`](README.md#listingscraperconfig)
-
-Defined in: [linkedin/types.ts:393](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L393)
+> **ScrapeLinkedinJobsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfig)
 
 #### Type declaration
 
 ##### query
 
-> **query**: [`SearchLinkedinJobsParams`](README.md#searchlinkedinjobsparams)
+> **query**: [`SearchLinkedinJobsParams`](#searchlinkedinjobsparams)
 
 ***
 
 ### ScrapeLinkedinCompaniesParams
 
-> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](README.md#listingscraperconfig)
-
-Defined in: [linkedin/types.ts:397](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L397)
+> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfig)
 
 #### Type declaration
 
 ##### query
 
-> **query**: [`SearchLinkedinCompaniesParams`](README.md#searchlinkedincompaniesparams)
+> **query**: [`SearchLinkedinCompaniesParams`](#searchlinkedincompaniesparams)
 
 ***
 
 ### ScrapeLinkedinProfilesParams
 
-> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](README.md#listingscraperconfig)
-
-Defined in: [linkedin/types.ts:401](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L401)
+> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfig)
 
 #### Type declaration
 
 ##### query
 
-> **query**: [`SearchLinkedInProfilesParams`](README.md#searchlinkedinprofilesparams)
+> **query**: [`SearchLinkedInProfilesParams`](#searchlinkedinprofilesparams)
 
 ***
 
 ### ScrapeLinkedinPostsParams
 
-> **ScrapeLinkedinPostsParams**: `object` & [`ListingScraperConfig`](README.md#listingscraperconfig)
-
-Defined in: [linkedin/types.ts:405](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L405)
+> **ScrapeLinkedinPostsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfig)
 
 #### Type declaration
 
 ##### query
 
-> **query**: [`SearchLinkedinPostsParams`](README.md#searchlinkedinpostsparams)
+> **query**: [`SearchLinkedinPostsParams`](#searchlinkedinpostsparams)
 
 ***
 
 ### ErrorResponse
 
 > **ErrorResponse**: `object`
-
-Defined in: [linkedin/types.ts:409](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/linkedin/types.ts#L409)
 
 #### Type declaration
 
@@ -1649,9 +1495,7 @@ Defined in: [linkedin/types.ts:409](https://github.com/xorcuit/harvestapi-sdk/bl
 
 ### ApiItemResponse\<TItem\>
 
-> **ApiItemResponse**\<`TItem`\>: [`BaseApiResponse`](README.md#baseapiresponse) & `object`
-
-Defined in: [types.ts:17](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/types.ts#L17)
+> **ApiItemResponse**\<`TItem`\>: [`BaseApiResponse`](#baseapiresponse) & `object`
 
 #### Type declaration
 
@@ -1667,9 +1511,7 @@ Defined in: [types.ts:17](https://github.com/xorcuit/harvestapi-sdk/blob/e178d54
 
 ### ApiListResponse\<TItem\>
 
-> **ApiListResponse**\<`TItem`\>: [`BaseApiResponse`](README.md#baseapiresponse) & `object`
-
-Defined in: [types.ts:21](https://github.com/xorcuit/harvestapi-sdk/blob/e178d548465916fc1a9eb280adacb9f09e09e6f4/packages/scraper/src/types.ts#L21)
+> **ApiListResponse**\<`TItem`\>: [`BaseApiResponse`](#baseapiresponse) & `object`
 
 #### Type declaration
 

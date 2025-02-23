@@ -1,6 +1,6 @@
 {
   "name": "@harvestapi/scraper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,8 @@
     "test:concurrency": "npx tsx src/test/concurrency.ts -- --run",
     "fix:lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "generate:docs": "npx tsx src/utils/gen-docs.ts",
-    "prepublishOnly": "npm run build && npm run generate:docs"
+    "prepublishOnly": "npm run build && npm run generate:docs",
+    "run:publish": "npm publish --access public"
   },
   "keywords": [],
   "author": "xorcuit",
