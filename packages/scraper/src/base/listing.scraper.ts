@@ -1,10 +1,10 @@
+import { randomUUID } from 'crypto';
 import fs from 'fs-extra';
-import { resolve } from 'path';
+import { dirname, resolve } from 'path';
 import type { Database } from 'sqlite';
 import { ApiItemResponse, ApiListResponse } from '../types';
 import { createConcurrentQueues } from '../utils';
 import { ListingScraperOptions } from './types';
-import { randomUUID } from 'crypto';
 
 export class ListingScraper<TItemShort extends { id: string }, TItemDetail extends { id: string }> {
   private id = randomUUID();
@@ -22,6 +22,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   private db: Database | null = null;
   private tableName: string;
   private sqliteDatabaseOpenPromise: Promise<void> | null = null;
+  private done = false;
+  private error: any | null = null;
 
   constructor(private options: ListingScraperOptions<TItemShort, TItemDetail>) {
     if (!this.options.outputType) {
@@ -60,6 +62,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     );
 
     if (!firstPage || !totalPages) {
+      this.done = true;
+      if (this.error) {
+        const errors = Array.isArray(this.error) ? this.error : [this.error];
+        console.error(...errors);
+      }
+      console.error('Error fetching first page or no items found. Exiting.');
       return;
     }
 
@@ -86,6 +94,11 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       `Finished ${this.options.entityName}. Scraped pages: ${this.stats.pages}. Scraped items: ${this.stats.itemsSuccess}. Total requests: ${this.stats.requests}.`,
     );
 
+    if (this.error) {
+      const errors = Array.isArray(this.error) ? this.error : [this.error];
+      console.error(...errors);
+    }
+
     return this.stats;
   }
 
@@ -96,12 +109,16 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     page: number;
     scrapedList?: ApiListResponse<TItemShort>;
   }) {
+    if (this.done) return;
     const list = scrapedList ? scrapedList : await this.fetchPage({ page });
+    if (this.done) return;
+
     let details: TItemDetail[] = [];
 
-    if (list) {
+    if (list?.elements) {
       details = await this.scrapePageItems({ list });
     }
+    if (this.done) return;
 
     console.info(
       `Scraped ${this.options.entityName} page ${page}. Items found: ${
@@ -118,6 +135,11 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       console.error('Error fetching page', page, error);
       return null;
     });
+    if (result?.status === 402) {
+      this.done = true;
+      this.error = result.error || 'Request limit exceeded - upgrade your plan';
+      return null;
+    }
     this.stats.pages++;
     this.stats.requests++;
     if (result?.id) {
@@ -141,6 +163,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
           console.error('Error scraping item', error);
           return null;
         });
+
+        if (itemDetails?.status === 402) {
+          this.done = true;
+          this.error = itemDetails?.error || 'Request limit exceeded - upgrade your plan';
+          return details;
+        }
       } else {
         itemDetails = {
           id: item?.id,
@@ -183,6 +211,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       const open = require('sqlite').open;
       const sqlite3 = require('sqlite3');
 
+      await fs.ensureDir(dirname(this.filePath));
+
       this.db = await open({
         filename: `${this.filePath}.sqlite`,
         driver: sqlite3.Database,
@@ -192,8 +222,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         `CREATE TABLE IF NOT EXISTS "${this.tableName}" (db_id INTEGER PRIMARY KEY AUTOINCREMENT)`,
       );
     } catch (error) {
-      console.error('Error creating SQLite database:', error);
-      process.exit(1);
+      this.error = ['Error creating SQLite database:', error];
+      this.done = true;
     }
   }
 

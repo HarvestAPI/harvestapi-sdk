@@ -1,6 +1,6 @@
 export interface BaseApiResponse {
   id: string | null;
-  status: string;
+  status: number;
   error: any;
   query: Record<string, any>;
   /** @internal */
