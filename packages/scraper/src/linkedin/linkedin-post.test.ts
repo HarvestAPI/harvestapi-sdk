@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // eslint-disable-line @typescript-eslint/no-require-imports
 
 import { LinkedinScraper } from './scraper';
 
@@ -17,6 +17,7 @@ describe('Linkedin API', () => {
       search: 'Software',
       postedLimit: '24h',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.search).toBe('Software');
     expect(data.query.postedLimit).toBe('past-24h');
@@ -38,6 +39,7 @@ describe('Linkedin API', () => {
     const data = await scraper.searchPosts({
       companyId: '1441',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.pagination?.pageNumber).toBe(1);
     expect(data.elements.length).toBeGreaterThan(0);
@@ -53,6 +55,7 @@ describe('Linkedin API', () => {
     const data = await scraper.searchPosts({
       profileId: 'ACoAAA8BYqEBCGLg_vT_ca6mMEqkpp9nVffJ3hc', // Bill Gates profile id
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.pagination?.pageNumber).toBe(1);
     expect(data.elements.length).toBeGreaterThan(0);

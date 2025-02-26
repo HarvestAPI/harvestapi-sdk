@@ -423,7 +423,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### status
 
-> **status**: `string`
+> **status**: `number`
 
 ##### error
 

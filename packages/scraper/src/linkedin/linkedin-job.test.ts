@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // eslint-disable-line @typescript-eslint/no-require-imports
 
 import { LinkedinScraper } from './scraper';
 
@@ -16,6 +16,7 @@ describe('Linkedin API', () => {
     const data = await scraper.getJob({
       jobId: '4153069088',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.jobId).toBe('4153069088');
 
@@ -28,6 +29,7 @@ describe('Linkedin API', () => {
     const data = await scraper.getJob({
       url: 'https://www.linkedin.com/jobs/view/4153069088',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.jobId).toBe('4153069088');
 
@@ -42,6 +44,7 @@ describe('Linkedin API', () => {
       location: 'Germany',
       page: 1,
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.location).toBe('Germany');
     expect(data.query.geoId).toBe('101282230');
@@ -62,6 +65,7 @@ describe('Linkedin API', () => {
       workplaceType: ['remote'],
       page: 1,
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.workplaceType).toBe('2');
     expect(data.query.location).toBe('US');
@@ -96,6 +100,7 @@ describe('Linkedin API', () => {
       sortBy: 'date',
       page: 1,
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.employmentType).toBe('C');
     expect(data.query.search).toBe('Software%20Engineer');
@@ -118,6 +123,7 @@ describe('Linkedin API', () => {
       companyId: '1441',
       page: 1,
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.search).toBe('Software%20Engineer');
     expect(data.query.companyId).toBe('1441');
@@ -140,6 +146,7 @@ describe('Linkedin API', () => {
       location: 'US',
       page: 1,
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.search).toBe('Software%20Engineer');
     expect(data.query.salary).toBe('8,9');

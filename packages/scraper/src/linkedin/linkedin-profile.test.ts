@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // eslint-disable-line @typescript-eslint/no-require-imports
 
 import { LinkedinScraper } from './scraper';
 
@@ -16,6 +16,7 @@ describe('Linkedin Profile API', () => {
     const data = await scraper.getProfile({
       url: 'https://www.linkedin.com/in/williamhgates',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.publicIdentifier).toBe('williamhgates');
 
@@ -28,6 +29,7 @@ describe('Linkedin Profile API', () => {
     const data = await scraper.getProfile({
       profileId: 'ACoAAA8BYqEBCGLg_vT_ca6mMEqkpp9nVffJ3hc',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.publicIdentifier).toBe('williamhgates');
 
@@ -40,6 +42,7 @@ describe('Linkedin Profile API', () => {
       search: 'Mark',
       location: 'Australia',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.geoId).toBe('101452733');
     expect(data.query.geoTitle).toBe('Australia');
@@ -61,6 +64,7 @@ describe('Linkedin Profile API', () => {
       location: 'US',
       companyId: '1441',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.query.location).toBe('US');
     expect(data.query.geoId).toBe('103644278');

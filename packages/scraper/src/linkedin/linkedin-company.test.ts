@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // eslint-disable-line @typescript-eslint/no-require-imports
 
 import { LinkedinScraper } from './scraper';
 
@@ -16,6 +16,7 @@ describe('Linkedin API', () => {
     const data = await scraper.getCompany({
       universalName: 'google',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.element.id).toBe('1441');
     expect(data.element.name).toBe('Google');
@@ -27,6 +28,7 @@ describe('Linkedin API', () => {
       location: 'Germany',
       page: 1,
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.elements.length).toBeGreaterThan(0);
     expect(data.elements[0].name).toBe('Google');
@@ -39,6 +41,7 @@ describe('Linkedin API', () => {
       location: 'Germany',
       companySize: '1-10',
     });
+    if (!data?.query) console.error('data', data);
 
     expect(data.elements.length).toBeGreaterThan(0);
     expect(data.elements[0].universalName).not.toBe('google');

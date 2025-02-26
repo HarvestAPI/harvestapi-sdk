@@ -10,79 +10,122 @@ const userStats: Record<
   }
 > = {};
 
-const logRequest = (userKey: string, ...args) => {
+const logRequest = ({
+  userKey,
+  status,
+  index,
+  id,
+  error,
+  used,
+  left,
+}: {
+  userKey: string;
+  index: number;
+  status: number;
+  id?: string;
+  error?: any;
+  used?: number;
+  left?: number;
+}) => {
   if (!userStats[userKey]) {
     userStats[userKey] = {
       startTime: Date.now(),
       requests: [],
     };
   }
-  userStats[userKey].requests.push({
-    timestamp: Date.now(),
-  });
+  if (status < 400) {
+    userStats[userKey].requests.push({
+      timestamp: Date.now(),
+    });
+  }
 
   const requestsPerSecond =
     userStats[userKey].requests.length / ((Date.now() - userStats[userKey].startTime) / 1000);
 
-  console.info(`${userKey}`, `average r/s: ${requestsPerSecond}`, ...args);
+  console.info(
+    `${userKey}`,
+    `average r/s: ${requestsPerSecond.toFixed(2)}`,
+    index,
+    id,
+    status,
+    error,
+    'used:',
+    used,
+    'left:',
+    left,
+  );
 };
 
 export function testConcurrentRequests({
   instances,
   method,
+  localhost,
 }: {
   method?: 'getCompany' | 'test';
+  localhost?: boolean;
   instances: {
     name?: string;
     method?: 'getCompany' | 'test';
     apiKey: string;
     requests: number;
+    loops?: number;
   }[];
 }) {
-  instances.forEach((instance, i) => {
-    const promises: Promise<any>[] = [];
-    const userKey = `instance_${instance.name || i}`;
+  instances.forEach(async (instance, i) => {
+    for (let loop = 0; loop < (instance.loops || 1); loop++) {
+      const promises: Promise<any>[] = [];
+      const userKey = `instance_${instance.name || i}`;
+      delete userStats[userKey];
 
-    const scraper = new LinkedinScraper({
-      apiKey: instance.apiKey,
-    });
-
-    for (let j = 0; j < instance.requests; j++) {
-      if (!userStats[userKey]) {
-        userStats[userKey] = {
-          startTime: Date.now(),
-          requests: [],
-        };
-      }
-
-      method = method || instance.method || 'getCompany';
-      let promise;
-
-      if (method === 'getCompany') {
-        promise = scraper.getCompany({ universalName: 'airbnb' });
-      }
-      if (method === 'test') {
-        promise = scraper.test();
-      }
-
-      promises.push(promise);
-
-      promise.then((data) => {
-        logRequest(userKey, j, data?.id, data?.status, data?.error);
+      const scraper = new LinkedinScraper({
+        apiKey: instance.apiKey,
+        basePath: localhost ? 'http://localhost:3552/api' : undefined,
       });
-    }
 
-    Promise.all(promises).then(() => {
+      for (let j = 0; j < instance.requests; j++) {
+        if (!userStats[userKey]) {
+          userStats[userKey] = {
+            startTime: Date.now(),
+            requests: [],
+          };
+        }
+
+        method = method || instance.method || 'getCompany';
+        let promise;
+
+        if (method === 'getCompany') {
+          promise = scraper.getCompany({ universalName: 'airbnb' });
+        }
+        if (method === 'test') {
+          promise = scraper.test();
+        }
+
+        promises.push(promise);
+
+        promise.then((data) => {
+          logRequest({
+            userKey,
+            index: j,
+            id: data?.id,
+            status: data?.status,
+            error: data?.error,
+            used: data?.user?.requestsUsedThisCycle,
+            left: data?.user?.requestsLeftThisCycle,
+          });
+        });
+      }
+
+      await Promise.all(promises);
       const requestsPerSecond =
         userStats[userKey].requests.length / ((Date.now() - userStats[userKey].startTime) / 1000);
 
-      console.info(userKey, 'requests per minute:', requestsPerSecond * 60);
-    });
+      console.info(userKey, 'loop', loop, 'requests per minute:', requestsPerSecond * 60);
+    }
   });
 }
 
 if (process.argv.includes('--run')) {
-  require('dotenv').config();
+  require('dotenv').config(); // eslint-disable-line @typescript-eslint/no-require-imports
 
   const instances = JSON.parse(process.env.API_TEST_ACCOUNTS || '[]');
   console.info(`instances`, instances);
