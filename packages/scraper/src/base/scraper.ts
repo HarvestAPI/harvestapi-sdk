@@ -2,11 +2,14 @@ import queryString from 'query-string';
 import { ScraperOptions } from './types';
 
 export class BaseScraper {
-  private apiBasePath = 'https://harvestapi.net/api';
+  private apiBaseUrl = 'https://api.harvestapi.net';
 
   constructor(private options: ScraperOptions) {
-    if (options.basePath) {
-      this.apiBasePath = options.basePath;
+    if (options.baseUrl) {
+      this.apiBaseUrl = options.baseUrl;
+    }
+    if (this.apiBaseUrl.endsWith('/')) {
+      this.apiBaseUrl = this.apiBaseUrl.slice(0, -1);
     }
   }
 
@@ -35,7 +38,7 @@ export class BaseScraper {
       })}`;
     }
 
-    const apiUrl = `${this.apiBasePath}${path}`;
+    const apiUrl = `${this.apiBaseUrl}${path}`;
     let error: any = null;
 
     const response = await fetch(apiUrl, {

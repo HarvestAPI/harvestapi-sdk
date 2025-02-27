@@ -208,8 +208,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
   private async createSqliteDatabase() {
     try {
-      const open = require('sqlite').open;
-      const sqlite3 = require('sqlite3');
+      const open = require('sqlite').open; // eslint-disable-line @typescript-eslint/no-require-imports
+      const sqlite3 = require('sqlite3'); // eslint-disable-line @typescript-eslint/no-require-imports
 
       await fs.ensureDir(dirname(this.filePath));
 

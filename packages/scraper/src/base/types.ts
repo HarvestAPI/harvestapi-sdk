@@ -28,5 +28,5 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
 
 export type ScraperOptions = {
   apiKey: string;
-  basePath?: string;
+  baseUrl?: string;
 };

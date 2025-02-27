@@ -60,9 +60,11 @@ export function testConcurrentRequests({
   instances,
   method,
   localhost,
+  baseUrl,
 }: {
   method?: 'getCompany' | 'test';
   localhost?: boolean;
+  baseUrl?: string;
   instances: {
     name?: string;
     method?: 'getCompany' | 'test';
@@ -79,7 +81,7 @@ export function testConcurrentRequests({
 
       const scraper = new LinkedinScraper({
         apiKey: instance.apiKey,
-        basePath: localhost ? 'http://localhost:3552/api' : undefined,
+        baseUrl: baseUrl || (localhost ? 'http://localhost:3552/api' : undefined),
       });
 
       for (let j = 0; j < instance.requests; j++) {

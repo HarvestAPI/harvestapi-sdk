@@ -507,9 +507,9 @@ true
 
 > **apiKey**: `string`
 
-##### basePath?
+##### baseUrl?
 
-> `optional` **basePath**: `string`
+> `optional` **baseUrl**: `string`
 
 ***
 

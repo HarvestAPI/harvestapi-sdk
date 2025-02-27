@@ -8,7 +8,7 @@ if (!process.env.API_KEY) {
 
 const scraper = new LinkedinScraper({
   apiKey: process.env.API_KEY!,
-  basePath: 'http://localhost:3552/api',
+  baseUrl: 'http://localhost:3552/api',
 });
 
 describe('Linkedin Profile API', () => {
