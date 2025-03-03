@@ -21,7 +21,7 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
     item,
   }: {
     item: TItemShot;
-  }) => Promise<ApiItemResponse<TItemDetails> | null> | null;
+  }) => Promise<(ApiItemResponse<TItemDetails> | { skipped: boolean }) | null> | null;
   maxPages?: number;
   entityName: string;
 };

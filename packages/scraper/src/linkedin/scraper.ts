@@ -65,7 +65,8 @@ export class LinkedinScraper {
   async scrapeJobs({ query, ...options }: ScrapeLinkedinJobsParams) {
     return new ListingScraper<JobShort, Job>({
       fetchList: ({ page }) => this.searchJobs({ ...query, page }),
-      fetchItem: ({ item }) => (item?.id ? this.getJob({ jobId: item.id }) : null),
+      fetchItem: async ({ item }) =>
+        item?.id ? this.getJob({ jobId: item.id }) : { skipped: true },
       scrapeDetails: true,
       entityName: 'jobs',
       ...options,
@@ -76,8 +77,10 @@ export class LinkedinScraper {
   async scrapeCompanies({ query, ...options }: ScrapeLinkedinCompaniesParams) {
     return new ListingScraper<CompanyShort, Company>({
       fetchList: ({ page }) => this.searchCompanies({ ...query, page }),
-      fetchItem: ({ item }) =>
-        item?.universalName ? this.getCompany({ universalName: item.universalName }) : null,
+      fetchItem: async ({ item }) =>
+        item?.universalName
+          ? this.getCompany({ universalName: item.universalName })
+          : { skipped: true },
       scrapeDetails: true,
       entityName: 'companies',
       ...options,
@@ -85,13 +88,13 @@ export class LinkedinScraper {
     }).scrapeStart();
   }
 
-  async scrapeProfiles({ query, ...options }: ScrapeLinkedinProfilesParams) {
+  async scrapeProfiles({ query, tryFindEmail, ...options }: ScrapeLinkedinProfilesParams) {
     return new ListingScraper<ProfileShort, Profile>({
       fetchList: ({ page }) => this.searchProfiles({ ...query, page }),
-      fetchItem: ({ item }) =>
+      fetchItem: async ({ item }) =>
         item?.publicIdentifier
-          ? this.getProfile({ publicIdentifier: item.publicIdentifier })
-          : null,
+          ? this.getProfile({ publicIdentifier: item.publicIdentifier, tryFindEmail })
+          : { skipped: true },
       scrapeDetails: true,
       entityName: 'profiles',
       ...options,
@@ -103,7 +106,9 @@ export class LinkedinScraper {
     return new ListingScraper<PostShort, PostShort>({
       fetchList: ({ page }) => this.searchPosts({ ...query, page }),
       fetchItem: async ({ item }) =>
-        item?.id ? ({ id: item?.id, element: item } as ApiItemResponse<PostShort>) : null,
+        item?.id
+          ? ({ id: item?.id, element: item } as ApiItemResponse<PostShort>)
+          : { skipped: true },
       scrapeDetails: false,
       entityName: 'posts',
       ...options,

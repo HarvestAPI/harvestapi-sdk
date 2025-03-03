@@ -4,6 +4,7 @@ export interface GetLinkedInProfileParams {
   url?: string;
   publicIdentifier?: string;
   profileId?: string;
+  tryFindEmail?: boolean;
 }
 
 export interface SearchLinkedInProfilesParams {
@@ -400,6 +401,7 @@ export type ScrapeLinkedinCompaniesParams = {
 
 export type ScrapeLinkedinProfilesParams = {
   query: SearchLinkedInProfilesParams;
+  tryFindEmail?: boolean;
 } & ListingScraperConfig;
 
 export type ScrapeLinkedinPostsParams = {

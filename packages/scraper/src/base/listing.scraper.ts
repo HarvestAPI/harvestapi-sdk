@@ -91,7 +91,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     await this.finalize();
 
     console.info(
-      `Finished ${this.options.entityName}. Scraped pages: ${this.stats.pages}. Scraped items: ${this.stats.itemsSuccess}. Total requests: ${this.stats.requests}.`,
+      `Finished scraping ${this.options.entityName}. Scraped pages: ${this.stats.pages}. Scraped items: ${this.stats.itemsSuccess}. Total requests: ${this.stats.requests}.`,
     );
 
     if (this.error) {
@@ -156,7 +156,10 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     const details: TItemDetail[] = [];
 
     for (const item of list.elements) {
-      let itemDetails: ApiItemResponse<TItemDetail> | null | undefined = null;
+      let itemDetails:
+        | (Partial<ApiItemResponse<TItemDetail>> & { skipped?: boolean })
+        | null
+        | undefined = null;
 
       if (this.options.scrapeDetails) {
         itemDetails = await this.options.fetchItem({ item })?.catch((error) => {
@@ -181,7 +184,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
       this.stats.items++;
 
-      if (this.options.scrapeDetails) {
+      if (this.options.scrapeDetails && !itemDetails?.skipped) {
         this.stats.requests++;
       }
 
