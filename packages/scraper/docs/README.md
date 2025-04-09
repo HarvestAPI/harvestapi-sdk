@@ -20,7 +20,7 @@ import { createLinkedinScraper } from '@harvestapi/scraper';
 
 // Initialize the scraper with your API key
 const scraper = createLinkedinScraper({
-  apiKey: 'your-api-key', // Replace with your HarvestAPI key. Obtain it at https://harvestapi.net/admin/api-keys
+  apiKey: 'your-api-key', // Replace with your HarvestAPI key. Obtain it at https://harvest-api.com/admin/api-keys
 });
 
 (async () => {

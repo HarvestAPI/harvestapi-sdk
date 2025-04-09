@@ -20,7 +20,7 @@ import { createLinkedinScraper } from '@harvestapi/scraper';
 
 // Initialize the scraper with your API key
 const scraper = createLinkedinScraper({
-  apiKey: 'your-api-key', // Replace with your HarvestAPI key. Obtain it at https://harvestapi.net/admin/api-keys
+  apiKey: 'your-api-key', // Replace with your HarvestAPI key. Obtain it at https://harvest-api.com/admin/api-keys
 });
 
 (async () => {
@@ -254,6 +254,10 @@ For more detailed information on the available methods and their parameters, che
 ##### profileId?
 
 > `optional` **profileId**: `string`
+
+##### tryFindEmail?
+
+> `optional` **tryFindEmail**: `boolean`
 
 ***
 
@@ -1458,6 +1462,10 @@ true
 ##### query
 
 > **query**: [`SearchLinkedInProfilesParams`](#searchlinkedinprofilesparams)
+
+##### tryFindEmail?
+
+> `optional` **tryFindEmail**: `boolean`
 
 ***
 

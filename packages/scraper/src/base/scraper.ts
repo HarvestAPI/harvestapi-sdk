@@ -2,7 +2,7 @@ import queryString from 'query-string';
 import { ScraperOptions } from './types';
 
 export class BaseScraper {
-  private apiBaseUrl = 'https://api.harvestapi.net';
+  private apiBaseUrl = 'https://api.harvest-api.com';
 
   constructor(private options: ScraperOptions) {
     if (options.baseUrl) {
