@@ -579,6 +579,14 @@ true
 
 > **photo**: `string`
 
+##### emails
+
+> **emails**: `string`[]
+
+##### websites
+
+> **websites**: `string`[]
+
 ##### registeredAt
 
 > **registeredAt**: `string`
@@ -607,25 +615,45 @@ true
 
 > **location**: `object`
 
-###### location.preferredGeoPlace
+###### location.linkedinText
 
-> **preferredGeoPlace**: `string` \| `null`
+> **linkedinText**: `string`
 
 ###### location.countryCode
 
 > **countryCode**: `string`
 
-###### location.postalCode
+###### location.parsed
 
-> **postalCode**: `string` \| `null`
+> **parsed**: `object`
 
-###### location.country
+###### location.parsed.text
+
+> **text**: `string`
+
+###### location.parsed.countryCode
+
+> **countryCode**: `string`
+
+###### location.parsed.regionCode
+
+> **regionCode**: `string` \| `null`
+
+###### location.parsed.country
 
 > **country**: `string`
 
-###### location.countryFull
+###### location.parsed.countryFull
 
 > **countryFull**: `string`
+
+###### location.parsed.state
+
+> **state**: `string`
+
+###### location.parsed.city
+
+> **city**: `string`
 
 ##### currentPosition
 
@@ -639,9 +667,9 @@ true
 
 > **education**: `object`[]
 
-##### certificates
+##### certifications
 
-> **certificates**: `object`[]
+> **certifications**: `object`[]
 
 ##### receivedRecommendations
 

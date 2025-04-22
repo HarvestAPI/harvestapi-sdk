@@ -88,6 +88,8 @@ export type Profile = {
   about: string;
   linkedinUrl: string;
   photo: string;
+  emails: string[];
+  websites: string[];
   registeredAt: string;
   topSkills: string;
   connectionsCount: number;
@@ -95,11 +97,17 @@ export type Profile = {
   openToWork: boolean;
   hiring: boolean;
   location: {
-    preferredGeoPlace: string | null;
+    linkedinText: string;
     countryCode: string;
-    postalCode: string | null;
-    country: string;
-    countryFull: string;
+    parsed: {
+      text: string;
+      countryCode: string;
+      regionCode: string | null;
+      country: string;
+      countryFull: string;
+      state: string;
+      city: string;
+    };
   };
   currentPosition: Array<{
     companyName: string;
@@ -111,18 +119,18 @@ export type Profile = {
     location: string;
     companyLink: string;
     description: string;
-    startDate: string;
-    endDate: string;
+    startDate: { text: string; month?: string; year?: number } | null;
+    endDate: { text: string; month?: string; year?: number } | null;
     employmentType: string;
   }>;
   education: Array<{
     title: string;
     link: string;
     degree: string;
-    startDate: string;
-    endDate: string;
+    startDate: { text: string; month?: string; year?: number } | null;
+    endDate: { text: string; month?: string; year?: number } | null;
   }>;
-  certificates: Array<{
+  certifications: Array<{
     title: string;
     issuedAt: string;
     issuedBy: string;
@@ -144,6 +152,8 @@ export type Profile = {
   projects: Array<{
     title: string;
     description: string;
+    startDate: { text: string; month?: string; year?: number } | null;
+    endDate: { text: string; month?: string; year?: number } | null;
   }>;
   publications: Array<{
     title: string;
