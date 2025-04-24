@@ -5,9 +5,9 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "homepage": "https://harvest-api.com",
-  "repository": "https://github.com/xorcuit/harvestapi-sdk",
+  "repository": "https://github.com/HarvestAPI/harvestapi-sdk",
   "bugs": {
-    "url": "https://github.com/xorcuit/harvestapi-sdk/issues"
+    "url": "https://github.com/HarvestAPI/harvestapi-sdk/issues"
   },
   "files": [
     "dist",
