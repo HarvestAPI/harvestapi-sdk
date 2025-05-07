@@ -46,6 +46,7 @@ export class BaseScraper {
       headers: {
         'Content-Type': 'application/json',
         'X-API-KEY': this.options.apiKey,
+        ...this.options.addHeaders,
       },
     }).catch((e) => {
       console.error('Error fetching API:', e);

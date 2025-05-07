@@ -609,6 +609,10 @@ true
 
 > `optional` **baseUrl**: `string`
 
+##### addHeaders?
+
+> `optional` **addHeaders**: `Record`\<`string`, `string`\>
+
 ***
 
 ### LinkedinCompanySize

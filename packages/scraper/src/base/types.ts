@@ -38,4 +38,5 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
 export type ScraperOptions = {
   apiKey: string;
   baseUrl?: string;
+  addHeaders?: Record<string, string>;
 };
