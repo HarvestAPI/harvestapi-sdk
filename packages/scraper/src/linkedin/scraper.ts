@@ -34,6 +34,13 @@ export class LinkedinScraper {
     return this.scraper.fetchApi({ path: 'linkedin/profile', params });
   }
 
+  async getProfileId(params: {
+    url?: string;
+    publicIdentifier?: string;
+  }): Promise<ApiItemResponse<{ id: string }>> {
+    return this.scraper.fetchApi({ path: 'linkedin/profile-id', params });
+  }
+
   async searchProfiles(
     params: SearchLinkedInProfilesParams,
   ): Promise<ApiListResponse<ProfileShort>> {
@@ -107,7 +114,7 @@ export class LinkedinScraper {
       fetchList: ({ page }) => this.searchPosts({ ...query, page }),
       fetchItem: async ({ item }) =>
         item?.id
-          ? ({ id: item?.id, element: item } as ApiItemResponse<PostShort>)
+          ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostShort>)
           : { skipped: true },
       scrapeDetails: false,
       entityName: 'posts',

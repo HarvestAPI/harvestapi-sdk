@@ -1,7 +1,7 @@
 import { ApiItemResponse, ApiListResponse } from '../types';
 
-export type ListingScraperConfig = {
-  outputType?: 'json' | 'sqlite';
+export type ListingScraperConfig<TItemShot, TItemDetails> = {
+  outputType?: 'json' | 'sqlite' | 'callback';
   outputDir?: string;
   filename?: string;
   /**
@@ -13,9 +13,18 @@ export type ListingScraperConfig = {
    * @default true
    */
   scrapeDetails?: boolean;
+
+  onItemScraped?: (args: { item: TItemShot | TItemDetails }) => any;
+  overrideConcurrency?: number;
+  maxItems?: number;
+  disableLog?: boolean;
+  disableErrorLog?: boolean;
 };
 
-export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfig & {
+export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfig<
+  TItemShot,
+  TItemDetails
+> & {
   fetchList: ({ page }: { page: number }) => Promise<ApiListResponse<TItemShot>>;
   fetchItem: ({
     item,

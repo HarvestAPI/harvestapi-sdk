@@ -40,6 +40,17 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     );
   }
 
+  log(...args: any[]) {
+    if (!this.options.disableLog) {
+      console.log(...args); // eslint-disable-line no-console
+    }
+  }
+  errorLog(...args: any[]) {
+    if (!this.options.disableErrorLog) {
+      console.error(...args);
+    }
+  }
+
   private scrapePageQueue!: (args: {
     page: number;
     scrapedList?: ApiListResponse<TItemShort>;
@@ -53,9 +64,10 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       totalPages = this.options.maxPages;
     }
 
-    const concurrency = firstPage?.user?.requestsConcurrency || 1;
+    const concurrency =
+      this.options?.overrideConcurrency || firstPage?.user?.requestsConcurrency || 1;
 
-    console.info(
+    this.log(
       `Scraping ${this.options.entityName} with ${concurrency} concurrent ${
         concurrency === 1 ? 'worker' : 'workers'
       }... Total pages: ${totalPages}`,
@@ -65,9 +77,9 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       this.done = true;
       if (this.error) {
         const errors = Array.isArray(this.error) ? this.error : [this.error];
-        console.error(...errors);
+        this.errorLog(...errors);
       }
-      console.error('Error fetching first page or no items found. Exiting.');
+      this.errorLog('Error fetching first page or no items found. Exiting.');
       return;
     }
 
@@ -90,13 +102,13 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     await Promise.all(promises);
     await this.finalize();
 
-    console.info(
+    this.log(
       `Finished scraping ${this.options.entityName}. Scraped pages: ${this.stats.pages}. Scraped items: ${this.stats.itemsSuccess}. Total requests: ${this.stats.requests}.`,
     );
 
     if (this.error) {
       const errors = Array.isArray(this.error) ? this.error : [this.error];
-      console.error(...errors);
+      this.errorLog(...errors);
     }
 
     return this.stats;
@@ -120,7 +132,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
     if (this.done) return;
 
-    console.info(
+    this.log(
       `Scraped ${this.options.entityName} page ${page}. Items found: ${
         details.length
       }. Requests/second: ${(
@@ -132,7 +144,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
   private async fetchPage({ page }: { page: number }) {
     const result = await this.options.fetchList({ page }).catch((error) => {
-      console.error('Error fetching page', page, error);
+      this.errorLog('Error fetching page', page, error);
       return null;
     });
     if (result?.status === 402) {
@@ -142,7 +154,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
     this.stats.pages++;
     this.stats.requests++;
-    if (result?.id) {
+    if (result?.entityId) {
       this.stats.pagesSuccess++;
     }
     return result;
@@ -163,7 +175,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
       if (this.options.scrapeDetails) {
         itemDetails = await this.options.fetchItem({ item })?.catch((error) => {
-          console.error('Error scraping item', error);
+          this.errorLog('Error scraping item', error);
           return null;
         });
 
@@ -174,7 +186,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         }
       } else {
         itemDetails = {
-          id: item?.id,
+          entityId: item?.id,
           element: item as any,
           status: list.status,
           error: list.error,
@@ -188,7 +200,13 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         this.stats.requests++;
       }
 
-      if (itemDetails?.element && itemDetails.id) {
+      if (itemDetails?.element && itemDetails.entityId) {
+        if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
+          this.done = true;
+          this.error = `Max items limit reached: ${this.options.maxItems}`;
+          return details;
+        }
+
         this.stats.itemsSuccess++;
         await this.onItemScraped({ item: itemDetails.element });
         details.push(itemDetails.element);
@@ -204,8 +222,11 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
     if (this.options.outputType === 'sqlite') {
       await this.insertSqliteItem(item).catch((error) => {
-        console.error('Error inserting item to SQLite:', error);
+        this.errorLog('Error inserting item to SQLite:', error);
       });
+    }
+    if (this.options.outputType === 'callback') {
+      await this.options.onItemScraped?.({ item });
     }
   });
 

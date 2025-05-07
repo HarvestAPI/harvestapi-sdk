@@ -97,6 +97,26 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile)\>\>
 
+##### getProfileId()
+
+> **getProfileId**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<\{ `id`: `string`; \}\>\>
+
+###### Parameters
+
+###### params
+
+###### url?
+
+`string`
+
+###### publicIdentifier?
+
+`string`
+
+###### Returns
+
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<\{ `id`: `string`; \}\>\>
+
 ##### searchProfiles()
 
 > **searchProfiles**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
@@ -267,15 +287,27 @@ For more detailed information on the available methods and their parameters, che
 
 ##### companyId?
 
-> `optional` **companyId**: `string`
+> `optional` **companyId**: `string` \| `string`[]
+
+##### companyUniversalName?
+
+> `optional` **companyUniversalName**: `string` \| `string`[]
+
+##### schoolId?
+
+> `optional` **schoolId**: `string` \| `string`[]
+
+##### schoolUniversalName?
+
+> `optional` **schoolUniversalName**: `string` \| `string`[]
 
 ##### geoId?
 
-> `optional` **geoId**: `string`
+> `optional` **geoId**: `string` \| `string`[]
 
 ##### location?
 
-> `optional` **location**: `string`
+> `optional` **location**: `string` \| `string`[]
 
 ##### search?
 
@@ -339,6 +371,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **url**: `string`
 
+##### withCompany?
+
+> `optional` **withCompany**: `boolean`
+
 ***
 
 ### SearchLinkedinJobsParams
@@ -352,6 +388,10 @@ For more detailed information on the available methods and their parameters, che
 ##### companyId?
 
 > `optional` **companyId**: `string` \| `string`[]
+
+##### companyUniversalName?
+
+> `optional` **companyUniversalName**: `string` \| `string`[]
 
 ##### location?
 
@@ -409,11 +449,27 @@ For more detailed information on the available methods and their parameters, che
 
 ##### companyId?
 
-> `optional` **companyId**: `string`
+> `optional` **companyId**: `string` \| `string`[]
 
 ##### profileId?
 
-> `optional` **profileId**: `string`
+> `optional` **profileId**: `string` \| `string`[]
+
+##### companyUniversalName?
+
+> `optional` **companyUniversalName**: `string` \| `string`[]
+
+##### profilePublicIdentifier?
+
+> `optional` **profilePublicIdentifier**: `string` \| `string`[]
+
+##### authorsCompanyUniversalName?
+
+> `optional` **authorsCompanyUniversalName**: `string` \| `string`[]
+
+##### authorsCompanyId?
+
+> `optional` **authorsCompanyId**: `string` \| `string`[]
 
 ***
 
@@ -421,9 +477,9 @@ For more detailed information on the available methods and their parameters, che
 
 #### Properties
 
-##### id
+##### entityId
 
-> **id**: `null` \| `string`
+> **entityId**: `null` \| `string`
 
 ##### status
 
@@ -463,15 +519,21 @@ For more detailed information on the available methods and their parameters, che
 
 ## Type Aliases
 
-### ListingScraperConfig
+### ListingScraperConfig\<TItemShot, TItemDetails\>
 
-> **ListingScraperConfig**: `object`
+> **ListingScraperConfig**\<`TItemShot`, `TItemDetails`\>: `object`
+
+#### Type Parameters
+
+• **TItemShot**
+
+• **TItemDetails**
 
 #### Type declaration
 
 ##### outputType?
 
-> `optional` **outputType**: `"json"` \| `"sqlite"`
+> `optional` **outputType**: `"json"` \| `"sqlite"` \| `"callback"`
 
 ##### outputDir?
 
@@ -498,6 +560,38 @@ Whether to make an additional request for each item details.
 ```ts
 true
 ```
+
+##### onItemScraped()?
+
+> `optional` **onItemScraped**: (`args`) => `any`
+
+###### Parameters
+
+###### args
+
+###### item
+
+`TItemShot` \| `TItemDetails`
+
+###### Returns
+
+`any`
+
+##### overrideConcurrency?
+
+> `optional` **overrideConcurrency**: `number`
+
+##### maxItems?
+
+> `optional` **maxItems**: `number`
+
+##### disableLog?
+
+> `optional` **disableLog**: `boolean`
+
+##### disableErrorLog?
+
+> `optional` **disableErrorLog**: `boolean`
 
 ***
 
@@ -747,9 +841,9 @@ true
 
 > `optional` **linkedinText**: `string`
 
-##### url?
+##### linkedinUrl?
 
-> `optional` **url**: `string`
+> `optional` **linkedinUrl**: `string`
 
 ##### photo?
 
@@ -907,9 +1001,9 @@ true
 
 > `optional` **specialities**: `string`[]
 
-##### industry?
+##### industries?
 
-> `optional` **industry**: `string`[]
+> `optional` **industries**: `string`[]
 
 ##### logos?
 
@@ -1023,9 +1117,9 @@ true
 
 > `optional` **name**: `string`
 
-##### industry?
+##### industries?
 
-> `optional` **industry**: `string`
+> `optional` **industries**: `string`
 
 ##### location?
 
@@ -1311,9 +1405,9 @@ true
 
 > `optional` **authorLinkedinUrl**: `string`
 
-##### authorPosition?
+##### authorInfo?
 
-> `optional` **authorPosition**: `string`
+> `optional` **authorInfo**: `string`
 
 ##### authorWebsite?
 
@@ -1374,6 +1468,22 @@ true
 ##### repost?
 
 > `optional` **repost**: [`PostShort`](#postshort)
+
+##### repostedBy?
+
+> `optional` **repostedBy**: `object`
+
+###### repostedBy.name
+
+> **name**: `string`
+
+###### repostedBy.publicIdentifier
+
+> **publicIdentifier**: `string`
+
+###### repostedBy.linkedinUrl
+
+> **linkedinUrl**: `string`
 
 ##### newsletterUrl?
 
@@ -1459,7 +1569,7 @@ true
 
 ### ScrapeLinkedinJobsParams
 
-> **ScrapeLinkedinJobsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfig)
+> **ScrapeLinkedinJobsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`JobShort`](#jobshort), [`Job`](#job)\>
 
 #### Type declaration
 
@@ -1471,7 +1581,7 @@ true
 
 ### ScrapeLinkedinCompaniesParams
 
-> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfig)
+> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company)\>
 
 #### Type declaration
 
@@ -1483,7 +1593,7 @@ true
 
 ### ScrapeLinkedinProfilesParams
 
-> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfig)
+> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile)\>
 
 #### Type declaration
 
@@ -1499,7 +1609,7 @@ true
 
 ### ScrapeLinkedinPostsParams
 
-> **ScrapeLinkedinPostsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfig)
+> **ScrapeLinkedinPostsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`PostShort`](#postshort), [`PostShort`](#postshort)\>
 
 #### Type declaration
 

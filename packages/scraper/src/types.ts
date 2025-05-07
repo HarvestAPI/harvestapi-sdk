@@ -1,5 +1,5 @@
 export interface BaseApiResponse {
-  id: string | null;
+  entityId: string | null;
   status: number;
   error: any;
   query: Record<string, any>;

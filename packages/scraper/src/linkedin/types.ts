@@ -8,9 +8,12 @@ export interface GetLinkedInProfileParams {
 }
 
 export interface SearchLinkedInProfilesParams {
-  companyId?: string;
-  geoId?: string;
-  location?: string;
+  companyId?: string | string[];
+  companyUniversalName?: string | string[];
+  schoolId?: string | string[];
+  schoolUniversalName?: string | string[];
+  geoId?: string | string[];
+  location?: string | string[];
   search?: string;
   page?: number;
 }
@@ -41,6 +44,7 @@ export interface SearchLinkedinCompaniesParams {
 export interface GetLinkedinJobParams {
   jobId?: string;
   url?: string;
+  withCompany?: boolean;
 }
 
 export type LinkedinSalaryRange =
@@ -60,6 +64,7 @@ export type LinkedinWorkplaceType = 'office' | 'hybrid' | 'remote';
 export interface SearchLinkedinJobsParams {
   search?: string;
   companyId?: string | string[];
+  companyUniversalName?: string | string[];
   location?: string;
   geoId?: string;
   sortBy?: 'date' | 'relevance';
@@ -75,8 +80,12 @@ export interface SearchLinkedinPostsParams {
   page?: number;
   sortBy?: 'date' | 'relevance';
   postedLimit?: '24h' | 'week' | 'month';
-  companyId?: string;
-  profileId?: string;
+  companyId?: string | string[];
+  profileId?: string | string[];
+  companyUniversalName?: string | string[];
+  profilePublicIdentifier?: string | string[];
+  authorsCompanyUniversalName?: string | string[];
+  authorsCompanyId?: string | string[];
 }
 
 export type Profile = {
@@ -178,7 +187,7 @@ export type ProfileShort = {
   location?: {
     linkedinText?: string;
   };
-  url?: string;
+  linkedinUrl?: string;
   photo?: string;
   hidden?: boolean;
 };
@@ -233,7 +242,7 @@ export type Company = {
     line1?: string;
   }>;
   specialities?: string[];
-  industry?: string[];
+  industries?: string[];
   logos?: Array<{
     url?: string;
     width?: number;
@@ -277,7 +286,7 @@ export type Company = {
 export type CompanyShort = {
   id: string;
   name?: string;
-  industry?: string;
+  industries?: string;
   location?: {
     linkedinText?: string;
   };
@@ -356,7 +365,7 @@ export type PostShort = {
   authorType?: 'company' | 'profile';
   authorName?: string;
   authorLinkedinUrl?: string;
-  authorPosition?: string;
+  authorInfo?: string;
   authorWebsite?: string | null;
   authorWebsiteLabel?: string | null;
   authorAvatar?: {
@@ -374,6 +383,11 @@ export type PostShort = {
   };
   repostId?: string | null;
   repost?: PostShort;
+  repostedBy?: {
+    name: string;
+    publicIdentifier: string;
+    linkedinUrl: string;
+  };
   newsletterUrl?: string;
   newsletterTitle?: string;
   socialContent?: {
@@ -403,20 +417,20 @@ export type PostShort = {
 
 export type ScrapeLinkedinJobsParams = {
   query: SearchLinkedinJobsParams;
-} & ListingScraperConfig;
+} & ListingScraperConfig<JobShort, Job>;
 
 export type ScrapeLinkedinCompaniesParams = {
   query: SearchLinkedinCompaniesParams;
-} & ListingScraperConfig;
+} & ListingScraperConfig<CompanyShort, Company>;
 
 export type ScrapeLinkedinProfilesParams = {
   query: SearchLinkedInProfilesParams;
   tryFindEmail?: boolean;
-} & ListingScraperConfig;
+} & ListingScraperConfig<ProfileShort, Profile>;
 
 export type ScrapeLinkedinPostsParams = {
   query: SearchLinkedinPostsParams;
-} & ListingScraperConfig;
+} & ListingScraperConfig<PostShort, PostShort>;
 
 export type ErrorResponse = {
   error: string;
