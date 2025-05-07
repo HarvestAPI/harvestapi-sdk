@@ -24,6 +24,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   private sqliteDatabaseOpenPromise: Promise<void> | null = null;
   private done = false;
   private error: any | null = null;
+  private scrapedItems: Record<string, boolean> = {};
 
   constructor(private options: ListingScraperOptions<TItemShort, TItemDetail>) {
     if (!this.options.outputType) {
@@ -172,6 +173,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         | (Partial<ApiItemResponse<TItemDetail>> & { skipped?: boolean })
         | null
         | undefined = null;
+
+      if (this.scrapedItems[item.id]) {
+        this.stats.items++;
+        continue;
+      }
+      this.scrapedItems[item.id] = true;
 
       if (this.options.scrapeDetails) {
         itemDetails = await this.options.fetchItem({ item })?.catch((error) => {
