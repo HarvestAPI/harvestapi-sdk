@@ -8,7 +8,7 @@ if (!process.env.API_KEY) {
 
 const scraper = new LinkedinScraper({
   apiKey: process.env.API_KEY!,
-  baseUrl: 'http://localhost:3552/api',
+  baseUrl: process.env.TEST_API_BASE_URL!,
 });
 
 describe('Linkedin API', () => {
@@ -96,13 +96,13 @@ describe('Linkedin API', () => {
   it('searchJobs Software Engineer', async () => {
     const data = await scraper.searchJobs({
       search: 'Software Engineer',
-      employmentType: ['contract'],
+      employmentType: ['part-time'],
       sortBy: 'date',
       page: 1,
     });
     if (!data?.query) console.error('data', data);
 
-    expect(data.query.employmentType).toBe('C');
+    expect(data.query.employmentType).toBe('P');
     expect(data.query.search).toBe('Software%20Engineer');
     expect(data.query.sortBy).toBe('DD');
 
@@ -113,7 +113,7 @@ describe('Linkedin API', () => {
       jobId: data.elements[0].id,
     });
 
-    expect(job.element.employmentType).toBe('contract');
+    expect(job.element.employmentType).toBe('part_time');
   });
 
   it('searchJobs Software Engineer at Google', async () => {
@@ -135,7 +135,7 @@ describe('Linkedin API', () => {
       jobId: data.elements[0].id,
     });
 
-    expect(job.element.companyUniversalName).toBe('google');
+    expect(job.element.company.universalName).toBe('google');
   });
 
   it('searchJobs Software Engineer 140k+', async () => {
@@ -159,7 +159,7 @@ describe('Linkedin API', () => {
       jobId: data.elements[0].id,
     });
 
-    expect(job.element.salaryCurrency).toBe('USD');
-    expect(Number(job.element.salaryMax!)).toBeGreaterThan(180000);
+    expect(job.element.salary!.currency).toBe('USD');
+    expect(Number(job.element.salary!.max!)).toBeGreaterThan(180000);
   });
 });

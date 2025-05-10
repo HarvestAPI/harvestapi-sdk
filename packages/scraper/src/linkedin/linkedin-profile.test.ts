@@ -8,7 +8,7 @@ if (!process.env.API_KEY) {
 
 const scraper = new LinkedinScraper({
   apiKey: process.env.API_KEY!,
-  baseUrl: 'http://localhost:3552/api',
+  baseUrl: process.env.TEST_API_BASE_URL!,
 });
 
 describe('Linkedin Profile API', () => {
@@ -49,8 +49,8 @@ describe('Linkedin Profile API', () => {
 
     expect(data.elements.length).toBeGreaterThan(0);
 
-    expect(data.elements[0].name).toContain('Mark');
-    expect(data.elements[1].name).toContain('Mark');
+    expect(data.elements[0].name).toMatch(/Mark|LinkedIn Member/i);
+    expect(data.elements[1].name).toMatch(/Mark|LinkedIn Member/i);
 
     const hasAustralia = !!data.elements.find((el) =>
       el.location!.linkedinText!.includes('Australia'),

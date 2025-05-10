@@ -6,6 +6,11 @@ import { ApiItemResponse, ApiListResponse } from '../types';
 import { createConcurrentQueues } from '../utils';
 import { ListingScraperOptions } from './types';
 
+type TFetchedItemDetails<TItemDetail> =
+  | (Partial<ApiItemResponse<TItemDetail>> & { skipped?: boolean })
+  | null
+  | undefined;
+
 export class ListingScraper<TItemShort extends { id: string }, TItemDetail extends { id: string }> {
   private id = randomUUID();
   private startTime = new Date();
@@ -57,6 +62,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     scrapedList?: ApiListResponse<TItemShort>;
   }) => Promise<void>;
 
+  private fetchItemQueue!: (args: {
+    item: TItemShort;
+  }) => Promise<TFetchedItemDetails<TItemDetail>>;
+
+  private onItemScrapedQueue!: (args: { item: TItemDetail }) => Promise<void>;
+
   async scrapeStart() {
     const firstPage = await this.fetchPage({ page: 1 });
 
@@ -84,7 +95,23 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       return;
     }
 
-    this.scrapePageQueue = createConcurrentQueues(concurrency, (args) => this.scrapePage(args));
+    this.scrapePageQueue = createConcurrentQueues(2, (args) => this.scrapePage(args));
+    this.fetchItemQueue = createConcurrentQueues(concurrency, async ({ item }) => {
+      if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
+        this.done = true;
+        this.error = `Max items limit reached: ${this.options.maxItems}`;
+        return null;
+      }
+      return await this.options.fetchItem({ item })?.catch((error) => {
+        this.errorLog('Error scraping item', error);
+        return null;
+      });
+    });
+    this.onItemScrapedQueue = createConcurrentQueues(
+      this.options.outputType === 'sqlite' ? 1 : concurrency,
+      ({ item }) => this.onItemScraped({ item }),
+    );
+
     this.stats.requestsStartTime = new Date();
     this.stats.pages = 1;
     this.stats.pagesSuccess = 1;
@@ -144,6 +171,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   }
 
   private async fetchPage({ page }: { page: number }) {
+    this.log(`Scraping page ${page} of ${this.options.entityName}...`);
+
     const result = await this.options.fetchList({ page }).catch((error) => {
       this.errorLog('Error fetching page', page, error);
       return null;
@@ -168,23 +197,17 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     const details: TItemDetail[] = [];
 
-    for (const item of list.elements) {
-      let itemDetails:
-        | (Partial<ApiItemResponse<TItemDetail>> & { skipped?: boolean })
-        | null
-        | undefined = null;
+    const itemPromises = list.elements.map(async (item) => {
+      let itemDetails: TFetchedItemDetails<TItemDetail> = null;
 
       if (this.scrapedItems[item.id]) {
         this.stats.items++;
-        continue;
+        return;
       }
       this.scrapedItems[item.id] = true;
 
       if (this.options.scrapeDetails) {
-        itemDetails = await this.options.fetchItem({ item })?.catch((error) => {
-          this.errorLog('Error scraping item', error);
-          return null;
-        });
+        itemDetails = await this.fetchItemQueue({ item });
 
         if (itemDetails?.status === 402) {
           this.done = true;
@@ -215,27 +238,33 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         }
 
         this.stats.itemsSuccess++;
-        await this.onItemScraped({ item: itemDetails.element });
+        await this.onItemScrapedQueue({ item: itemDetails.element });
         details.push(itemDetails.element);
       }
-    }
+    });
+
+    await Promise.all(itemPromises).catch((error) => {
+      this.errorLog('Error scraping items', error);
+    });
 
     return details;
   }
 
-  private onItemScraped = createConcurrentQueues(1, async ({ item }: { item: TItemDetail }) => {
+  private onItemScraped = async ({ item }: { item: TItemDetail }) => {
     if (this.options.outputType === 'json') {
       this.inMemoryItems.push(item);
+      void this.options.onItemScraped?.({ item });
     }
     if (this.options.outputType === 'sqlite') {
       await this.insertSqliteItem(item).catch((error) => {
         this.errorLog('Error inserting item to SQLite:', error);
       });
+      void this.options.onItemScraped?.({ item });
     }
     if (this.options.outputType === 'callback') {
       await this.options.onItemScraped?.({ item });
     }
-  });
+  };
 
   private async createSqliteDatabase() {
     try {

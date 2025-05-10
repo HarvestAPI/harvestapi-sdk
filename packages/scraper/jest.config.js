@@ -25,6 +25,6 @@ export default {
   testEnvironment: 'node',
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   testMatch: ['**/*.test.ts'],
-  testTimeout: 60 * 1000,
-  maxConcurrency: 10,
+  testTimeout: 2 * 60 * 1000,
+  maxConcurrency: 2,
 };

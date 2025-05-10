@@ -8,8 +8,10 @@ export interface GetLinkedInProfileParams {
 }
 
 export interface SearchLinkedInProfilesParams {
+  company?: string | string[];
   companyId?: string | string[];
   companyUniversalName?: string | string[];
+  school?: string | string[];
   schoolId?: string | string[];
   schoolUniversalName?: string | string[];
   geoId?: string | string[];
@@ -21,6 +23,7 @@ export interface SearchLinkedInProfilesParams {
 export interface GetLinkedinCompanyParams {
   universalName?: string;
   url?: string;
+  companyId?: string;
 }
 
 export type LinkedinCompanySize =
@@ -80,10 +83,14 @@ export interface SearchLinkedinPostsParams {
   page?: number;
   sortBy?: 'date' | 'relevance';
   postedLimit?: '24h' | 'week' | 'month';
+  targetUrl?: string | string[];
+  profile?: string | string[];
   companyId?: string | string[];
   profileId?: string | string[];
+  company?: string | string[];
   companyUniversalName?: string | string[];
   profilePublicIdentifier?: string | string[];
+  authorsCompany?: string | string[];
   authorsCompanyUniversalName?: string | string[];
   authorsCompanyId?: string | string[];
 }
@@ -199,7 +206,7 @@ export type Company = {
   tagline?: string;
   website?: string;
   linkedinUrl?: string;
-  logoUrl?: string;
+  logo?: string;
   foundedOn?: {
     month?: string | null;
     year?: number;
@@ -285,6 +292,8 @@ export type Company = {
 
 export type CompanyShort = {
   id: string;
+  universalName: string;
+  linkedinUrl: string;
   name?: string;
   industries?: string;
   location?: {
@@ -293,8 +302,6 @@ export type CompanyShort = {
   followers?: string;
   summary?: string;
   logo?: string;
-  url?: string;
-  universalName: string;
 };
 
 export type Job = {
@@ -323,14 +330,17 @@ export type Job = {
   workRemoteAllowed?: boolean;
   easyApplyUrl?: string;
   applicants?: number;
-  companyName?: string;
-  companyLogo?: string;
-  companyLink?: string;
-  companyUniversalName?: string;
-  salaryText?: string;
-  salaryMin?: string;
-  salaryMax?: string;
-  salaryCurrency?: string;
+  company: Company;
+  salary: {
+    text: string;
+    min: number;
+    max: number;
+    currency: string;
+    payPeriod: string;
+    compensationType: string;
+    compensationSource: string;
+    providedByEmployer: boolean;
+  } | null;
   views?: number;
   expireAt?: string; // ISO 8601 date-time string
   new?: boolean;
@@ -343,9 +353,7 @@ export type JobShort = {
   url?: string;
   title?: string;
   postedDate?: string; // ISO 8601 date-time string
-  companyName?: string;
-  companyLink?: string;
-  companyUniversalName?: string;
+  company?: CompanyShort;
   location?: {
     linkedinText?: string;
   };
@@ -355,32 +363,37 @@ export type JobShort = {
 export type PostShort = {
   id: string;
   content?: string;
-  title?: string;
-  subtitle?: string;
-  link?: string;
-  linkLabel?: string;
-  description?: string;
-  authorUniversalName?: string | null;
-  authorPublicIdentifier?: string | null;
-  authorType?: 'company' | 'profile';
-  authorName?: string;
-  authorLinkedinUrl?: string;
-  authorInfo?: string;
-  authorWebsite?: string | null;
-  authorWebsiteLabel?: string | null;
-  authorAvatar?: {
-    url: string;
-    width: number;
-    height: number;
-    expiresAt: number;
+  author: {
+    universalName?: string | null;
+    publicIdentifier?: string | null;
+    type?: 'company' | 'profile';
+    name?: string;
+    linkedinUrl?: string;
+    info?: string;
+    website?: string | null;
+    websiteLabel?: string | null;
+    avatar?: {
+      url: string;
+      width: number;
+      height: number;
+      expiresAt: number;
+    };
   };
+  article: {
+    title: string | null;
+    subtitle: string | null;
+    link: string | null;
+    linkLabel: string | null;
+    description: string | null;
+    image: string | null;
+  } | null;
   postedAgo?: string;
-  postImage?: {
+  postImages?: {
     url: string;
     width: number;
     height: number;
     expiresAt: number;
-  };
+  }[];
   repostId?: string | null;
   repost?: PostShort;
   repostedBy?: {

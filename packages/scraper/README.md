@@ -85,7 +85,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getProfile()
 
-> **getProfile**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile)\>\>
+> **getProfile**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-1)\>\>
 
 ###### Parameters
 
@@ -95,7 +95,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-1)\>\>
 
 ##### getProfileId()
 
@@ -133,7 +133,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getCompany()
 
-> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company)\>\>
+> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-2)\>\>
 
 ###### Parameters
 
@@ -143,7 +143,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-2)\>\>
 
 ##### searchCompanies()
 
@@ -285,6 +285,10 @@ For more detailed information on the available methods and their parameters, che
 
 #### Properties
 
+##### company?
+
+> `optional` **company**: `string` \| `string`[]
+
 ##### companyId?
 
 > `optional` **companyId**: `string` \| `string`[]
@@ -292,6 +296,10 @@ For more detailed information on the available methods and their parameters, che
 ##### companyUniversalName?
 
 > `optional` **companyUniversalName**: `string` \| `string`[]
+
+##### school?
+
+> `optional` **school**: `string` \| `string`[]
 
 ##### schoolId?
 
@@ -330,6 +338,10 @@ For more detailed information on the available methods and their parameters, che
 ##### url?
 
 > `optional` **url**: `string`
+
+##### companyId?
+
+> `optional` **companyId**: `string`
 
 ***
 
@@ -447,6 +459,14 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **postedLimit**: `"24h"` \| `"week"` \| `"month"`
 
+##### targetUrl?
+
+> `optional` **targetUrl**: `string` \| `string`[]
+
+##### profile?
+
+> `optional` **profile**: `string` \| `string`[]
+
 ##### companyId?
 
 > `optional` **companyId**: `string` \| `string`[]
@@ -455,6 +475,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **profileId**: `string` \| `string`[]
 
+##### company?
+
+> `optional` **company**: `string` \| `string`[]
+
 ##### companyUniversalName?
 
 > `optional` **companyUniversalName**: `string` \| `string`[]
@@ -462,6 +486,10 @@ For more detailed information on the available methods and their parameters, che
 ##### profilePublicIdentifier?
 
 > `optional` **profilePublicIdentifier**: `string` \| `string`[]
+
+##### authorsCompany?
+
+> `optional` **authorsCompany**: `string` \| `string`[]
 
 ##### authorsCompanyUniversalName?
 
@@ -889,9 +917,9 @@ true
 
 > `optional` **linkedinUrl**: `string`
 
-##### logoUrl?
+##### logo?
 
-> `optional` **logoUrl**: `string`
+> `optional` **logo**: `string`
 
 ##### foundedOn?
 
@@ -1117,6 +1145,14 @@ true
 
 > **id**: `string`
 
+##### universalName
+
+> **universalName**: `string`
+
+##### linkedinUrl
+
+> **linkedinUrl**: `string`
+
 ##### name?
 
 > `optional` **name**: `string`
@@ -1144,14 +1180,6 @@ true
 ##### logo?
 
 > `optional` **logo**: `string`
-
-##### url?
-
-> `optional` **url**: `string`
-
-##### universalName
-
-> **universalName**: `string`
 
 ***
 
@@ -1253,37 +1281,13 @@ true
 
 > `optional` **applicants**: `number`
 
-##### companyName?
+##### company
 
-> `optional` **companyName**: `string`
+> **company**: [`Company`](#company-2)
 
-##### companyLogo?
+##### salary
 
-> `optional` **companyLogo**: `string`
-
-##### companyLink?
-
-> `optional` **companyLink**: `string`
-
-##### companyUniversalName?
-
-> `optional` **companyUniversalName**: `string`
-
-##### salaryText?
-
-> `optional` **salaryText**: `string`
-
-##### salaryMin?
-
-> `optional` **salaryMin**: `string`
-
-##### salaryMax?
-
-> `optional` **salaryMax**: `string`
-
-##### salaryCurrency?
-
-> `optional` **salaryCurrency**: `string`
+> **salary**: \{ `text`: `string`; `min`: `number`; `max`: `number`; `currency`: `string`; `payPeriod`: `string`; `compensationType`: `string`; `compensationSource`: `string`; `providedByEmployer`: `boolean`; \} \| `null`
 
 ##### views?
 
@@ -1329,17 +1333,9 @@ true
 
 > `optional` **postedDate**: `string`
 
-##### companyName?
+##### company?
 
-> `optional` **companyName**: `string`
-
-##### companyLink?
-
-> `optional` **companyLink**: `string`
-
-##### companyUniversalName?
-
-> `optional` **companyUniversalName**: `string`
+> `optional` **company**: [`CompanyShort`](#companyshort)
 
 ##### location?
 
@@ -1369,101 +1365,73 @@ true
 
 > `optional` **content**: `string`
 
-##### title?
+##### author
 
-> `optional` **title**: `string`
+> **author**: `object`
 
-##### subtitle?
+###### author.universalName?
 
-> `optional` **subtitle**: `string`
+> `optional` **universalName**: `string` \| `null`
 
-##### link?
+###### author.publicIdentifier?
 
-> `optional` **link**: `string`
+> `optional` **publicIdentifier**: `string` \| `null`
 
-##### linkLabel?
+###### author.type?
 
-> `optional` **linkLabel**: `string`
+> `optional` **type**: `"company"` \| `"profile"`
 
-##### description?
+###### author.name?
 
-> `optional` **description**: `string`
+> `optional` **name**: `string`
 
-##### authorUniversalName?
+###### author.linkedinUrl?
 
-> `optional` **authorUniversalName**: `string` \| `null`
+> `optional` **linkedinUrl**: `string`
 
-##### authorPublicIdentifier?
+###### author.info?
 
-> `optional` **authorPublicIdentifier**: `string` \| `null`
+> `optional` **info**: `string`
 
-##### authorType?
+###### author.website?
 
-> `optional` **authorType**: `"company"` \| `"profile"`
+> `optional` **website**: `string` \| `null`
 
-##### authorName?
+###### author.websiteLabel?
 
-> `optional` **authorName**: `string`
+> `optional` **websiteLabel**: `string` \| `null`
 
-##### authorLinkedinUrl?
+###### author.avatar?
 
-> `optional` **authorLinkedinUrl**: `string`
+> `optional` **avatar**: `object`
 
-##### authorInfo?
-
-> `optional` **authorInfo**: `string`
-
-##### authorWebsite?
-
-> `optional` **authorWebsite**: `string` \| `null`
-
-##### authorWebsiteLabel?
-
-> `optional` **authorWebsiteLabel**: `string` \| `null`
-
-##### authorAvatar?
-
-> `optional` **authorAvatar**: `object`
-
-###### authorAvatar.url
+###### author.avatar.url
 
 > **url**: `string`
 
-###### authorAvatar.width
+###### author.avatar.width
 
 > **width**: `number`
 
-###### authorAvatar.height
+###### author.avatar.height
 
 > **height**: `number`
 
-###### authorAvatar.expiresAt
+###### author.avatar.expiresAt
 
 > **expiresAt**: `number`
+
+##### article
+
+> **article**: \{ `title`: `string` \| `null`; `subtitle`: `string` \| `null`; `link`: `string` \| `null`; `linkLabel`: `string` \| `null`; `description`: `string` \| `null`; `image`: `string` \| `null`; \} \| `null`
 
 ##### postedAgo?
 
 > `optional` **postedAgo**: `string`
 
-##### postImage?
+##### postImages?
 
-> `optional` **postImage**: `object`
-
-###### postImage.url
-
-> **url**: `string`
-
-###### postImage.width
-
-> **width**: `number`
-
-###### postImage.height
-
-> **height**: `number`
-
-###### postImage.expiresAt
-
-> **expiresAt**: `number`
+> `optional` **postImages**: `object`[]
 
 ##### repostId?
 
@@ -1585,7 +1553,7 @@ true
 
 ### ScrapeLinkedinCompaniesParams
 
-> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company)\>
+> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-2)\>
 
 #### Type declaration
 
@@ -1597,7 +1565,7 @@ true
 
 ### ScrapeLinkedinProfilesParams
 
-> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile)\>
+> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-1)\>
 
 #### Type declaration
 

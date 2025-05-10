@@ -8,7 +8,7 @@ if (!process.env.API_KEY) {
 
 const scraper = new LinkedinScraper({
   apiKey: process.env.API_KEY!,
-  baseUrl: 'http://localhost:3552/api',
+  baseUrl: process.env.TEST_API_BASE_URL!,
 });
 
 describe('Linkedin API', () => {
@@ -44,11 +44,11 @@ describe('Linkedin API', () => {
     expect(data.pagination?.pageNumber).toBe(1);
     expect(data.elements.length).toBeGreaterThan(0);
 
-    expect(data.elements[0].authorType).toBe('company');
-    expect(data.elements[0].authorUniversalName).toBe('google');
+    expect(data.elements[0].author.type).toBe('company');
+    expect(data.elements[0].author.universalName).toBe('google');
 
-    expect(data.elements[1].authorType).toBe('company');
-    expect(data.elements[1].authorUniversalName).toBe('google');
+    expect(data.elements[1].author.type).toBe('company');
+    expect(data.elements[1].author.universalName).toBe('google');
   });
 
   it('searchPosts by author', async () => {
@@ -60,10 +60,10 @@ describe('Linkedin API', () => {
     expect(data.pagination?.pageNumber).toBe(1);
     expect(data.elements.length).toBeGreaterThan(0);
 
-    expect(data.elements[0].authorType).toBe('profile');
-    expect(data.elements[0].authorPublicIdentifier).toBe('williamhgates');
+    expect(data.elements[0].author.type).toBe('profile');
+    expect(data.elements[0].author.publicIdentifier).toBe('williamhgates');
 
-    expect(data.elements[1].authorType).toBe('profile');
-    expect(data.elements[1].authorPublicIdentifier).toBe('williamhgates');
+    expect(data.elements[1].author.type).toBe('profile');
+    expect(data.elements[1].author.publicIdentifier).toBe('williamhgates');
   });
 });
