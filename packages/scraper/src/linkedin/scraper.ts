@@ -17,6 +17,7 @@ import {
   ScrapeLinkedinPostsParams,
   ScrapeLinkedinProfilesParams,
   SearchLinkedinCompaniesParams,
+  SearchLinkedInCompanyAssociatedProfilesParams,
   SearchLinkedinJobsParams,
   SearchLinkedinPostsParams,
   SearchLinkedInProfilesParams,
@@ -67,6 +68,15 @@ export class LinkedinScraper {
 
   async searchPosts(params: SearchLinkedinPostsParams): Promise<ApiListResponse<PostShort>> {
     return this.scraper.fetchApi({ path: 'linkedin/post-search', params });
+  }
+
+  async searchCompanyAssociatedProfiles(
+    params: SearchLinkedInCompanyAssociatedProfilesParams,
+  ): Promise<ApiListResponse<ProfileShort>> {
+    return this.scraper.fetchApi({
+      path: 'linkedin/company-associated-profiles',
+      params,
+    });
   }
 
   async scrapeJobs({ query, ...options }: ScrapeLinkedinJobsParams) {

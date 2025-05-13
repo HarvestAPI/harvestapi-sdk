@@ -32,6 +32,13 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   private scrapedItems: Record<string, boolean> = {};
 
   constructor(private options: ListingScraperOptions<TItemShort, TItemDetail>) {
+    if (this.options.optionsOverride) {
+      this.options = {
+        ...this.options,
+        ...this.options.optionsOverride,
+      };
+    }
+
     if (!this.options.outputType) {
       this.options.outputType = 'sqlite';
     }

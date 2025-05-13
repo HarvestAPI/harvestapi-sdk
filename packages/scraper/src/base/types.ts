@@ -19,6 +19,7 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
   maxItems?: number;
   disableLog?: boolean;
   disableErrorLog?: boolean;
+  optionsOverride?: Partial<ListingScraperOptions<TItemShot, TItemDetails>>;
 };
 
 export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfig<

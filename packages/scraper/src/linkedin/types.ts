@@ -20,6 +20,14 @@ export interface SearchLinkedInProfilesParams {
   page?: number;
 }
 
+export interface SearchLinkedInCompanyAssociatedProfilesParams {
+  company?: string | string[];
+  companyId?: string | string[];
+  companyUniversalName?: string | string[];
+  search?: string;
+  page?: number;
+}
+
 export interface GetLinkedinCompanyParams {
   universalName?: string;
   url?: string;
