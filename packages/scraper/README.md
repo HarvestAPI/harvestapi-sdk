@@ -133,7 +133,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getCompany()
 
-> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-2)\>\>
+> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-3)\>\>
 
 ###### Parameters
 
@@ -143,7 +143,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-2)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-3)\>\>
 
 ##### searchCompanies()
 
@@ -200,6 +200,20 @@ For more detailed information on the available methods and their parameters, che
 ###### Returns
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
+
+##### searchCompanyAssociatedProfiles()
+
+> **searchCompanyAssociatedProfiles**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`SearchLinkedInCompanyAssociatedProfilesParams`](#searchlinkedincompanyassociatedprofilesparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
 
 ##### scrapeJobs()
 
@@ -316,6 +330,32 @@ For more detailed information on the available methods and their parameters, che
 ##### location?
 
 > `optional` **location**: `string` \| `string`[]
+
+##### search?
+
+> `optional` **search**: `string`
+
+##### page?
+
+> `optional` **page**: `number`
+
+***
+
+### SearchLinkedInCompanyAssociatedProfilesParams
+
+#### Properties
+
+##### company?
+
+> `optional` **company**: `string` \| `string`[]
+
+##### companyId?
+
+> `optional` **companyId**: `string` \| `string`[]
+
+##### companyUniversalName?
+
+> `optional` **companyUniversalName**: `string` \| `string`[]
 
 ##### search?
 
@@ -620,6 +660,10 @@ true
 ##### disableErrorLog?
 
 > `optional` **disableErrorLog**: `boolean`
+
+##### optionsOverride?
+
+> `optional` **optionsOverride**: `Partial`\<`ListingScraperOptions`\<`TItemShot`, `TItemDetails`\>\>
 
 ***
 
@@ -1283,7 +1327,7 @@ true
 
 ##### company
 
-> **company**: [`Company`](#company-2)
+> **company**: [`Company`](#company-3)
 
 ##### salary
 
@@ -1553,7 +1597,7 @@ true
 
 ### ScrapeLinkedinCompaniesParams
 
-> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-2)\>
+> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-3)\>
 
 #### Type declaration
 
