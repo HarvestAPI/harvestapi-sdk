@@ -76,6 +76,14 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   private onItemScrapedQueue!: (args: { item: TItemDetail }) => Promise<void>;
 
   async scrapeStart() {
+    this.stats = {
+      pages: 0,
+      pagesSuccess: 0,
+      items: 0,
+      itemsSuccess: 0,
+      requests: 0,
+      requestsStartTime: new Date(),
+    };
     const firstPage = await this.fetchPage({ page: 1 });
 
     let totalPages = firstPage?.pagination?.totalPages || 0;
