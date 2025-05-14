@@ -37,6 +37,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       scraped: boolean;
     }
   > = {};
+  private undefinedPagination = false;
 
   constructor(private options: ListingScraperOptions<TItemShort, TItemDetail>) {
     if (this.options.optionsOverride) {
@@ -99,6 +100,9 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
     if (!totalPages && firstPage?.elements?.length) {
       totalPages = this.options.maxPages;
+      this.undefinedPagination = true;
+    } else {
+      this.undefinedPagination = false;
     }
 
     const concurrency =
@@ -187,10 +191,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
     if (this.done) return;
 
-    if (!details?.length) {
-      this.scrapePagesDone = true;
-    } else {
-      this.scrapePagesDone = false;
+    if (this.undefinedPagination) {
+      if (!details?.length) {
+        this.scrapePagesDone = true;
+      } else {
+        this.scrapePagesDone = false;
+      }
     }
 
     this.log(
