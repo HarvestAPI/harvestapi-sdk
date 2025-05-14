@@ -63,12 +63,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
   log(...args: any[]) {
     if (!this.options.disableLog) {
-      console.log(...args); // eslint-disable-line no-console
+      console.log(`[${new Date().toISOString()}]`, ...args); // eslint-disable-line no-console
     }
   }
   errorLog(...args: any[]) {
     if (!this.options.disableErrorLog) {
-      console.error(...args);
+      console.error(`[${new Date().toISOString()}]`, ...args);
     }
   }
 
@@ -292,18 +292,22 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   }
 
   private onItemScraped = async ({ item }: { item: TItemDetail }) => {
+    const logger = {
+      log: (...args: any[]) => this.log(...args),
+      error: (...args: any[]) => this.errorLog(...args),
+    };
     if (this.options.outputType === 'json') {
       this.inMemoryItems.push(item);
-      void this.options.onItemScraped?.({ item });
+      void this.options.onItemScraped?.({ item, logger });
     }
     if (this.options.outputType === 'sqlite') {
       await this.insertSqliteItem(item).catch((error) => {
         this.errorLog('Error inserting item to SQLite:', error);
       });
-      void this.options.onItemScraped?.({ item });
+      void this.options.onItemScraped?.({ item, logger });
     }
     if (this.options.outputType === 'callback') {
-      await this.options.onItemScraped?.({ item });
+      await this.options.onItemScraped?.({ item, logger });
     }
   };
 

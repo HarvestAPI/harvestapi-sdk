@@ -14,7 +14,10 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
    */
   scrapeDetails?: boolean;
 
-  onItemScraped?: (args: { item: TItemShot | TItemDetails }) => any;
+  onItemScraped?: (args: {
+    item: TItemShot | TItemDetails;
+    logger: Required<ScraperOptions>['logger'];
+  }) => any;
   overrideConcurrency?: number;
   maxItems?: number;
   disableLog?: boolean;
@@ -40,4 +43,8 @@ export type ScraperOptions = {
   apiKey: string;
   baseUrl?: string;
   addHeaders?: Record<string, string>;
+  logger?: {
+    log: (...args: any[]) => void;
+    error: (...args: any[]) => void;
+  };
 };

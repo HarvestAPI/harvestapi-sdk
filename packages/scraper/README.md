@@ -657,6 +657,10 @@ true
 
 `TItemShot` \| `TItemDetails`
 
+###### logger
+
+`Required`\<[`ScraperOptions`](#scraperoptions)\>\[`"logger"`\]
+
 ###### Returns
 
 `any`
@@ -700,6 +704,38 @@ true
 ##### addHeaders?
 
 > `optional` **addHeaders**: `Record`\<`string`, `string`\>
+
+##### logger?
+
+> `optional` **logger**: `object`
+
+###### logger.log()
+
+> **log**: (...`args`) => `void`
+
+###### Parameters
+
+###### args
+
+...`any`[]
+
+###### Returns
+
+`void`
+
+###### logger.error()
+
+> **error**: (...`args`) => `void`
+
+###### Parameters
+
+###### args
+
+...`any`[]
+
+###### Returns
+
+`void`
 
 ***
 

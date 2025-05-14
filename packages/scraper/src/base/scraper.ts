@@ -4,6 +4,8 @@ import { ScraperOptions } from './types';
 export class BaseScraper {
   private apiBaseUrl = 'https://api.harvest-api.com';
 
+  logger: Required<ScraperOptions>['logger'] = console;
+
   constructor(private options: ScraperOptions) {
     if (options.baseUrl) {
       this.apiBaseUrl = options.baseUrl;
@@ -11,17 +13,18 @@ export class BaseScraper {
     if (this.apiBaseUrl.endsWith('/')) {
       this.apiBaseUrl = this.apiBaseUrl.slice(0, -1);
     }
+    this.logger = options.logger || console;
   }
 
   async fetchApi({ path, params }: { path: string; params?: any }) {
     if (!this.options.apiKey) {
-      console.error('API Key is required');
+      this.logger.error('API Key is required');
       return {
         error: 'API Key is required to fetch API',
       };
     }
     if (!path) {
-      console.error('Path is required');
+      this.logger.error('Path is required');
       return {
         error: 'Path is required to fetch API',
       };
@@ -49,13 +52,13 @@ export class BaseScraper {
         ...this.options.addHeaders,
       },
     }).catch((e) => {
-      console.error('Error fetching API:', e);
+      this.logger.error('Error fetching API:', e);
       error = e;
       return null;
     });
 
     const data = await response?.json()?.catch((e) => {
-      console.error('Error parsing response:', e);
+      this.logger.error('Error parsing response:', e);
       error = e;
       return null;
     });
