@@ -28,8 +28,15 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   private tableName: string;
   private sqliteDatabaseOpenPromise: Promise<void> | null = null;
   private done = false;
+  private scrapePagesDone = false;
   private error: any | null = null;
-  private scrapedItems: Record<string, boolean> = {};
+  private scrapedItems: Record<
+    string,
+    {
+      found: boolean;
+      scraped: boolean;
+    }
+  > = {};
 
   constructor(private options: ListingScraperOptions<TItemShort, TItemDetail>) {
     if (this.options.optionsOverride) {
@@ -90,6 +97,9 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     if (this.options.maxPages && totalPages > this.options.maxPages) {
       totalPages = this.options.maxPages;
     }
+    if (!totalPages && firstPage?.elements?.length) {
+      totalPages = this.options.maxPages;
+    }
 
     const concurrency =
       this.options?.overrideConcurrency || firstPage?.user?.requestsConcurrency || 1;
@@ -100,7 +110,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       }... Total pages: ${totalPages}`,
     );
 
-    if (!firstPage || !totalPages) {
+    if (!firstPage?.elements?.length) {
       this.done = true;
       if (this.error) {
         const errors = Array.isArray(this.error) ? this.error : [this.error];
@@ -164,16 +174,24 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     page: number;
     scrapedList?: ApiListResponse<TItemShort>;
   }) {
-    if (this.done) return;
+    if (this.done || this.scrapePagesDone) return;
     const list = scrapedList ? scrapedList : await this.fetchPage({ page });
     if (this.done) return;
 
     let details: TItemDetail[] = [];
 
-    if (list?.elements) {
+    if (list?.elements?.length) {
       details = await this.scrapePageItems({ list });
+    } else {
+      this.scrapePagesDone = true;
     }
     if (this.done) return;
+
+    if (!details?.length) {
+      this.scrapePagesDone = true;
+    } else {
+      this.scrapePagesDone = false;
+    }
 
     this.log(
       `Scraped ${this.options.entityName} page ${page}. Items found: ${
@@ -214,12 +232,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     const itemPromises = list.elements.map(async (item) => {
       let itemDetails: TFetchedItemDetails<TItemDetail> = null;
+      this.stats.items++;
 
       if (this.scrapedItems[item.id]) {
-        this.stats.items++;
         return;
       }
-      this.scrapedItems[item.id] = true;
+      this.scrapedItems[item.id] = { found: true, scraped: false };
 
       if (this.options.scrapeDetails) {
         itemDetails = await this.fetchItemQueue({ item });
@@ -239,8 +257,6 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         };
       }
 
-      this.stats.items++;
-
       if (this.options.scrapeDetails && !itemDetails?.skipped) {
         this.stats.requests++;
       }
@@ -252,9 +268,13 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
           return details;
         }
 
-        this.stats.itemsSuccess++;
-        await this.onItemScrapedQueue({ item: itemDetails.element });
-        details.push(itemDetails.element);
+        if (!this.scrapedItems[itemDetails.entityId].scraped) {
+          this.scrapedItems[itemDetails.entityId].scraped = true;
+          this.stats.itemsSuccess++;
+
+          await this.onItemScrapedQueue({ item: itemDetails.element });
+          details.push(itemDetails.element);
+        }
       }
     });
 

@@ -133,7 +133,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getCompany()
 
-> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-3)\>\>
+> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
 
 ###### Parameters
 
@@ -143,7 +143,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-3)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
 
 ##### searchCompanies()
 
@@ -437,6 +437,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **search**: `string`
 
+##### company?
+
+> `optional` **company**: `string` \| `string`[]
+
 ##### companyId?
 
 > `optional` **companyId**: `string` \| `string`[]
@@ -464,6 +468,18 @@ For more detailed information on the available methods and their parameters, che
 ##### employmentType?
 
 > `optional` **employmentType**: [`LinkedinJobType`](#linkedinjobtype) \| [`LinkedinJobType`](#linkedinjobtype)[]
+
+##### experienceLevel?
+
+> `optional` **experienceLevel**: [`ExperienceLevel`](#experiencelevel-1) \| [`ExperienceLevel`](#experiencelevel-1)[]
+
+##### under10Applicants?
+
+> `optional` **under10Applicants**: `boolean`
+
+##### easyApply?
+
+> `optional` **easyApply**: `boolean`
 
 ##### postedLimit?
 
@@ -708,6 +724,12 @@ true
 ### LinkedinWorkplaceType
 
 > **LinkedinWorkplaceType**: `"office"` \| `"hybrid"` \| `"remote"`
+
+***
+
+### ExperienceLevel
+
+> **ExperienceLevel**: `"internship"` \| `"entry"` \| `"associate"` \| `"mid-senior"` \| `"director"` \| `"executive"`
 
 ***
 
@@ -1327,7 +1349,7 @@ true
 
 ##### company
 
-> **company**: [`Company`](#company-3)
+> **company**: [`Company`](#company-4)
 
 ##### salary
 
@@ -1597,7 +1619,7 @@ true
 
 ### ScrapeLinkedinCompaniesParams
 
-> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-3)\>
+> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-4)\>
 
 #### Type declaration
 

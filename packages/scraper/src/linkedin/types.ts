@@ -71,9 +71,17 @@ export type LinkedinSalaryRange =
 
 export type LinkedinJobType = 'full-time' | 'part-time' | 'contract' | 'internship';
 export type LinkedinWorkplaceType = 'office' | 'hybrid' | 'remote';
+export type ExperienceLevel =
+  | 'internship'
+  | 'entry'
+  | 'associate'
+  | 'mid-senior'
+  | 'director'
+  | 'executive';
 
 export interface SearchLinkedinJobsParams {
   search?: string;
+  company?: string | string[];
   companyId?: string | string[];
   companyUniversalName?: string | string[];
   location?: string;
@@ -81,6 +89,9 @@ export interface SearchLinkedinJobsParams {
   sortBy?: 'date' | 'relevance';
   workplaceType?: LinkedinWorkplaceType | LinkedinWorkplaceType[];
   employmentType?: LinkedinJobType | LinkedinJobType[];
+  experienceLevel?: ExperienceLevel | ExperienceLevel[];
+  under10Applicants?: boolean;
+  easyApply?: boolean;
   postedLimit?: '24h' | 'week' | 'month';
   page?: number;
   salary?: LinkedinSalaryRange | LinkedinSalaryRange[];
