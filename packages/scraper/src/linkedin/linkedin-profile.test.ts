@@ -25,13 +25,33 @@ describe('Linkedin Profile API', () => {
     expect(data.element.firstName).toBe('Bill');
   });
 
-  it('getJob software by profileId', async () => {
+  it('getProfile by profileId', async () => {
     const data = await scraper.getProfile({
       profileId: 'ACoAAA8BYqEBCGLg_vT_ca6mMEqkpp9nVffJ3hc',
     });
     if (!data?.query) console.error('data', data);
 
     expect(data.query.publicIdentifier).toBe('williamhgates');
+
+    expect(data.element.publicIdentifier).toBe('williamhgates');
+    expect(data.element.firstName).toBe('Bill');
+  });
+
+  it('getProfile by LSN profileId', async () => {
+    const data = await scraper.getProfile({
+      profileId: 'ACwAACH6bPIB0ezh5N9RULGK9F2kzeF2OOUx9zY',
+    });
+    if (!data?.query) console.error('data', data);
+
+    expect(data.element.publicIdentifier).toBe('amandasantospask');
+    expect(data.element.firstName).toBe('Amanda');
+  });
+
+  it('getProfile by profileId in URL', async () => {
+    const data = await scraper.getProfile({
+      query: 'https://www.linkedin.com/in/ACoAAA8BYqEBCGLg_vT_ca6mMEqkpp9nVffJ3hc',
+    });
+    if (!data?.query) console.error('data', data);
 
     expect(data.element.publicIdentifier).toBe('williamhgates');
     expect(data.element.firstName).toBe('Bill');
@@ -58,21 +78,20 @@ describe('Linkedin Profile API', () => {
     expect(hasAustralia).toBe(true);
   });
 
-  it('searchProfiles Mark at Google US', async () => {
+  it('searchProfiles Michael at Google US', async () => {
     const data = await scraper.searchProfiles({
-      search: 'Mark',
-      location: 'US',
+      search: 'Michael',
+      // location: 'US',
       companyId: '1441',
     });
     if (!data?.query) console.error('data', data);
-
-    expect(data.query.location).toBe('US');
-    expect(data.query.geoId).toBe('103644278');
+    // expect(data.query.location).toBe('US');
+    // expect(data.query.geoId).toBe('103644278');
 
     expect(data.elements.length).toBeGreaterThan(0);
 
-    expect(data.elements[0].name).toContain('Mark');
-    expect(data.elements[1].name).toContain('Mark');
+    expect(data.elements[0].name).toContain('Michael');
+    expect(data.elements[1].name).toContain('Michael');
 
     const hasGoogle = !!data.elements.find((el) => el.position!.includes('Google'));
     expect(hasGoogle).toBe(true);

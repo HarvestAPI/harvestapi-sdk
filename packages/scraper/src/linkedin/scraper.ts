@@ -21,6 +21,7 @@ import {
   SearchLinkedinJobsParams,
   SearchLinkedinPostsParams,
   SearchLinkedInProfilesParams,
+  SearchLinkedInProfilesParamsV2,
 } from './types';
 
 export class LinkedinScraper {
@@ -46,6 +47,12 @@ export class LinkedinScraper {
     params: SearchLinkedInProfilesParams,
   ): Promise<ApiListResponse<ProfileShort>> {
     return this.scraper.fetchApi({ path: 'linkedin/profile-search', params });
+  }
+
+  async searchProfilesV2(
+    params: SearchLinkedInProfilesParamsV2,
+  ): Promise<ApiListResponse<ProfileShort>> {
+    return this.scraper.fetchApi({ path: 'linkedin/v2/profile-search', params });
   }
 
   async getCompany(params: GetLinkedinCompanyParams): Promise<ApiItemResponse<Company>> {
@@ -112,6 +119,19 @@ export class LinkedinScraper {
         item?.publicIdentifier
           ? this.getProfile({ publicIdentifier: item.publicIdentifier, tryFindEmail })
           : { skipped: true },
+      scrapeDetails: true,
+      entityName: 'profiles',
+      ...options,
+      maxPages: 100,
+    }).scrapeStart();
+  }
+
+  async scrapeProfilesV2({ query, tryFindEmail, ...options }: ScrapeLinkedinProfilesParams) {
+    return new ListingScraper<ProfileShort, Profile>({
+      fetchList: ({ page }) => this.searchProfilesV2({ ...query, page }),
+      fetchItem: async ({ item }) => {
+        return item?.id ? this.getProfile({ profileId: item.id, tryFindEmail }) : { skipped: true };
+      },
       scrapeDetails: true,
       entityName: 'profiles',
       ...options,

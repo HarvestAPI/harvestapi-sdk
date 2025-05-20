@@ -4,6 +4,7 @@ export interface GetLinkedInProfileParams {
   url?: string;
   publicIdentifier?: string;
   profileId?: string;
+  query?: string;
   tryFindEmail?: boolean;
 }
 
@@ -15,6 +16,15 @@ export interface SearchLinkedInProfilesParams {
   schoolId?: string | string[];
   schoolUniversalName?: string | string[];
   geoId?: string | string[];
+  location?: string | string[];
+  search?: string;
+  page?: number;
+}
+
+export interface SearchLinkedInProfilesParamsV2 {
+  currentCompanies?: string | string[];
+  pastCompanies?: string | string[];
+  school?: string | string[];
   location?: string | string[];
   search?: string;
   page?: number;
@@ -32,6 +42,8 @@ export interface GetLinkedinCompanyParams {
   universalName?: string;
   url?: string;
   companyId?: string;
+  search?: string;
+  query?: string;
 }
 
 export type LinkedinCompanySize =
@@ -49,7 +61,7 @@ export interface SearchLinkedinCompaniesParams {
   location?: string;
   search?: string;
   page?: number;
-  companySize?: LinkedinCompanySize;
+  companySize?: LinkedinCompanySize | LinkedinCompanySize[];
 }
 
 export interface GetLinkedinJobParams {

@@ -131,6 +131,20 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
 
+##### searchProfilesV2()
+
+> **searchProfilesV2**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`SearchLinkedInProfilesParamsV2`](#searchlinkedinprofilesparamsv2)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
 ##### getCompany()
 
 > **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
@@ -257,6 +271,20 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
+##### scrapeProfilesV2()
+
+> **scrapeProfilesV2**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+###### Parameters
+
+###### \_\_namedParameters
+
+[`ScrapeLinkedinProfilesParams`](#scrapelinkedinprofilesparams)
+
+###### Returns
+
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
 ##### scrapePosts()
 
 > **scrapePosts**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
@@ -288,6 +316,10 @@ For more detailed information on the available methods and their parameters, che
 ##### profileId?
 
 > `optional` **profileId**: `string`
+
+##### query?
+
+> `optional` **query**: `string`
 
 ##### tryFindEmail?
 
@@ -326,6 +358,36 @@ For more detailed information on the available methods and their parameters, che
 ##### geoId?
 
 > `optional` **geoId**: `string` \| `string`[]
+
+##### location?
+
+> `optional` **location**: `string` \| `string`[]
+
+##### search?
+
+> `optional` **search**: `string`
+
+##### page?
+
+> `optional` **page**: `number`
+
+***
+
+### SearchLinkedInProfilesParamsV2
+
+#### Properties
+
+##### currentCompanies?
+
+> `optional` **currentCompanies**: `string` \| `string`[]
+
+##### pastCompanies?
+
+> `optional` **pastCompanies**: `string` \| `string`[]
+
+##### school?
+
+> `optional` **school**: `string` \| `string`[]
 
 ##### location?
 
@@ -383,6 +445,14 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **companyId**: `string`
 
+##### search?
+
+> `optional` **search**: `string`
+
+##### query?
+
+> `optional` **query**: `string`
+
 ***
 
 ### SearchLinkedinCompaniesParams
@@ -407,7 +477,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### companySize?
 
-> `optional` **companySize**: [`LinkedinCompanySize`](#linkedincompanysize)
+> `optional` **companySize**: [`LinkedinCompanySize`](#linkedincompanysize) \| [`LinkedinCompanySize`](#linkedincompanysize)[]
 
 ***
 

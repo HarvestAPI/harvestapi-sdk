@@ -191,13 +191,18 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
     if (this.done) return;
 
-    if (this.undefinedPagination) {
-      if (!details?.length) {
-        this.scrapePagesDone = true;
-      } else {
-        this.scrapePagesDone = false;
-      }
+    if (!details?.length) {
+      this.scrapePagesDone = true;
+    } else {
+      this.scrapePagesDone = false;
     }
+    // if (this.undefinedPagination) {
+    //   if (!details?.length) {
+    //     this.scrapePagesDone = true;
+    //   } else {
+    //     this.scrapePagesDone = false;
+    //   }
+    // }
 
     this.log(
       `Scraped ${this.options.entityName} page ${page}. Items found: ${
@@ -274,8 +279,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
           return details;
         }
 
-        if (!this.scrapedItems[itemDetails.entityId].scraped) {
-          this.scrapedItems[itemDetails.entityId].scraped = true;
+        if (!this.scrapedItems[item.id].scraped) {
+          this.scrapedItems[item.id].scraped = true;
           this.stats.itemsSuccess++;
 
           await this.onItemScrapedQueue({ item: itemDetails.element });
