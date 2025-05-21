@@ -126,6 +126,11 @@ export interface SearchLinkedinPostsParams {
   authorsCompanyId?: string | string[];
 }
 
+export interface GetLinkedinPostReactionsParams {
+  post: string | number;
+  page?: number;
+}
+
 export type Profile = {
   id: string;
   publicIdentifier: string;
@@ -459,6 +464,23 @@ export type PostShort = {
   };
 };
 
+export type PostReaction = {
+  id: string;
+  reactionType: string;
+  actor: {
+    id: string;
+    name: string;
+    linkedinUrl: string;
+    position: string;
+    image: {
+      url: string;
+      width: number;
+      height: number;
+      expiresAt: number;
+    };
+  };
+};
+
 export type ScrapeLinkedinJobsParams = {
   query: SearchLinkedinJobsParams;
 } & ListingScraperConfig<JobShort, Job>;
@@ -475,6 +497,10 @@ export type ScrapeLinkedinProfilesParams = {
 export type ScrapeLinkedinPostsParams = {
   query: SearchLinkedinPostsParams;
 } & ListingScraperConfig<PostShort, PostShort>;
+
+export type ScrapeLinkedinPostReactionsParams = {
+  query: GetLinkedinPostReactionsParams;
+} & ListingScraperConfig<PostReaction, PostReaction>;
 
 export type ErrorResponse = {
   error: string;

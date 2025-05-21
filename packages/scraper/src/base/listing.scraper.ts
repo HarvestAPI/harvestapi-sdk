@@ -245,7 +245,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       let itemDetails: TFetchedItemDetails<TItemDetail> = null;
       this.stats.items++;
 
-      if (this.scrapedItems[item.id]) {
+      if (!item?.id || this.scrapedItems[item.id]) {
         return;
       }
       this.scrapedItems[item.id] = { found: true, scraped: false };

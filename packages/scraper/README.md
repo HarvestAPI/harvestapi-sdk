@@ -215,6 +215,20 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
 
+##### getPostReactions()
+
+> **getPostReactions**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
+
+###### Parameters
+
+###### params
+
+[`GetLinkedinPostReactionsParams`](#getlinkedinpostreactionsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
+
 ##### searchCompanyAssociatedProfiles()
 
 > **searchCompanyAssociatedProfiles**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
@@ -294,6 +308,20 @@ For more detailed information on the available methods and their parameters, che
 ###### \_\_namedParameters
 
 [`ScrapeLinkedinPostsParams`](#scrapelinkedinpostsparams)
+
+###### Returns
+
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+##### scrapePostReactions()
+
+> **scrapePostReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+###### Parameters
+
+###### \_\_namedParameters
+
+[`ScrapeLinkedinPostReactionsParams`](#scrapelinkedinpostreactionsparams)
 
 ###### Returns
 
@@ -624,6 +652,20 @@ For more detailed information on the available methods and their parameters, che
 ##### authorsCompanyId?
 
 > `optional` **authorsCompanyId**: `string` \| `string`[]
+
+***
+
+### GetLinkedinPostReactionsParams
+
+#### Properties
+
+##### post
+
+> **post**: `string` \| `number`
+
+##### page?
+
+> `optional` **page**: `number`
 
 ***
 
@@ -1711,6 +1753,62 @@ true
 
 ***
 
+### PostReaction
+
+> **PostReaction**: `object`
+
+#### Type declaration
+
+##### id
+
+> **id**: `string`
+
+##### reactionType
+
+> **reactionType**: `string`
+
+##### actor
+
+> **actor**: `object`
+
+###### actor.id
+
+> **id**: `string`
+
+###### actor.name
+
+> **name**: `string`
+
+###### actor.linkedinUrl
+
+> **linkedinUrl**: `string`
+
+###### actor.position
+
+> **position**: `string`
+
+###### actor.image
+
+> **image**: `object`
+
+###### actor.image.url
+
+> **url**: `string`
+
+###### actor.image.width
+
+> **width**: `number`
+
+###### actor.image.height
+
+> **height**: `number`
+
+###### actor.image.expiresAt
+
+> **expiresAt**: `number`
+
+***
+
 ### ScrapeLinkedinJobsParams
 
 > **ScrapeLinkedinJobsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`JobShort`](#jobshort), [`Job`](#job)\>
@@ -1760,6 +1858,18 @@ true
 ##### query
 
 > **query**: [`SearchLinkedinPostsParams`](#searchlinkedinpostsparams)
+
+***
+
+### ScrapeLinkedinPostReactionsParams
+
+> **ScrapeLinkedinPostReactionsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`PostReaction`](#postreaction), [`PostReaction`](#postreaction)\>
+
+#### Type declaration
+
+##### query
+
+> **query**: [`GetLinkedinPostReactionsParams`](#getlinkedinpostreactionsparams)
 
 ***
 

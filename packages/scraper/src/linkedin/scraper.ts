@@ -6,14 +6,17 @@ import {
   CompanyShort,
   GetLinkedinCompanyParams,
   GetLinkedinJobParams,
+  GetLinkedinPostReactionsParams,
   GetLinkedInProfileParams,
   Job,
   JobShort,
+  PostReaction,
   PostShort,
   Profile,
   ProfileShort,
   ScrapeLinkedinCompaniesParams,
   ScrapeLinkedinJobsParams,
+  ScrapeLinkedinPostReactionsParams,
   ScrapeLinkedinPostsParams,
   ScrapeLinkedinProfilesParams,
   SearchLinkedinCompaniesParams,
@@ -75,6 +78,12 @@ export class LinkedinScraper {
 
   async searchPosts(params: SearchLinkedinPostsParams): Promise<ApiListResponse<PostShort>> {
     return this.scraper.fetchApi({ path: 'linkedin/post-search', params });
+  }
+
+  async getPostReactions(
+    params: GetLinkedinPostReactionsParams,
+  ): Promise<ApiListResponse<PostReaction>> {
+    return this.scraper.fetchApi({ path: 'linkedin/post-reactions', params });
   }
 
   async searchCompanyAssociatedProfiles(
@@ -148,6 +157,20 @@ export class LinkedinScraper {
           : { skipped: true },
       scrapeDetails: false,
       entityName: 'posts',
+      ...options,
+      maxPages: 100,
+    }).scrapeStart();
+  }
+
+  async scrapePostReactions({ query, ...options }: ScrapeLinkedinPostReactionsParams) {
+    return new ListingScraper<PostReaction, PostReaction>({
+      fetchList: ({ page }) => this.getPostReactions({ ...query, page }),
+      fetchItem: async ({ item }) =>
+        item?.id
+          ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostReaction>)
+          : { skipped: true },
+      scrapeDetails: false,
+      entityName: 'post-reactions',
       ...options,
       maxPages: 100,
     }).scrapeStart();
