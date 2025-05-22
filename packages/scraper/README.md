@@ -229,6 +229,20 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
 
+##### getPostComments()
+
+> **getPostComments**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+###### Parameters
+
+###### params
+
+[`GetLinkedinPostCommentsParams`](#getlinkedinpostcommentsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
 ##### searchCompanyAssociatedProfiles()
 
 > **searchCompanyAssociatedProfiles**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
@@ -322,6 +336,20 @@ For more detailed information on the available methods and their parameters, che
 ###### \_\_namedParameters
 
 [`ScrapeLinkedinPostReactionsParams`](#scrapelinkedinpostreactionsparams)
+
+###### Returns
+
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+##### scrapePostComments()
+
+> **scrapePostComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+###### Parameters
+
+###### \_\_namedParameters
+
+[`ScrapeLinkedinPostCommentsParams`](#scrapelinkedinpostcommentsparams)
 
 ###### Returns
 
@@ -666,6 +694,28 @@ For more detailed information on the available methods and their parameters, che
 ##### page?
 
 > `optional` **page**: `number`
+
+***
+
+### GetLinkedinPostCommentsParams
+
+#### Properties
+
+##### post
+
+> **post**: `string` \| `number`
+
+##### page?
+
+> `optional` **page**: `number`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `null` \| `string`
+
+##### sortBy?
+
+> `optional` **sortBy**: `"date"` \| `"relevance"`
 
 ***
 
@@ -1809,6 +1859,94 @@ true
 
 ***
 
+### PostComment
+
+> **PostComment**: `object`
+
+#### Type declaration
+
+##### id
+
+> **id**: `string`
+
+##### linkedinUrl
+
+> **linkedinUrl**: `string`
+
+##### commentary
+
+> **commentary**: `string`
+
+##### createdAt
+
+> **createdAt**: `string`
+
+##### postId
+
+> **postId**: `string`
+
+##### actor
+
+> **actor**: `object`
+
+###### actor.id
+
+> **id**: `string`
+
+###### actor.name
+
+> **name**: `string`
+
+###### actor.linkedinUrl
+
+> **linkedinUrl**: `string`
+
+###### actor.position
+
+> **position**: `string`
+
+###### actor.pictureUrl
+
+> **pictureUrl**: `string`
+
+###### actor.picture
+
+> **picture**: `object`
+
+###### actor.picture.url
+
+> **url**: `string`
+
+###### actor.picture.width
+
+> **width**: `number`
+
+###### actor.picture.height
+
+> **height**: `number`
+
+###### actor.picture.expiresAt
+
+> **expiresAt**: `number`
+
+##### createdAtTimestamp
+
+> **createdAtTimestamp**: `number`
+
+##### pinned?
+
+> `optional` **pinned**: `boolean` \| `null`
+
+##### contributed?
+
+> `optional` **contributed**: `boolean` \| `null`
+
+##### edited?
+
+> `optional` **edited**: `boolean` \| `null`
+
+***
+
 ### ScrapeLinkedinJobsParams
 
 > **ScrapeLinkedinJobsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`JobShort`](#jobshort), [`Job`](#job)\>
@@ -1873,6 +2011,18 @@ true
 
 ***
 
+### ScrapeLinkedinPostCommentsParams
+
+> **ScrapeLinkedinPostCommentsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`PostComment`](#postcomment), [`PostComment`](#postcomment)\>
+
+#### Type declaration
+
+##### query
+
+> **query**: [`GetLinkedinPostCommentsParams`](#getlinkedinpostcommentsparams)
+
+***
+
 ### ErrorResponse
 
 > **ErrorResponse**: `object`
@@ -1917,7 +2067,7 @@ true
 
 ##### pagination
 
-> **pagination**: \{ `totalPages`: `number`; `totalElements`: `number`; `pageNumber`: `number`; `previousElements`: `number`; `pageSize`: `number`; \} \| `null`
+> **pagination**: \{ `totalPages`: `number`; `totalElements`: `number`; `pageNumber`: `number`; `previousElements`: `number`; `pageSize`: `number`; `paginationToken`: `string` \| `null`; \} \| `null`
 
 ##### elements
 

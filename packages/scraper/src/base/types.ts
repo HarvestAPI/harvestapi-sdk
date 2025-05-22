@@ -29,7 +29,10 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
   TItemShot,
   TItemDetails
 > & {
-  fetchList: ({ page }: { page: number }) => Promise<ApiListResponse<TItemShot>>;
+  fetchList: (args: {
+    page: number;
+    paginationToken?: string | null;
+  }) => Promise<ApiListResponse<TItemShot>>;
   fetchItem: ({
     item,
   }: {

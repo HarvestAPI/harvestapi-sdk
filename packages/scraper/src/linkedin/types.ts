@@ -131,6 +131,13 @@ export interface GetLinkedinPostReactionsParams {
   page?: number;
 }
 
+export interface GetLinkedinPostCommentsParams {
+  post: string | number;
+  page?: number;
+  paginationToken?: string | null;
+  sortBy?: 'date' | 'relevance';
+}
+
 export type Profile = {
   id: string;
   publicIdentifier: string;
@@ -481,6 +488,31 @@ export type PostReaction = {
   };
 };
 
+export type PostComment = {
+  id: string;
+  linkedinUrl: string;
+  commentary: string;
+  createdAt: string;
+  postId: string;
+  actor: {
+    id: string;
+    name: string;
+    linkedinUrl: string;
+    position: string;
+    pictureUrl: string;
+    picture: {
+      url: string;
+      width: number;
+      height: number;
+      expiresAt: number;
+    };
+  };
+  createdAtTimestamp: number;
+  pinned?: boolean | null;
+  contributed?: boolean | null;
+  edited?: boolean | null;
+};
+
 export type ScrapeLinkedinJobsParams = {
   query: SearchLinkedinJobsParams;
 } & ListingScraperConfig<JobShort, Job>;
@@ -501,6 +533,10 @@ export type ScrapeLinkedinPostsParams = {
 export type ScrapeLinkedinPostReactionsParams = {
   query: GetLinkedinPostReactionsParams;
 } & ListingScraperConfig<PostReaction, PostReaction>;
+
+export type ScrapeLinkedinPostCommentsParams = {
+  query: GetLinkedinPostCommentsParams;
+} & ListingScraperConfig<PostComment, PostComment>;
 
 export type ErrorResponse = {
   error: string;

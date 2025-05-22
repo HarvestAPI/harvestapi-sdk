@@ -37,6 +37,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       scraped: boolean;
     }
   > = {};
+  private paginationToken: string | null = null;
   private undefinedPagination = false;
 
   constructor(private options: ListingScraperOptions<TItemShort, TItemDetail>) {
@@ -92,9 +93,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       requests: 0,
       requestsStartTime: new Date(),
     };
+    this.paginationToken = null;
+    this.scrapePagesDone = false;
     const firstPage = await this.fetchPage({ page: 1 });
 
     let totalPages = firstPage?.pagination?.totalPages || 0;
+    this.paginationToken = firstPage?.pagination?.paginationToken || null;
     if (this.options.maxPages && totalPages > this.options.maxPages) {
       totalPages = this.options.maxPages;
     }
@@ -217,10 +221,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   private async fetchPage({ page }: { page: number }) {
     this.log(`Scraping page ${page} of ${this.options.entityName}...`);
 
-    const result = await this.options.fetchList({ page }).catch((error) => {
-      this.errorLog('Error fetching page', page, error);
-      return null;
-    });
+    const result = await this.options
+      .fetchList({ page, paginationToken: this.paginationToken })
+      .catch((error) => {
+        this.errorLog('Error fetching page', page, error);
+        return null;
+      });
     if (result?.status === 402) {
       this.done = true;
       this.error = result.error || 'Request limit exceeded - upgrade your plan';

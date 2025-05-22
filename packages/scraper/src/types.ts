@@ -25,6 +25,7 @@ export type ApiListResponse<TItem> = BaseApiResponse & {
     pageNumber: number;
     previousElements: number;
     pageSize: number;
+    paginationToken?: string | null;
   } | null;
   elements: TItem[];
 };
