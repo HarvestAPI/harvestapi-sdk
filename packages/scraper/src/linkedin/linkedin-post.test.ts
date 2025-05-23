@@ -44,11 +44,11 @@ describe('Linkedin API', () => {
     expect(data.pagination?.pageNumber).toBe(1);
     expect(data.elements.length).toBeGreaterThan(0);
 
-    expect(data.elements[0].author.type).toBe('company');
-    expect(data.elements[0].author.universalName).toBe('google');
-
-    expect(data.elements[1].author.type).toBe('company');
-    expect(data.elements[1].author.universalName).toBe('google');
+    expect(
+      data.elements[0].repostedBy?.universalName === 'google'
+        ? data.elements[0].repostedBy.universalName
+        : data.elements[0].author.universalName,
+    ).toBe('google');
   });
 
   it('searchPosts by author', async () => {

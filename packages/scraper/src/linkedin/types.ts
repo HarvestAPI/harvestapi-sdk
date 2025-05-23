@@ -441,7 +441,8 @@ export type PostShort = {
   repost?: PostShort;
   repostedBy?: {
     name: string;
-    publicIdentifier: string;
+    publicIdentifier?: string;
+    universalName?: string;
     linkedinUrl: string;
   };
   newsletterUrl?: string;
