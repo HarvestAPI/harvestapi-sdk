@@ -115,7 +115,9 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     this.log(
       `Scraping ${this.options.entityName} with ${concurrency} concurrent ${
         concurrency === 1 ? 'worker' : 'workers'
-      }... Total pages: ${totalPages}`,
+      }... Total pages: ${totalPages}. Total items: ${
+        firstPage?.pagination?.totalElements || firstPage?.elements?.length || 0
+      }`,
     );
 
     if (!firstPage?.elements?.length) {

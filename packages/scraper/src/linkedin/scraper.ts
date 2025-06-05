@@ -22,6 +22,7 @@ import {
   ScrapeLinkedinPostReactionsParams,
   ScrapeLinkedinPostsParams,
   ScrapeLinkedinProfilesParams,
+  ScrapeLinkedinProfilesParamsV2,
   SearchLinkedinCompaniesParams,
   SearchLinkedInCompanyAssociatedProfilesParams,
   SearchLinkedinJobsParams,
@@ -144,7 +145,7 @@ export class LinkedinScraper {
     }).scrapeStart();
   }
 
-  async scrapeProfilesV2({ query, tryFindEmail, ...options }: ScrapeLinkedinProfilesParams) {
+  async scrapeProfilesV2({ query, tryFindEmail, ...options }: ScrapeLinkedinProfilesParamsV2) {
     return new ListingScraper<ProfileShort, Profile>({
       fetchList: ({ page }) => this.searchProfilesV2({ ...query, page }),
       fetchItem: async ({ item }) => {

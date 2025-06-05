@@ -307,7 +307,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### \_\_namedParameters
 
-[`ScrapeLinkedinProfilesParams`](#scrapelinkedinprofilesparams)
+[`ScrapeLinkedinProfilesParamsV2`](#scrapelinkedinprofilesparamsv2)
 
 ###### Returns
 
@@ -380,6 +380,10 @@ For more detailed information on the available methods and their parameters, che
 ##### tryFindEmail?
 
 > `optional` **tryFindEmail**: `boolean`
+
+##### short?
+
+> `optional` **short**: `boolean`
 
 ***
 
@@ -456,6 +460,10 @@ For more detailed information on the available methods and their parameters, che
 ##### page?
 
 > `optional` **page**: `number`
+
+##### salesNavUrl?
+
+> `optional` **salesNavUrl**: `string`
 
 ***
 
@@ -1713,9 +1721,13 @@ true
 
 > **name**: `string`
 
-###### repostedBy.publicIdentifier
+###### repostedBy.publicIdentifier?
 
-> **publicIdentifier**: `string`
+> `optional` **publicIdentifier**: `string`
+
+###### repostedBy.universalName?
+
+> `optional` **universalName**: `string`
 
 ###### repostedBy.linkedinUrl
 
@@ -1980,6 +1992,22 @@ true
 ##### query
 
 > **query**: [`SearchLinkedInProfilesParams`](#searchlinkedinprofilesparams)
+
+##### tryFindEmail?
+
+> `optional` **tryFindEmail**: `boolean`
+
+***
+
+### ScrapeLinkedinProfilesParamsV2
+
+> **ScrapeLinkedinProfilesParamsV2**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-1)\>
+
+#### Type declaration
+
+##### query
+
+> **query**: [`SearchLinkedInProfilesParamsV2`](#searchlinkedinprofilesparamsv2)
 
 ##### tryFindEmail?
 

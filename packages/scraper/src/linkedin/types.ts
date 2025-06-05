@@ -6,6 +6,7 @@ export interface GetLinkedInProfileParams {
   profileId?: string;
   query?: string;
   tryFindEmail?: boolean;
+  short?: boolean;
 }
 
 export interface SearchLinkedInProfilesParams {
@@ -28,6 +29,7 @@ export interface SearchLinkedInProfilesParamsV2 {
   location?: string | string[];
   search?: string;
   page?: number;
+  salesNavUrl?: string;
 }
 
 export interface SearchLinkedInCompanyAssociatedProfilesParams {
@@ -524,6 +526,11 @@ export type ScrapeLinkedinCompaniesParams = {
 
 export type ScrapeLinkedinProfilesParams = {
   query: SearchLinkedInProfilesParams;
+  tryFindEmail?: boolean;
+} & ListingScraperConfig<ProfileShort, Profile>;
+
+export type ScrapeLinkedinProfilesParamsV2 = {
+  query: SearchLinkedInProfilesParamsV2;
   tryFindEmail?: boolean;
 } & ListingScraperConfig<ProfileShort, Profile>;
 

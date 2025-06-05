@@ -71,6 +71,7 @@ export function testConcurrentRequests({
     apiKey: string;
     requests: number;
     loops?: number;
+    baseUrl?: string;
   }[];
 }) {
   instances.forEach(async (instance, i) => {
@@ -81,7 +82,8 @@ export function testConcurrentRequests({
 
       const scraper = new LinkedinScraper({
         apiKey: instance.apiKey,
-        baseUrl: baseUrl || (localhost ? 'http://localhost:3552/api' : undefined),
+        baseUrl:
+          baseUrl || instance.baseUrl || (localhost ? 'http://localhost:3552/api' : undefined),
       });
 
       for (let j = 0; j < instance.requests; j++) {
@@ -108,7 +110,7 @@ export function testConcurrentRequests({
           logRequest({
             userKey,
             index: j,
-            id: data?.id,
+            id: data?.element?.id,
             status: data?.status,
             error: data?.error,
             used: data?.user?.requestsUsedThisCycle,
