@@ -22,7 +22,7 @@ export interface SearchLinkedInProfilesParams {
   page?: number;
 }
 
-export interface SearchLinkedInProfilesParamsV2 {
+export interface SearchLinkedInSalesNavLeadsParams {
   currentCompanies?: string | string[];
   pastCompanies?: string | string[];
   school?: string | string[];
@@ -30,6 +30,10 @@ export interface SearchLinkedInProfilesParamsV2 {
   search?: string;
   page?: number;
   salesNavUrl?: string;
+  currentJobTitles?: string | string[];
+  pastJobTitles?: string | string[];
+  firstNames?: string | string[];
+  lastNames?: string | string[];
 }
 
 export interface SearchLinkedInCompanyAssociatedProfilesParams {
@@ -529,8 +533,8 @@ export type ScrapeLinkedinProfilesParams = {
   tryFindEmail?: boolean;
 } & ListingScraperConfig<ProfileShort, Profile>;
 
-export type ScrapeLinkedinProfilesParamsV2 = {
-  query: SearchLinkedInProfilesParamsV2;
+export type ScrapeLinkedinSalesNavLeadsParams = {
+  query: SearchLinkedInSalesNavLeadsParams;
   tryFindEmail?: boolean;
 } & ListingScraperConfig<ProfileShort, Profile>;
 

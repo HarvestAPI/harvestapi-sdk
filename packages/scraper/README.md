@@ -131,20 +131,6 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
 
-##### searchProfilesV2()
-
-> **searchProfilesV2**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
-
-###### Parameters
-
-###### params
-
-[`SearchLinkedInProfilesParamsV2`](#searchlinkedinprofilesparamsv2)
-
-###### Returns
-
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
-
 ##### getCompany()
 
 > **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
@@ -299,20 +285,6 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
-##### scrapeProfilesV2()
-
-> **scrapeProfilesV2**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
-
-###### Parameters
-
-###### \_\_namedParameters
-
-[`ScrapeLinkedinProfilesParamsV2`](#scrapelinkedinprofilesparamsv2)
-
-###### Returns
-
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
-
 ##### scrapePosts()
 
 > **scrapePosts**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
@@ -350,6 +322,34 @@ For more detailed information on the available methods and their parameters, che
 ###### \_\_namedParameters
 
 [`ScrapeLinkedinPostCommentsParams`](#scrapelinkedinpostcommentsparams)
+
+###### Returns
+
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+##### searchSalesNavigatorLeads()
+
+> **searchSalesNavigatorLeads**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+##### scrapeSalesNavigatorLeads()
+
+> **scrapeSalesNavigatorLeads**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+###### Parameters
+
+###### \_\_namedParameters
+
+[`ScrapeLinkedinSalesNavLeadsParams`](#scrapelinkedinsalesnavleadsparams)
 
 ###### Returns
 
@@ -433,7 +433,7 @@ For more detailed information on the available methods and their parameters, che
 
 ***
 
-### SearchLinkedInProfilesParamsV2
+### SearchLinkedInSalesNavLeadsParams
 
 #### Properties
 
@@ -464,6 +464,22 @@ For more detailed information on the available methods and their parameters, che
 ##### salesNavUrl?
 
 > `optional` **salesNavUrl**: `string`
+
+##### currentJobTitles?
+
+> `optional` **currentJobTitles**: `string` \| `string`[]
+
+##### pastJobTitles?
+
+> `optional` **pastJobTitles**: `string` \| `string`[]
+
+##### firstNames?
+
+> `optional` **firstNames**: `string` \| `string`[]
+
+##### lastNames?
+
+> `optional` **lastNames**: `string` \| `string`[]
 
 ***
 
@@ -1999,15 +2015,15 @@ true
 
 ***
 
-### ScrapeLinkedinProfilesParamsV2
+### ScrapeLinkedinSalesNavLeadsParams
 
-> **ScrapeLinkedinProfilesParamsV2**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-1)\>
+> **ScrapeLinkedinSalesNavLeadsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-1)\>
 
 #### Type declaration
 
 ##### query
 
-> **query**: [`SearchLinkedInProfilesParamsV2`](#searchlinkedinprofilesparamsv2)
+> **query**: [`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
 
 ##### tryFindEmail?
 
