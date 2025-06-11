@@ -37,9 +37,10 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
     item,
   }: {
     item: TItemShot;
-  }) => Promise<(ApiItemResponse<TItemDetails> | { skipped: boolean }) | null> | null;
+  }) => Promise<(ApiItemResponse<TItemDetails> | { skipped: boolean; done?: boolean }) | null> | null;
   maxPages: number;
   entityName: string;
+  warnPageLimit?: boolean;
 };
 
 export type ScraperOptions = {

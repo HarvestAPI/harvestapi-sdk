@@ -5,9 +5,10 @@ import type { Database } from 'sqlite';
 import { ApiItemResponse, ApiListResponse } from '../types';
 import { createConcurrentQueues } from '../utils';
 import { ListingScraperOptions } from './types';
+import { styleText } from 'node:util';
 
 type TFetchedItemDetails<TItemDetail> =
-  | (Partial<ApiItemResponse<TItemDetail>> & { skipped?: boolean })
+  | (Partial<ApiItemResponse<TItemDetail>> & { skipped?: boolean; done?: boolean })
   | null
   | undefined;
 
@@ -107,6 +108,32 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       this.undefinedPagination = true;
     } else {
       this.undefinedPagination = false;
+    }
+
+    if (
+      this.options.warnPageLimit &&
+      totalPages === this.options.maxPages &&
+      firstPage?.pagination?.pageSize &&
+      firstPage?.pagination.totalElements
+    ) {
+      const totalAllowedItems = this.options.maxPages * firstPage.pagination.pageSize;
+      const totalItems = firstPage.pagination.totalElements;
+
+      if (totalItems > totalAllowedItems) {
+        console.warn(
+          '\n' +
+            styleText('bgYellow', ' [WARNING] ') +
+            ` The search results are limited to ${
+              this.options.maxPages * firstPage?.pagination?.pageSize
+            } items (out of total ${
+              firstPage.pagination.totalElements
+            }) because LinkedIn does not allow to scrape more for one query. ` +
+            `Which means you will not be able to extract all data for this exact query. ` +
+            'Consider splitting your query into multiple queries applying more filters. ' +
+            `For example do multiple runs for locations of specific cities, instead of one run targeting entire country or region. ` +
+            '\n',
+        );
+      }
     }
 
     const concurrency =
@@ -278,6 +305,10 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
       if (this.options.scrapeDetails && !itemDetails?.skipped) {
         this.stats.requests++;
+      }
+      if (itemDetails?.done) {
+        this.scrapePagesDone = true;
+        this.done = true;
       }
 
       if (itemDetails?.element && itemDetails.entityId) {

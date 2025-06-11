@@ -199,6 +199,7 @@ export class LinkedinScraper {
       },
       scrapeDetails: true,
       entityName: 'profiles',
+      warnPageLimit: true,
       ...options,
       maxPages: 100,
     }).scrapeStart();

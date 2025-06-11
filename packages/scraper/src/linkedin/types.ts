@@ -536,6 +536,7 @@ export type ScrapeLinkedinProfilesParams = {
 export type ScrapeLinkedinSalesNavLeadsParams = {
   query: SearchLinkedInSalesNavLeadsParams;
   tryFindEmail?: boolean;
+  warnPageLimit?: boolean;
 } & ListingScraperConfig<ProfileShort, Profile>;
 
 export type ScrapeLinkedinPostsParams = {

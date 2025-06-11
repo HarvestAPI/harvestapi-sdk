@@ -2029,6 +2029,10 @@ true
 
 > `optional` **tryFindEmail**: `boolean`
 
+##### warnPageLimit?
+
+> `optional` **warnPageLimit**: `boolean`
+
 ***
 
 ### ScrapeLinkedinPostsParams
