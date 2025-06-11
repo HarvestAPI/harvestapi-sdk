@@ -122,14 +122,14 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       if (totalItems > totalAllowedItems) {
         console.warn(
           '\n' +
-            styleText('bgYellow', ' [WARNING] ') +
-            ` The search results are limited to ${
+            styleText('bgYellow', ' [WARNING] \n') +
+            `The search results are limited to ${
               this.options.maxPages * firstPage?.pagination?.pageSize
             } items (out of total ${
               firstPage.pagination.totalElements
-            }) because LinkedIn does not allow to scrape more for one query. ` +
-            `Which means you will not be able to extract all data for this exact query. ` +
-            'Consider splitting your query into multiple queries applying more filters. ' +
+            }) because LinkedIn does not allow to scrape more for one query. \n` +
+            `Which means you will not be able to extract all data for this exact query. \n` +
+            'Consider splitting your query into multiple queries applying more filters. \n' +
             `For example do multiple runs for locations of specific cities, instead of one run targeting entire country or region. ` +
             '\n',
         );
