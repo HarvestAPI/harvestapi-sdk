@@ -154,7 +154,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         this.errorLog(...errors);
       }
 
-      this.log(
+      this.errorLog(
         'Error fetching first page or no items found. Exiting.',
         firstPage?.error ? JSON.stringify(firstPage?.error, null, 2) : '',
       );

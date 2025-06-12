@@ -94,4 +94,13 @@ describe('Linkedin API', () => {
 
     expect(data.element?.universalName).toBe('oracle');
   });
+
+  it('getCompany search by id', async () => {
+    const data = await scraper.getCompany({
+      search: '82827208',
+    });
+    if (!data?.query) console.error('data', data);
+
+    expect(data.element?.universalName).toBe('cartconnect1');
+  });
 });
