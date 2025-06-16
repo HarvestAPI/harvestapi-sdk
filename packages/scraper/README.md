@@ -541,6 +541,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **query**: `string`
 
+##### location?
+
+> `optional` **location**: `string`
+
 ***
 
 ### SearchLinkedinCompaniesParams
@@ -854,6 +858,22 @@ true
 ###### logger
 
 `Required`\<[`ScraperOptions`](#scraperoptions)\>\[`"logger"`\]
+
+###### Returns
+
+`any`
+
+##### onFirstPageFetched()?
+
+> `optional` **onFirstPageFetched**: (`args`) => `any`
+
+###### Parameters
+
+###### args
+
+###### data
+
+[`ApiListResponse`](#apilistresponsetitem)\<`TItemShot`\> \| `null`
 
 ###### Returns
 
@@ -2115,6 +2135,38 @@ true
 
 ***
 
+### ApiPagination
+
+> **ApiPagination**: `object`
+
+#### Type declaration
+
+##### totalPages
+
+> **totalPages**: `number`
+
+##### totalElements
+
+> **totalElements**: `number`
+
+##### pageNumber
+
+> **pageNumber**: `number`
+
+##### previousElements
+
+> **previousElements**: `number`
+
+##### pageSize
+
+> **pageSize**: `number`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `string` \| `null`
+
+***
+
 ### ApiListResponse\<TItem\>
 
 > **ApiListResponse**\<`TItem`\>: [`BaseApiResponse`](#baseapiresponse) & `object`
@@ -2123,7 +2175,7 @@ true
 
 ##### pagination
 
-> **pagination**: \{ `totalPages`: `number`; `totalElements`: `number`; `pageNumber`: `number`; `previousElements`: `number`; `pageSize`: `number`; `paginationToken`: `string` \| `null`; \} \| `null`
+> **pagination**: [`ApiPagination`](#apipagination) \| `null`
 
 ##### elements
 

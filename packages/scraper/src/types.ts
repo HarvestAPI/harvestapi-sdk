@@ -18,14 +18,16 @@ export type ApiItemResponse<TItem> = BaseApiResponse & {
   element: TItem;
 };
 
+export type ApiPagination = {
+  totalPages: number;
+  totalElements: number;
+  pageNumber: number;
+  previousElements: number;
+  pageSize: number;
+  paginationToken?: string | null;
+};
+
 export type ApiListResponse<TItem> = BaseApiResponse & {
-  pagination: {
-    totalPages: number;
-    totalElements: number;
-    pageNumber: number;
-    previousElements: number;
-    pageSize: number;
-    paginationToken?: string | null;
-  } | null;
+  pagination: ApiPagination | null;
   elements: TItem[];
 };

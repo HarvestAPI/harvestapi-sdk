@@ -103,4 +103,22 @@ describe('Linkedin API', () => {
 
     expect(data.element?.universalName).toBe('cartconnect1');
   });
+
+  it('getCompany search by old URL', async () => {
+    const data = await scraper.getCompany({
+      search: 'https://www.linkedin.com/edu/mount-holyoke-college',
+    });
+    if (!data?.query) console.error('data', data);
+
+    expect(data.element?.universalName).toBe('mount-holyoke-college');
+  });
+
+  it('getCompany get by redirect URL', async () => {
+    const data = await scraper.getCompany({
+      url: 'https://www.linkedin.com/company/abdullah-al-othaim-investment',
+    });
+    if (!data?.query) console.error('data', data);
+
+    expect(data.element?.universalName).toBe('othaiminv');
+  });
 });

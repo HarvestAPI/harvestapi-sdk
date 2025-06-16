@@ -50,6 +50,7 @@ export interface GetLinkedinCompanyParams {
   companyId?: string;
   search?: string;
   query?: string;
+  location?: string;
 }
 
 export type LinkedinCompanySize =

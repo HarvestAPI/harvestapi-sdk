@@ -98,6 +98,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     this.scrapePagesDone = false;
     const firstPage = await this.fetchPage({ page: 1 });
 
+    this.options.onFirstPageFetched?.({ data: firstPage });
+
     let totalPages = firstPage?.pagination?.totalPages || 0;
     this.paginationToken = firstPage?.pagination?.paginationToken || null;
     if (this.options.maxPages && totalPages > this.options.maxPages) {

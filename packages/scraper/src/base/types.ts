@@ -18,6 +18,7 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
     item: TItemShot | TItemDetails;
     logger: Required<ScraperOptions>['logger'];
   }) => any;
+  onFirstPageFetched?: (args: { data: ApiListResponse<TItemShot> | null }) => any;
   overrideConcurrency?: number;
   maxItems?: number;
   disableLog?: boolean;
@@ -37,7 +38,9 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
     item,
   }: {
     item: TItemShot;
-  }) => Promise<(ApiItemResponse<TItemDetails> | { skipped: boolean; done?: boolean }) | null> | null;
+  }) => Promise<
+    (ApiItemResponse<TItemDetails> | { skipped: boolean; done?: boolean }) | null
+  > | null;
   maxPages: number;
   entityName: string;
   warnPageLimit?: boolean;
