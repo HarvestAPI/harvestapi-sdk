@@ -20,6 +20,7 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
   }) => any;
   onFirstPageFetched?: (args: { data: ApiListResponse<TItemShot> | null }) => any;
   overrideConcurrency?: number;
+  overridePageConcurrency?: number;
   maxItems?: number;
   disableLog?: boolean;
   disableErrorLog?: boolean;

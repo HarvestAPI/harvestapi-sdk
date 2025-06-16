@@ -883,6 +883,10 @@ true
 
 > `optional` **overrideConcurrency**: `number`
 
+##### overridePageConcurrency?
+
+> `optional` **overridePageConcurrency**: `number`
+
 ##### maxItems?
 
 > `optional` **maxItems**: `number`

@@ -163,7 +163,10 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       return;
     }
 
-    this.scrapePageQueue = createConcurrentQueues(2, (args) => this.scrapePage(args));
+    this.scrapePageQueue = createConcurrentQueues(
+      this.options?.overridePageConcurrency || 2,
+      (args) => this.scrapePage(args),
+    );
     this.fetchItemQueue = createConcurrentQueues(concurrency, async ({ item }) => {
       if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
         this.done = true;
@@ -262,6 +265,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         this.errorLog('Error fetching page', page, error);
         return null;
       });
+
     if (result?.status === 402) {
       this.done = true;
       this.error = result.error || 'Request limit exceeded - upgrade your plan';
@@ -287,7 +291,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       this.stats.items++;
 
       if (!item?.id || this.scrapedItems[item.id]) {
-        return;
+        return null;
       }
       this.scrapedItems[item.id] = { found: true, scraped: false };
 
@@ -297,7 +301,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         if (itemDetails?.status === 402) {
           this.done = true;
           this.error = itemDetails?.error || 'Request limit exceeded - upgrade your plan';
-          return details;
+          return null;
         }
       } else {
         itemDetails = {
@@ -321,7 +325,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
           this.done = true;
           this.error = `Max items limit reached: ${this.options.maxItems}`;
-          return details;
+          return null;
         }
 
         if (!this.scrapedItems[item.id].scraped) {
@@ -337,6 +341,11 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     await Promise.all(itemPromises).catch((error) => {
       this.errorLog('Error scraping items', error);
     });
+
+    if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
+      this.done = true;
+      this.error = `Max items limit reached: ${this.options.maxItems}`;
+    }
 
     return details;
   }
