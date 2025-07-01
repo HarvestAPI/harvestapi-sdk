@@ -67,11 +67,13 @@ export class LinkedinScraper {
   }
 
   async getJob(params: GetLinkedinJobParams): Promise<ApiItemResponse<Job>> {
-    return this.scraper.fetchApi({ path: 'linkedin/job', params });
+    const results = await this.scraper.fetchApi({ path: 'linkedin/job', params });
+    return results;
   }
 
   async searchJobs(params: SearchLinkedinJobsParams): Promise<ApiListResponse<JobShort>> {
-    return this.scraper.fetchApi({ path: 'linkedin/job-search', params });
+    const results = await this.scraper.fetchApi({ path: 'linkedin/job-search', params });
+    return results;
   }
 
   async searchPosts(params: SearchLinkedinPostsParams): Promise<ApiListResponse<PostShort>> {
@@ -101,7 +103,7 @@ export class LinkedinScraper {
 
   async scrapeJobs({ query, ...options }: ScrapeLinkedinJobsParams) {
     return new ListingScraper<JobShort, Job>({
-      fetchList: ({ page }) => this.searchJobs({ ...query, page }),
+      fetchList: (listParams) => this.searchJobs({ ...query, ...listParams }),
       fetchItem: async ({ item }) =>
         item?.id ? this.getJob({ jobId: item.id }) : { skipped: true },
       scrapeDetails: true,
@@ -113,7 +115,7 @@ export class LinkedinScraper {
 
   async scrapeCompanies({ query, ...options }: ScrapeLinkedinCompaniesParams) {
     return new ListingScraper<CompanyShort, Company>({
-      fetchList: ({ page }) => this.searchCompanies({ ...query, page }),
+      fetchList: (listParams) => this.searchCompanies({ ...query, ...listParams }),
       fetchItem: async ({ item }) =>
         item?.universalName
           ? this.getCompany({ universalName: item.universalName })
@@ -127,7 +129,7 @@ export class LinkedinScraper {
 
   async scrapeProfiles({ query, tryFindEmail, ...options }: ScrapeLinkedinProfilesParams) {
     return new ListingScraper<ProfileShort, Profile>({
-      fetchList: ({ page }) => this.searchProfiles({ ...query, page }),
+      fetchList: (listParams) => this.searchProfiles({ ...query, ...listParams }),
       fetchItem: async ({ item }) =>
         item?.publicIdentifier
           ? this.getProfile({ publicIdentifier: item.publicIdentifier, tryFindEmail })
@@ -141,7 +143,7 @@ export class LinkedinScraper {
 
   async scrapePosts({ query, ...options }: ScrapeLinkedinPostsParams) {
     return new ListingScraper<PostShort, PostShort>({
-      fetchList: ({ page }) => this.searchPosts({ ...query, page }),
+      fetchList: (listParams) => this.searchPosts({ ...query, ...listParams }),
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostShort>)
@@ -155,7 +157,7 @@ export class LinkedinScraper {
 
   async scrapePostReactions({ query, ...options }: ScrapeLinkedinPostReactionsParams) {
     return new ListingScraper<PostReaction, PostReaction>({
-      fetchList: ({ page }) => this.getPostReactions({ ...query, page }),
+      fetchList: (listParams) => this.getPostReactions({ ...query, ...listParams }),
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostReaction>)
@@ -193,7 +195,7 @@ export class LinkedinScraper {
     ...options
   }: ScrapeLinkedinSalesNavLeadsParams) {
     return new ListingScraper<ProfileShort, Profile>({
-      fetchList: ({ page }) => this.searchSalesNavigatorLeads({ ...query, page }),
+      fetchList: (listParams) => this.searchSalesNavigatorLeads({ ...query, ...listParams }),
       fetchItem: async ({ item }) => {
         return item?.id ? this.getProfile({ profileId: item.id, tryFindEmail }) : { skipped: true };
       },

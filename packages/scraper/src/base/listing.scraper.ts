@@ -260,7 +260,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     this.log(`Scraping page ${page} of ${this.options.entityName}...`);
 
     const result = await this.options
-      .fetchList({ page, paginationToken: this.paginationToken })
+      .fetchList({ page, paginationToken: this.paginationToken, sessionId: this.options.sessionId })
       .catch((error) => {
         this.errorLog('Error fetching page', page, error);
         return null;

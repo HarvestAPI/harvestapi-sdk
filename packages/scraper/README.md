@@ -903,6 +903,10 @@ true
 
 > `optional` **optionsOverride**: `Partial`\<`ListingScraperOptions`\<`TItemShot`, `TItemDetails`\>\>
 
+##### sessionId?
+
+> `optional` **sessionId**: `string`
+
 ***
 
 ### ScraperOptions

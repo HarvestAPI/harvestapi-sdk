@@ -27,14 +27,14 @@ describe('Linkedin Profile API', () => {
 
   it('getProfile by profileId', async () => {
     const data = await scraper.getProfile({
-      profileId: 'ACoAAA8BYqEBCGLg_vT_ca6mMEqkpp9nVffJ3hc',
+      profileId: 'ACoAAA7IcPoBXbqAyFuCjYLHAhmm13BgChs-P5g',
     });
     if (!data?.query) console.error('data', data);
 
-    expect(data.query.publicIdentifier).toBe('williamhgates');
+    expect(data.query.publicIdentifier).toBe('lewisowain');
 
-    expect(data.element.publicIdentifier).toBe('williamhgates');
-    expect(data.element.firstName).toBe('Bill');
+    expect(data.element.publicIdentifier).toBe('lewisowain');
+    expect(data.element.firstName).toBe('Owain');
   });
 
   it('getProfile by LSN profileId', async () => {
