@@ -16,7 +16,6 @@
   ],
   "scripts": {
     "build": "npx tsx build.ts",
-    "test": "jest",
     "test:concurrency": "npx tsx src/test/concurrency.ts -- --run",
     "fix:lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "check:typescript": "tsc --noEmit",
