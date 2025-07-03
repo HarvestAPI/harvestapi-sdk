@@ -385,9 +385,9 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **query**: `string`
 
-##### tryFindEmail?
+##### findEmail?
 
-> `optional` **tryFindEmail**: `boolean`
+> `optional` **findEmail**: `boolean`
 
 ##### short?
 
@@ -1379,7 +1379,15 @@ true
 
 ##### phone?
 
-> `optional` **phone**: `string` \| `null`
+> `optional` **phone**: `object`
+
+###### phone.number
+
+> **number**: `string`
+
+###### phone.extension?
+
+> `optional` **extension**: `string` \| `null`
 
 ##### crunchbaseFundingData?
 
@@ -2045,9 +2053,9 @@ true
 
 > **query**: [`SearchLinkedInProfilesParams`](#searchlinkedinprofilesparams)
 
-##### tryFindEmail?
+##### findEmail?
 
-> `optional` **tryFindEmail**: `boolean`
+> `optional` **findEmail**: `boolean`
 
 ***
 
@@ -2061,9 +2069,9 @@ true
 
 > **query**: [`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
 
-##### tryFindEmail?
+##### findEmail?
 
-> `optional` **tryFindEmail**: `boolean`
+> `optional` **findEmail**: `boolean`
 
 ##### warnPageLimit?
 

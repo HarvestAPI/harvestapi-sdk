@@ -127,12 +127,12 @@ export class LinkedinScraper {
     }).scrapeStart();
   }
 
-  async scrapeProfiles({ query, tryFindEmail, ...options }: ScrapeLinkedinProfilesParams) {
+  async scrapeProfiles({ query, findEmail, ...options }: ScrapeLinkedinProfilesParams) {
     return new ListingScraper<ProfileShort, Profile>({
       fetchList: (listParams) => this.searchProfiles({ ...query, ...listParams }),
       fetchItem: async ({ item }) =>
         item?.publicIdentifier
-          ? this.getProfile({ publicIdentifier: item.publicIdentifier, tryFindEmail })
+          ? this.getProfile({ publicIdentifier: item.publicIdentifier, findEmail })
           : { skipped: true },
       scrapeDetails: true,
       entityName: 'profiles',
@@ -191,13 +191,13 @@ export class LinkedinScraper {
 
   async scrapeSalesNavigatorLeads({
     query,
-    tryFindEmail,
+    findEmail,
     ...options
   }: ScrapeLinkedinSalesNavLeadsParams) {
     return new ListingScraper<ProfileShort, Profile>({
       fetchList: (listParams) => this.searchSalesNavigatorLeads({ ...query, ...listParams }),
       fetchItem: async ({ item }) => {
-        return item?.id ? this.getProfile({ profileId: item.id, tryFindEmail }) : { skipped: true };
+        return item?.id ? this.getProfile({ profileId: item.id, findEmail }) : { skipped: true };
       },
       scrapeDetails: true,
       entityName: 'profiles',

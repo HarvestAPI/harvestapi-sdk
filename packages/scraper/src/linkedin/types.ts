@@ -5,7 +5,7 @@ export interface GetLinkedInProfileParams {
   publicIdentifier?: string;
   profileId?: string;
   query?: string;
-  tryFindEmail?: boolean;
+  findEmail?: boolean;
   short?: boolean;
 }
 
@@ -314,7 +314,10 @@ export type Company = {
   }>;
   active?: boolean;
   jobSearchUrl?: string;
-  phone?: string | null;
+  phone?: {
+    number: string;
+    extension?: string | null;
+  };
   crunchbaseFundingData?: {
     numberOfFundingRounds?: number;
     lastFundingRound?: {
@@ -531,12 +534,12 @@ export type ScrapeLinkedinCompaniesParams = {
 
 export type ScrapeLinkedinProfilesParams = {
   query: SearchLinkedInProfilesParams;
-  tryFindEmail?: boolean;
+  findEmail?: boolean;
 } & ListingScraperConfig<ProfileShort, Profile>;
 
 export type ScrapeLinkedinSalesNavLeadsParams = {
   query: SearchLinkedInSalesNavLeadsParams;
-  tryFindEmail?: boolean;
+  findEmail?: boolean;
   warnPageLimit?: boolean;
 } & ListingScraperConfig<ProfileShort, Profile>;
 
