@@ -83,7 +83,9 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     item: TItemShort;
   }) => Promise<TFetchedItemDetails<TItemDetail>>;
 
-  private onItemScrapedQueue!: (args: { item: TItemDetail }) => Promise<void>;
+  private onItemScrapedQueue!: (
+    args: { item: TItemDetail } & TFetchedItemDetails<TItemDetail>,
+  ) => Promise<void>;
 
   async scrapeStart() {
     this.stats = {
@@ -186,7 +188,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     });
     this.onItemScrapedQueue = createConcurrentQueues(
       this.options.outputType === 'sqlite' ? 1 : concurrency,
-      ({ item }) => this.onItemScraped({ item }),
+      ({ item, ...rest }) => this.onItemScraped({ item, ...rest }),
     );
 
     this.stats.requestsStartTime = new Date();
@@ -343,7 +345,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
           this.scrapedItems[item.id].scraped = true;
           this.stats.itemsSuccess++;
 
-          await this.onItemScrapedQueue({ item: itemDetails.element });
+          await this.onItemScrapedQueue({ item: itemDetails.element, ...itemDetails });
           details.push(itemDetails.element);
         }
       }
@@ -361,23 +363,26 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     return details;
   }
 
-  private onItemScraped = async ({ item }: { item: TItemDetail }) => {
+  private onItemScraped = async ({
+    item,
+    ...apiArgs
+  }: { item: TItemDetail } & TFetchedItemDetails<TItemDetail>) => {
     const logger = {
       log: (...args: any[]) => this.log(...args),
       error: (...args: any[]) => this.errorLog(...args),
     };
     if (this.options.outputType === 'json') {
       this.inMemoryItems.push(item);
-      void this.options.onItemScraped?.({ item, logger });
+      void this.options.onItemScraped?.({ item, logger, ...apiArgs });
     }
     if (this.options.outputType === 'sqlite') {
       await this.insertSqliteItem(item).catch((error) => {
         this.errorLog('Error inserting item to SQLite:', error);
       });
-      void this.options.onItemScraped?.({ item, logger });
+      void this.options.onItemScraped?.({ item, logger, ...apiArgs });
     }
     if (this.options.outputType === 'callback') {
-      await this.options.onItemScraped?.({ item, logger });
+      await this.options.onItemScraped?.({ item, logger, ...apiArgs });
     }
   };
 

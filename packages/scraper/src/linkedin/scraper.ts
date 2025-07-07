@@ -81,7 +81,6 @@ export class LinkedinScraper {
     params: BaseFetchParams & SearchLinkedinJobsParams,
   ): Promise<ApiListResponse<JobShort>> {
     const results = await this.scraper.fetchApi({ path: 'linkedin/job-search', params });
-    console.log(`searchJobs results`, results.pagination);
     return results;
   }
 

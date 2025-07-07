@@ -14,10 +14,12 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
    */
   scrapeDetails?: boolean;
 
-  onItemScraped?: (args: {
-    item: TItemShot | TItemDetails;
-    logger: Required<ScraperOptions>['logger'];
-  }) => any;
+  onItemScraped?: (
+    args: {
+      item: TItemShot | TItemDetails;
+      logger: Required<ScraperOptions>['logger'];
+    } & Partial<ApiItemResponse<TItemShot | TItemDetails>>,
+  ) => any;
   onFirstPageFetched?: (args: { data: ApiListResponse<TItemShot> | null }) => any;
   overrideConcurrency?: number;
   overridePageConcurrency?: number;

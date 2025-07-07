@@ -815,13 +815,7 @@ true
 
 ###### args
 
-###### item
-
-`TItemShot` \| `TItemDetails`
-
-###### logger
-
-`Required`\<[`ScraperOptions`](#scraperoptions)\>\[`"logger"`\]
+`object` & `Partial`\<[`ApiItemResponse`](#apiitemresponsetitem)\<`TItemShot` \| `TItemDetails`\>\>
 
 ###### Returns
 
