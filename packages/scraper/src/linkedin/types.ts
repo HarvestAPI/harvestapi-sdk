@@ -1,5 +1,9 @@
 import { ListingScraperConfig } from '../base';
 
+export interface BaseFetchParams {
+  addHeaders?: Record<string, string>;
+}
+
 export interface GetLinkedInProfileParams {
   url?: string;
   publicIdentifier?: string;
@@ -34,14 +38,6 @@ export interface SearchLinkedInSalesNavLeadsParams {
   pastJobTitles?: string | string[];
   firstNames?: string | string[];
   lastNames?: string | string[];
-}
-
-export interface SearchLinkedInCompanyAssociatedProfilesParams {
-  company?: string | string[];
-  companyId?: string | string[];
-  companyUniversalName?: string | string[];
-  search?: string;
-  page?: number;
 }
 
 export interface GetLinkedinCompanyParams {

@@ -173,10 +173,16 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         this.error = `Max items limit reached: ${this.options.maxItems}`;
         return null;
       }
-      return await this.options.fetchItem({ item })?.catch((error) => {
-        this.errorLog('Error scraping item', error);
-        return null;
-      });
+      return await this.options
+        .fetchItem({
+          item,
+          addHeaders: this.options.addItemHeaders,
+          // sessionId: this.options.sessionId,
+        })
+        ?.catch((error) => {
+          this.errorLog('Error scraping item', error);
+          return null;
+        });
     });
     this.onItemScrapedQueue = createConcurrentQueues(
       this.options.outputType === 'sqlite' ? 1 : concurrency,
@@ -260,7 +266,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     this.log(`Scraping page ${page} of ${this.options.entityName}...`);
 
     const result = await this.options
-      .fetchList({ page, paginationToken: this.paginationToken, sessionId: this.options.sessionId })
+      .fetchList({
+        page,
+        paginationToken: this.paginationToken,
+        sessionId: this.options.sessionId,
+        addHeaders: this.options.addListingHeaders,
+      })
       .catch((error) => {
         this.errorLog('Error fetching page', page, error);
         return null;

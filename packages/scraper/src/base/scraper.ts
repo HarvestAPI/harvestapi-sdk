@@ -16,7 +16,15 @@ export class BaseScraper {
     this.logger = options.logger || console;
   }
 
-  async fetchApi({ path, params }: { path: string; params?: any }) {
+  async fetchApi({
+    path,
+    params,
+    addHeaders,
+  }: {
+    path: string;
+    params?: any;
+    addHeaders?: Record<string, string>;
+  }) {
     if (!this.options.apiKey) {
       this.logger.error('API Key is required');
       return {
@@ -31,6 +39,14 @@ export class BaseScraper {
     }
     if (!path.startsWith('/')) {
       path = `/${path}`;
+    }
+
+    if (params.addHeaders) {
+      addHeaders = {
+        ...addHeaders,
+        ...params.addHeaders,
+      };
+      delete params.addHeaders;
     }
 
     if (params && Object.values(params).filter(Boolean).length > 0) {
@@ -50,6 +66,7 @@ export class BaseScraper {
         'Content-Type': 'application/json',
         'X-API-KEY': this.options.apiKey,
         ...this.options.addHeaders,
+        ...addHeaders,
       },
     }).catch((e) => {
       this.logger.error('Error fetching API:', e);

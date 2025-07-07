@@ -26,6 +26,8 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
   disableErrorLog?: boolean;
   optionsOverride?: Partial<ListingScraperOptions<TItemShot, TItemDetails>>;
   sessionId?: string;
+  addListingHeaders?: Record<string, string>;
+  addItemHeaders?: Record<string, string>;
 };
 
 export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfig<
@@ -36,11 +38,12 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
     page: number;
     paginationToken?: string | null;
     sessionId?: string;
+    addHeaders?: Record<string, string>;
   }) => Promise<ApiListResponse<TItemShot>>;
-  fetchItem: ({
-    item,
-  }: {
+  fetchItem: (args: {
     item: TItemShot;
+    sessionId?: string;
+    addHeaders?: Record<string, string>;
   }) => Promise<
     (ApiItemResponse<TItemDetails> | { skipped: boolean; done?: boolean }) | null
   > | null;

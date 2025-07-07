@@ -99,7 +99,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`GetLinkedInProfileParams`](#getlinkedinprofileparams)
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedInProfileParams`](#getlinkedinprofileparams)
 
 ###### Returns
 
@@ -113,13 +113,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-###### url?
-
-`string`
-
-###### publicIdentifier?
-
-`string`
+[`BaseFetchParams`](#basefetchparams) & `object`
 
 ###### Returns
 
@@ -133,7 +127,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`SearchLinkedInProfilesParams`](#searchlinkedinprofilesparams)
+[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedInProfilesParams`](#searchlinkedinprofilesparams)
 
 ###### Returns
 
@@ -141,17 +135,17 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getCompany()
 
-> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
+> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-3)\>\>
 
 ###### Parameters
 
 ###### params
 
-[`GetLinkedinCompanyParams`](#getlinkedincompanyparams)
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinCompanyParams`](#getlinkedincompanyparams)
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-3)\>\>
 
 ##### searchCompanies()
 
@@ -161,7 +155,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`SearchLinkedinCompaniesParams`](#searchlinkedincompaniesparams)
+[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedinCompaniesParams`](#searchlinkedincompaniesparams)
 
 ###### Returns
 
@@ -175,7 +169,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`GetLinkedinJobParams`](#getlinkedinjobparams)
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinJobParams`](#getlinkedinjobparams)
 
 ###### Returns
 
@@ -189,7 +183,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`SearchLinkedinJobsParams`](#searchlinkedinjobsparams)
+[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedinJobsParams`](#searchlinkedinjobsparams)
 
 ###### Returns
 
@@ -203,7 +197,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`SearchLinkedinPostsParams`](#searchlinkedinpostsparams)
+[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedinPostsParams`](#searchlinkedinpostsparams)
 
 ###### Returns
 
@@ -217,7 +211,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`GetLinkedinPostReactionsParams`](#getlinkedinpostreactionsparams)
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinPostReactionsParams`](#getlinkedinpostreactionsparams)
 
 ###### Returns
 
@@ -231,25 +225,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`GetLinkedinPostCommentsParams`](#getlinkedinpostcommentsparams)
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinPostCommentsParams`](#getlinkedinpostcommentsparams)
 
 ###### Returns
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
-
-##### searchCompanyAssociatedProfiles()
-
-> **searchCompanyAssociatedProfiles**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
-
-###### Parameters
-
-###### params
-
-[`SearchLinkedInCompanyAssociatedProfilesParams`](#searchlinkedincompanyassociatedprofilesparams)
-
-###### Returns
-
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
 
 ##### scrapeJobs()
 
@@ -343,7 +323,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
+[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
 
 ###### Returns
 
@@ -364,6 +344,16 @@ For more detailed information on the available methods and their parameters, che
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ## Interfaces
+
+### BaseFetchParams
+
+#### Properties
+
+##### addHeaders?
+
+> `optional` **addHeaders**: `Record`\<`string`, `string`\>
+
+***
 
 ### GetLinkedInProfileParams
 
@@ -488,32 +478,6 @@ For more detailed information on the available methods and their parameters, che
 ##### lastNames?
 
 > `optional` **lastNames**: `string` \| `string`[]
-
-***
-
-### SearchLinkedInCompanyAssociatedProfilesParams
-
-#### Properties
-
-##### company?
-
-> `optional` **company**: `string` \| `string`[]
-
-##### companyId?
-
-> `optional` **companyId**: `string` \| `string`[]
-
-##### companyUniversalName?
-
-> `optional` **companyUniversalName**: `string` \| `string`[]
-
-##### search?
-
-> `optional` **search**: `string`
-
-##### page?
-
-> `optional` **page**: `number`
 
 ***
 
@@ -906,6 +870,14 @@ true
 ##### sessionId?
 
 > `optional` **sessionId**: `string`
+
+##### addListingHeaders?
+
+> `optional` **addListingHeaders**: `Record`\<`string`, `string`\>
+
+##### addItemHeaders?
+
+> `optional` **addItemHeaders**: `Record`\<`string`, `string`\>
 
 ***
 
@@ -1615,7 +1587,7 @@ true
 
 ##### company
 
-> **company**: [`Company`](#company-4)
+> **company**: [`Company`](#company-3)
 
 ##### salary
 
@@ -2033,7 +2005,7 @@ true
 
 ### ScrapeLinkedinCompaniesParams
 
-> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-4)\>
+> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-3)\>
 
 #### Type declaration
 
