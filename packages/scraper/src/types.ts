@@ -1,17 +1,18 @@
 export interface BaseApiResponse {
   entityId: string | null;
+  requestId: string;
   status: number;
   error: any;
   query: Record<string, any>;
+  originalQuery: Record<string, any>;
   /** @internal */
-  liUrl?: string;
+  liUrl?: string | string[];
   user?: {
-    subscriptionPlan: string;
-    requestsThisCycle: number;
-    requestsLeftThisCycle: number;
-    requestsUsedThisCycle: number;
+    membershipTier: string;
     requestsConcurrency: number;
   };
+  payments: string[];
+  const: number;
 }
 
 export type ApiItemResponse<TItem> = BaseApiResponse & {

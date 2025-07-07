@@ -727,6 +727,10 @@ For more detailed information on the available methods and their parameters, che
 
 > **entityId**: `null` \| `string`
 
+##### requestId
+
+> **requestId**: `string`
+
 ##### status
 
 > **status**: `number`
@@ -739,29 +743,29 @@ For more detailed information on the available methods and their parameters, che
 
 > **query**: `Record`\<`string`, `any`\>
 
+##### originalQuery
+
+> **originalQuery**: `Record`\<`string`, `any`\>
+
 ##### user?
 
 > `optional` **user**: `object`
 
-###### subscriptionPlan
+###### membershipTier
 
-> **subscriptionPlan**: `string`
-
-###### requestsThisCycle
-
-> **requestsThisCycle**: `number`
-
-###### requestsLeftThisCycle
-
-> **requestsLeftThisCycle**: `number`
-
-###### requestsUsedThisCycle
-
-> **requestsUsedThisCycle**: `number`
+> **membershipTier**: `string`
 
 ###### requestsConcurrency
 
 > **requestsConcurrency**: `number`
+
+##### payments
+
+> **payments**: `string`[]
+
+##### const
+
+> **const**: `number`
 
 ## Type Aliases
 
