@@ -141,6 +141,32 @@ export interface GetLinkedinPostCommentsParams {
   sortBy?: 'date' | 'relevance';
 }
 
+export interface GetLinkedinProfileCommentsParams {
+  targetUrl?: string;
+  profile?: string;
+  profileId?: string;
+  profilePublicIdentifier?: string;
+  company?: string;
+  companyId?: string;
+  companyUniversalName?: string;
+  page?: number;
+  paginationToken?: string | null;
+  postedLimit?: '24h' | 'week' | 'month';
+}
+
+export interface GetLinkedinProfileReactionsParams {
+  targetUrl?: string;
+  profile?: string;
+  profileId?: string;
+  profilePublicIdentifier?: string;
+  company?: string;
+  companyId?: string;
+  companyUniversalName?: string;
+  page?: number;
+  paginationToken?: string | null;
+  postedLimit?: '24h' | 'week' | 'month';
+}
+
 export type Profile = {
   id: string;
   publicIdentifier: string;

@@ -93,7 +93,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getProfile()
 
-> **getProfile**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-1)\>\>
+> **getProfile**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-3)\>\>
 
 ###### Parameters
 
@@ -103,7 +103,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-1)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-3)\>\>
 
 ##### getProfileId()
 
@@ -135,7 +135,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getCompany()
 
-> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-3)\>\>
+> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-5)\>\>
 
 ###### Parameters
 
@@ -145,7 +145,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-3)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-5)\>\>
 
 ##### searchCompanies()
 
@@ -230,6 +230,34 @@ For more detailed information on the available methods and their parameters, che
 ###### Returns
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+##### getProfileComments()
+
+> **getProfileComments**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinProfileCommentsParams`](#getlinkedinprofilecommentsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+##### getProfileReactions()
+
+> **getProfileReactions**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinProfileReactionsParams`](#getlinkedinprofilereactionsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
 
 ##### scrapeJobs()
 
@@ -716,6 +744,98 @@ For more detailed information on the available methods and their parameters, che
 ##### sortBy?
 
 > `optional` **sortBy**: `"date"` \| `"relevance"`
+
+***
+
+### GetLinkedinProfileCommentsParams
+
+#### Properties
+
+##### targetUrl?
+
+> `optional` **targetUrl**: `string`
+
+##### profile?
+
+> `optional` **profile**: `string`
+
+##### profileId?
+
+> `optional` **profileId**: `string`
+
+##### profilePublicIdentifier?
+
+> `optional` **profilePublicIdentifier**: `string`
+
+##### company?
+
+> `optional` **company**: `string`
+
+##### companyId?
+
+> `optional` **companyId**: `string`
+
+##### companyUniversalName?
+
+> `optional` **companyUniversalName**: `string`
+
+##### page?
+
+> `optional` **page**: `number`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `null` \| `string`
+
+##### postedLimit?
+
+> `optional` **postedLimit**: `"24h"` \| `"week"` \| `"month"`
+
+***
+
+### GetLinkedinProfileReactionsParams
+
+#### Properties
+
+##### targetUrl?
+
+> `optional` **targetUrl**: `string`
+
+##### profile?
+
+> `optional` **profile**: `string`
+
+##### profileId?
+
+> `optional` **profileId**: `string`
+
+##### profilePublicIdentifier?
+
+> `optional` **profilePublicIdentifier**: `string`
+
+##### company?
+
+> `optional` **company**: `string`
+
+##### companyId?
+
+> `optional` **companyId**: `string`
+
+##### companyUniversalName?
+
+> `optional` **companyUniversalName**: `string`
+
+##### page?
+
+> `optional` **page**: `number`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `null` \| `string`
+
+##### postedLimit?
+
+> `optional` **postedLimit**: `"24h"` \| `"week"` \| `"month"`
 
 ***
 
@@ -1585,7 +1705,7 @@ true
 
 ##### company
 
-> **company**: [`Company`](#company-3)
+> **company**: [`Company`](#company-5)
 
 ##### salary
 
@@ -2003,7 +2123,7 @@ true
 
 ### ScrapeLinkedinCompaniesParams
 
-> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-3)\>
+> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-5)\>
 
 #### Type declaration
 
@@ -2015,7 +2135,7 @@ true
 
 ### ScrapeLinkedinProfilesParams
 
-> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-1)\>
+> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-3)\>
 
 #### Type declaration
 
@@ -2031,7 +2151,7 @@ true
 
 ### ScrapeLinkedinSalesNavLeadsParams
 
-> **ScrapeLinkedinSalesNavLeadsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-1)\>
+> **ScrapeLinkedinSalesNavLeadsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-3)\>
 
 #### Type declaration
 

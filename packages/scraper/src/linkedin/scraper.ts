@@ -9,7 +9,9 @@ import {
   GetLinkedinJobParams,
   GetLinkedinPostCommentsParams,
   GetLinkedinPostReactionsParams,
+  GetLinkedinProfileCommentsParams,
   GetLinkedInProfileParams,
+  GetLinkedinProfileReactionsParams,
   Job,
   JobShort,
   PostComment,
@@ -100,6 +102,18 @@ export class LinkedinScraper {
     params: BaseFetchParams & GetLinkedinPostCommentsParams,
   ): Promise<ApiListResponse<PostComment>> {
     return this.scraper.fetchApi({ path: 'linkedin/post-comments', params });
+  }
+
+  async getProfileComments(
+    params: BaseFetchParams & GetLinkedinProfileCommentsParams,
+  ): Promise<ApiListResponse<PostComment>> {
+    return this.scraper.fetchApi({ path: 'linkedin/profile-comments', params });
+  }
+
+  async getProfileReactions(
+    params: BaseFetchParams & GetLinkedinProfileReactionsParams,
+  ): Promise<ApiListResponse<PostReaction>> {
+    return this.scraper.fetchApi({ path: 'linkedin/profile-reactions', params });
   }
 
   async scrapeJobs({ query, ...options }: ScrapeLinkedinJobsParams) {
