@@ -232,6 +232,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     const list = scrapedList ? scrapedList : await this.fetchPage({ page });
     if (this.done) return;
 
+    this.paginationToken = list?.pagination?.paginationToken || null;
+
     let details: TItemDetail[] = [];
 
     if (list?.elements?.length) {

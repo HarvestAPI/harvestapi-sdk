@@ -577,6 +577,14 @@ export type ScrapeLinkedinPostCommentsParams = {
   query: GetLinkedinPostCommentsParams;
 } & ListingScraperConfig<PostComment, PostComment>;
 
+export type ScrapeLinkedinProfileCommentsParams = {
+  query: GetLinkedinProfileCommentsParams;
+} & ListingScraperConfig<PostComment, PostComment>;
+
+export type ScrapeLinkedinProfileReactionsParams = {
+  query: GetLinkedinProfileReactionsParams;
+} & ListingScraperConfig<PostReaction, PostReaction>;
+
 export type ErrorResponse = {
   error: string;
   message: string;

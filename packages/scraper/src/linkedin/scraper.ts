@@ -24,6 +24,8 @@ import {
   ScrapeLinkedinPostCommentsParams,
   ScrapeLinkedinPostReactionsParams,
   ScrapeLinkedinPostsParams,
+  ScrapeLinkedinProfileCommentsParams,
+  ScrapeLinkedinProfileReactionsParams,
   ScrapeLinkedinProfilesParams,
   ScrapeLinkedinSalesNavLeadsParams,
   SearchLinkedinCompaniesParams,
@@ -193,6 +195,36 @@ export class LinkedinScraper {
           : { skipped: true },
       scrapeDetails: false,
       entityName: 'post-comments',
+      ...options,
+      maxPages: 100,
+    }).scrapeStart();
+  }
+
+  async scrapeProfileComments({ query, ...options }: ScrapeLinkedinProfileCommentsParams) {
+    return new ListingScraper<PostComment, PostComment>({
+      fetchList: (fetchArgs) => this.getProfileComments({ ...query, ...fetchArgs }),
+      fetchItem: async ({ item }) =>
+        item?.id
+          ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostComment>)
+          : { skipped: true },
+      scrapeDetails: false,
+      entityName: 'profile-comments',
+      ...options,
+      maxPages: 100,
+    }).scrapeStart();
+  }
+
+  async scrapeProfileReactions({ query, ...options }: ScrapeLinkedinProfileReactionsParams) {
+    return new ListingScraper<PostReaction, PostReaction>({
+      fetchList: (fetchArgs) => {
+        return this.getProfileReactions({ ...query, ...fetchArgs });
+      },
+      fetchItem: async ({ item }) =>
+        item?.id
+          ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostReaction>)
+          : { skipped: true },
+      scrapeDetails: false,
+      entityName: 'profile-reactions',
       ...options,
       maxPages: 100,
     }).scrapeStart();

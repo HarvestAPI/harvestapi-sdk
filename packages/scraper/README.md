@@ -343,6 +343,34 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
+##### scrapeProfileComments()
+
+> **scrapeProfileComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+###### Parameters
+
+###### \_\_namedParameters
+
+[`ScrapeLinkedinProfileCommentsParams`](#scrapelinkedinprofilecommentsparams)
+
+###### Returns
+
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+##### scrapeProfileReactions()
+
+> **scrapeProfileReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+###### Parameters
+
+###### \_\_namedParameters
+
+[`ScrapeLinkedinProfileReactionsParams`](#scrapelinkedinprofilereactionsparams)
+
+###### Returns
+
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
 ##### searchSalesNavigatorLeads()
 
 > **searchSalesNavigatorLeads**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
@@ -2202,6 +2230,30 @@ true
 ##### query
 
 > **query**: [`GetLinkedinPostCommentsParams`](#getlinkedinpostcommentsparams)
+
+***
+
+### ScrapeLinkedinProfileCommentsParams
+
+> **ScrapeLinkedinProfileCommentsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`PostComment`](#postcomment), [`PostComment`](#postcomment)\>
+
+#### Type declaration
+
+##### query
+
+> **query**: [`GetLinkedinProfileCommentsParams`](#getlinkedinprofilecommentsparams)
+
+***
+
+### ScrapeLinkedinProfileReactionsParams
+
+> **ScrapeLinkedinProfileReactionsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`PostReaction`](#postreaction), [`PostReaction`](#postreaction)\>
+
+#### Type declaration
+
+##### query
+
+> **query**: [`GetLinkedinProfileReactionsParams`](#getlinkedinprofilereactionsparams)
 
 ***
 
