@@ -139,6 +139,7 @@ export interface GetLinkedinPostCommentsParams {
   page?: number;
   paginationToken?: string | null;
   sortBy?: 'date' | 'relevance';
+  postedLimit?: '24h' | 'week' | 'month';
 }
 
 export interface GetLinkedinProfileCommentsParams {
@@ -164,7 +165,6 @@ export interface GetLinkedinProfileReactionsParams {
   companyUniversalName?: string;
   page?: number;
   paginationToken?: string | null;
-  postedLimit?: '24h' | 'week' | 'month';
 }
 
 export type Profile = {

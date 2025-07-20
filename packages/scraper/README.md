@@ -773,6 +773,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **sortBy**: `"date"` \| `"relevance"`
 
+##### postedLimit?
+
+> `optional` **postedLimit**: `"24h"` \| `"week"` \| `"month"`
+
 ***
 
 ### GetLinkedinProfileCommentsParams
@@ -860,10 +864,6 @@ For more detailed information on the available methods and their parameters, che
 ##### paginationToken?
 
 > `optional` **paginationToken**: `null` \| `string`
-
-##### postedLimit?
-
-> `optional` **postedLimit**: `"24h"` \| `"week"` \| `"month"`
 
 ***
 
