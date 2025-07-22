@@ -535,6 +535,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **lastNames**: `string` \| `string`[]
 
+##### industryIds?
+
+> `optional` **industryIds**: `string` \| `string`[]
+
 ***
 
 ### GetLinkedinCompanyParams

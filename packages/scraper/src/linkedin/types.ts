@@ -38,6 +38,7 @@ export interface SearchLinkedInSalesNavLeadsParams {
   pastJobTitles?: string | string[];
   firstNames?: string | string[];
   lastNames?: string | string[];
+  industryIds?: string | string[];
 }
 
 export interface GetLinkedinCompanyParams {
