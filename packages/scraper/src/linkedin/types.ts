@@ -14,18 +14,25 @@ export interface GetLinkedInProfileParams {
 }
 
 export interface SearchLinkedInProfilesParams {
-  company?: string | string[];
-  companyId?: string | string[];
-  companyUniversalName?: string | string[];
+  currentCompany?: string | string[];
+  currentCompanyId?: string | string[];
+  currentCompanyUniversalName?: string | string[];
+  pastCompany?: string | string[];
+  pastCompanyId?: string | string[];
+  pastCompanyUniversalName?: string | string[];
   school?: string | string[];
   schoolId?: string | string[];
   schoolUniversalName?: string | string[];
   geoId?: string | string[];
   location?: string | string[];
+  industryId?: string | string[];
   search?: string;
+  firstName?: string;
+  lastName?: string;
   page?: number;
 }
 
+/** @internal */
 export interface SearchLinkedInSalesNavLeadsParams {
   currentCompanies?: string | string[];
   pastCompanies?: string | string[];
@@ -560,6 +567,7 @@ export type ScrapeLinkedinProfilesParams = {
   findEmail?: boolean;
 } & ListingScraperConfig<ProfileShort, Profile>;
 
+/** @internal */
 export type ScrapeLinkedinSalesNavLeadsParams = {
   query: SearchLinkedInSalesNavLeadsParams;
   findEmail?: boolean;

@@ -135,7 +135,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getCompany()
 
-> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-5)\>\>
+> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
 
 ###### Parameters
 
@@ -145,7 +145,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-5)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
 
 ##### searchCompanies()
 
@@ -371,34 +371,6 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
-##### searchSalesNavigatorLeads()
-
-> **searchSalesNavigatorLeads**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
-
-###### Parameters
-
-###### params
-
-[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
-
-###### Returns
-
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
-
-##### scrapeSalesNavigatorLeads()
-
-> **scrapeSalesNavigatorLeads**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
-
-###### Parameters
-
-###### \_\_namedParameters
-
-[`ScrapeLinkedinSalesNavLeadsParams`](#scrapelinkedinsalesnavleadsparams)
-
-###### Returns
-
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
-
 ## Interfaces
 
 ### BaseFetchParams
@@ -445,17 +417,29 @@ For more detailed information on the available methods and their parameters, che
 
 #### Properties
 
-##### company?
+##### currentCompany?
 
-> `optional` **company**: `string` \| `string`[]
+> `optional` **currentCompany**: `string` \| `string`[]
 
-##### companyId?
+##### currentCompanyId?
 
-> `optional` **companyId**: `string` \| `string`[]
+> `optional` **currentCompanyId**: `string` \| `string`[]
 
-##### companyUniversalName?
+##### currentCompanyUniversalName?
 
-> `optional` **companyUniversalName**: `string` \| `string`[]
+> `optional` **currentCompanyUniversalName**: `string` \| `string`[]
+
+##### pastCompany?
+
+> `optional` **pastCompany**: `string` \| `string`[]
+
+##### pastCompanyId?
+
+> `optional` **pastCompanyId**: `string` \| `string`[]
+
+##### pastCompanyUniversalName?
+
+> `optional` **pastCompanyUniversalName**: `string` \| `string`[]
 
 ##### school?
 
@@ -477,67 +461,25 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **location**: `string` \| `string`[]
 
-##### search?
+##### industryId?
 
-> `optional` **search**: `string`
-
-##### page?
-
-> `optional` **page**: `number`
-
-***
-
-### SearchLinkedInSalesNavLeadsParams
-
-#### Properties
-
-##### currentCompanies?
-
-> `optional` **currentCompanies**: `string` \| `string`[]
-
-##### pastCompanies?
-
-> `optional` **pastCompanies**: `string` \| `string`[]
-
-##### school?
-
-> `optional` **school**: `string` \| `string`[]
-
-##### location?
-
-> `optional` **location**: `string` \| `string`[]
+> `optional` **industryId**: `string` \| `string`[]
 
 ##### search?
 
 > `optional` **search**: `string`
 
+##### firstName?
+
+> `optional` **firstName**: `string`
+
+##### lastName?
+
+> `optional` **lastName**: `string`
+
 ##### page?
 
 > `optional` **page**: `number`
-
-##### salesNavUrl?
-
-> `optional` **salesNavUrl**: `string`
-
-##### currentJobTitles?
-
-> `optional` **currentJobTitles**: `string` \| `string`[]
-
-##### pastJobTitles?
-
-> `optional` **pastJobTitles**: `string` \| `string`[]
-
-##### firstNames?
-
-> `optional` **firstNames**: `string` \| `string`[]
-
-##### lastNames?
-
-> `optional` **lastNames**: `string` \| `string`[]
-
-##### industryIds?
-
-> `optional` **industryIds**: `string` \| `string`[]
 
 ***
 
@@ -1737,7 +1679,7 @@ true
 
 ##### company
 
-> **company**: [`Company`](#company-5)
+> **company**: [`Company`](#company-4)
 
 ##### salary
 
@@ -2155,7 +2097,7 @@ true
 
 ### ScrapeLinkedinCompaniesParams
 
-> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-5)\>
+> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-4)\>
 
 #### Type declaration
 
@@ -2178,26 +2120,6 @@ true
 ##### findEmail?
 
 > `optional` **findEmail**: `boolean`
-
-***
-
-### ScrapeLinkedinSalesNavLeadsParams
-
-> **ScrapeLinkedinSalesNavLeadsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-3)\>
-
-#### Type declaration
-
-##### query
-
-> **query**: [`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
-
-##### findEmail?
-
-> `optional` **findEmail**: `boolean`
-
-##### warnPageLimit?
-
-> `optional` **warnPageLimit**: `boolean`
 
 ***
 

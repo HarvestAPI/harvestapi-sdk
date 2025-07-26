@@ -230,12 +230,14 @@ export class LinkedinScraper {
     }).scrapeStart();
   }
 
+  /** @internal */
   async searchSalesNavigatorLeads(
     params: BaseFetchParams & SearchLinkedInSalesNavLeadsParams,
   ): Promise<ApiListResponse<ProfileShort>> {
     return this.scraper.fetchApi({ path: 'linkedin-sales-nav/lead-search', params });
   }
 
+  /** @internal */
   async scrapeSalesNavigatorLeads({
     query,
     findEmail,
