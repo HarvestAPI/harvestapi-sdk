@@ -20,10 +20,14 @@ export class BaseScraper {
     path,
     params,
     addHeaders,
+    method = 'GET',
+    body,
   }: {
     path: string;
     params?: any;
     addHeaders?: Record<string, string>;
+    method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+    body?: any;
   }) {
     if (!this.options.apiKey) {
       this.logger.error('API Key is required');
@@ -61,13 +65,14 @@ export class BaseScraper {
     let error: any = null;
 
     const response = await fetch(apiUrl, {
-      method: 'GET',
+      method: method || 'GET',
       headers: {
         'Content-Type': 'application/json',
         'X-API-KEY': this.options.apiKey,
         ...this.options.addHeaders,
         ...addHeaders,
       },
+      body: body ? JSON.stringify(body) : undefined,
     }).catch((e) => {
       this.logger.error('Error fetching API:', e);
       error = e;

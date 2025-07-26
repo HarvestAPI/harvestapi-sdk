@@ -58,6 +58,23 @@ export class LinkedinScraper {
     return this.scraper.fetchApi({ path: 'linkedin/profile-id', params });
   }
 
+  /** @internal */
+  async searchProfileEmail({
+    profile,
+    ...params
+  }: BaseFetchParams & { profile: Partial<Profile> }): Promise<
+    ApiItemResponse<{ email?: string }>
+  > {
+    return this.scraper.fetchApi({
+      path: 'linkedin/email-search-by-profile',
+      params,
+      method: 'POST',
+      body: {
+        profile,
+      },
+    });
+  }
+
   async searchProfiles(
     params: BaseFetchParams & SearchLinkedInProfilesParams,
   ): Promise<ApiListResponse<ProfileShort>> {
