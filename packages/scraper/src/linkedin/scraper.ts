@@ -275,6 +275,18 @@ export class LinkedinScraper {
     }).scrapeStart();
   }
 
+  async getGroup(
+    params: BaseFetchParams & { groupId?: string; url?: string },
+  ): Promise<ApiItemResponse<{ name: string; url: string }>> {
+    return this.scraper.fetchApi({ path: 'linkedin/group', params });
+  }
+
+  async searchGroups(
+    params: BaseFetchParams & { search: string; page?: number },
+  ): Promise<ApiListResponse<{ name: string; url: string }>> {
+    return this.scraper.fetchApi({ path: 'linkedin/group-search', params });
+  }
+
   /** @internal */
   async test() {
     return this.scraper.fetchApi({ path: 'linkedin/test' });

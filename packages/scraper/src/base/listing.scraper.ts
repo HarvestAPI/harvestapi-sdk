@@ -281,6 +281,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         return null;
       });
 
+    this.options.onPageFetched?.({ page: 1, data: result });
+
     if (result?.status === 402) {
       this.done = true;
       this.error = result.error || 'Request limit exceeded - upgrade your plan';

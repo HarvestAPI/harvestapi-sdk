@@ -135,6 +135,8 @@ export interface SearchLinkedinPostsParams {
   authorsCompany?: string | string[];
   authorsCompanyUniversalName?: string | string[];
   authorsCompanyId?: string | string[];
+  group?: string;
+  paginationToken?: string | null;
 }
 
 export interface GetLinkedinPostReactionsParams {

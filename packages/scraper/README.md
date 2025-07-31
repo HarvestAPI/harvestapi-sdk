@@ -371,6 +371,34 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
+##### getGroup()
+
+> **getGroup**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<\{ `name`: `string`; `url`: `string`; \}\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & `object`
+
+###### Returns
+
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<\{ `name`: `string`; `url`: `string`; \}\>\>
+
+##### searchGroups()
+
+> **searchGroups**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `name`: `string`; `url`: `string`; \}\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & `object`
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `name`: `string`; `url`: `string`; \}\>\>
+
 ## Interfaces
 
 ### BaseFetchParams
@@ -683,6 +711,14 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **authorsCompanyId**: `string` \| `string`[]
 
+##### group?
+
+> `optional` **group**: `string`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `null` \| `string`
+
 ***
 
 ### GetLinkedinPostReactionsParams
@@ -926,6 +962,26 @@ true
 ###### Parameters
 
 ###### args
+
+###### data
+
+[`ApiListResponse`](#apilistresponsetitem)\<`TItemShot`\> \| `null`
+
+###### Returns
+
+`any`
+
+##### onPageFetched()?
+
+> `optional` **onPageFetched**: (`args`) => `any`
+
+###### Parameters
+
+###### args
+
+###### page
+
+`number`
 
 ###### data
 

@@ -21,6 +21,7 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
     } & Partial<ApiItemResponse<TItemShot | TItemDetails>>,
   ) => any;
   onFirstPageFetched?: (args: { data: ApiListResponse<TItemShot> | null }) => any;
+  onPageFetched?: (args: { page: number; data: ApiListResponse<TItemShot> | null }) => any;
   overrideConcurrency?: number;
   overridePageConcurrency?: number;
   maxItems?: number;
