@@ -409,6 +409,18 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **addHeaders**: `Record`\<`string`, `string`\>
 
+##### cookie?
+
+> `optional` **cookie**: `string`
+
+##### proxy?
+
+> `optional` **proxy**: `string`
+
+##### userAgent?
+
+> `optional` **userAgent**: `string`
+
 ***
 
 ### GetLinkedInProfileParams

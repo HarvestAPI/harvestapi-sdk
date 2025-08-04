@@ -2,6 +2,9 @@ import { ListingScraperConfig } from '../base';
 
 export interface BaseFetchParams {
   addHeaders?: Record<string, string>;
+  cookie?: string;
+  proxy?: string;
+  userAgent?: string;
 }
 
 export interface GetLinkedInProfileParams {
