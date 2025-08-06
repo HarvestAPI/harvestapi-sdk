@@ -39,7 +39,7 @@ export interface SearchLinkedInProfilesParams {
 export interface SearchLinkedInSalesNavLeadsParams {
   currentCompanies?: string | string[];
   pastCompanies?: string | string[];
-  school?: string | string[];
+  schools?: string | string[];
   location?: string | string[];
   search?: string;
   page?: number;
@@ -49,6 +49,9 @@ export interface SearchLinkedInSalesNavLeadsParams {
   firstNames?: string | string[];
   lastNames?: string | string[];
   industryIds?: string | string[];
+
+  /** @internal */
+  skipSnRequest?: boolean;
 }
 
 export interface GetLinkedinCompanyParams {
