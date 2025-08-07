@@ -143,7 +143,7 @@ export class LinkedinScraper {
       scrapeDetails: true,
       entityName: 'jobs',
       ...options,
-      maxPages: 40,
+      maxPageNumber: 40,
     }).scrapeStart();
   }
 
@@ -157,7 +157,7 @@ export class LinkedinScraper {
       scrapeDetails: true,
       entityName: 'companies',
       ...options,
-      maxPages: 100,
+      maxPageNumber: 100,
     }).scrapeStart();
   }
 
@@ -171,7 +171,7 @@ export class LinkedinScraper {
       scrapeDetails: true,
       entityName: 'profiles',
       ...options,
-      maxPages: 100,
+      maxPageNumber: 100,
     }).scrapeStart();
   }
 
@@ -185,7 +185,7 @@ export class LinkedinScraper {
       scrapeDetails: false,
       entityName: 'posts',
       ...options,
-      maxPages: 100,
+      maxPageNumber: 100,
     }).scrapeStart();
   }
 
@@ -199,7 +199,7 @@ export class LinkedinScraper {
       scrapeDetails: false,
       entityName: 'post-reactions',
       ...options,
-      maxPages: 100,
+      maxPageNumber: 100,
     }).scrapeStart();
   }
 
@@ -213,7 +213,7 @@ export class LinkedinScraper {
       scrapeDetails: false,
       entityName: 'post-comments',
       ...options,
-      maxPages: 100,
+      maxPageNumber: 100,
     }).scrapeStart();
   }
 
@@ -227,7 +227,7 @@ export class LinkedinScraper {
       scrapeDetails: false,
       entityName: 'profile-comments',
       ...options,
-      maxPages: 100,
+      maxPageNumber: 100,
     }).scrapeStart();
   }
 
@@ -243,7 +243,7 @@ export class LinkedinScraper {
       scrapeDetails: false,
       entityName: 'profile-reactions',
       ...options,
-      maxPages: 100,
+      maxPageNumber: 100,
     }).scrapeStart();
   }
 
@@ -271,7 +271,7 @@ export class LinkedinScraper {
       entityName: 'profiles',
       warnPageLimit: true,
       ...options,
-      maxPages: 100,
+      maxPageNumber: 100,
     }).scrapeStart();
   }
 

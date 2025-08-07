@@ -31,6 +31,8 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
   sessionId?: string;
   addListingHeaders?: Record<string, string>;
   addItemHeaders?: Record<string, string>;
+  takePages?: number;
+  startPage?: number;
 };
 
 export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfig<
@@ -50,7 +52,7 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
   }) => Promise<
     (ApiItemResponse<TItemDetails> | { skipped: boolean; done?: boolean }) | null
   > | null;
-  maxPages: number;
+  maxPageNumber: number;
   entityName: string;
   warnPageLimit?: boolean;
 };

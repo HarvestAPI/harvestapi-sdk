@@ -98,17 +98,18 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     };
     this.paginationToken = null;
     this.scrapePagesDone = false;
-    const firstPage = await this.fetchPage({ page: 1 });
+    const startPageNumber = this.options.startPage || 1;
+    const firstPage = await this.fetchPage({ page: startPageNumber });
 
     this.options.onFirstPageFetched?.({ data: firstPage });
 
     let totalPages = firstPage?.pagination?.totalPages || 0;
     this.paginationToken = firstPage?.pagination?.paginationToken || null;
-    if (this.options.maxPages && totalPages > this.options.maxPages) {
-      totalPages = this.options.maxPages;
+    if (this.options.maxPageNumber && totalPages > this.options.maxPageNumber) {
+      totalPages = this.options.maxPageNumber;
     }
     if (!totalPages && firstPage?.elements?.length) {
-      totalPages = this.options.maxPages;
+      totalPages = this.options.maxPageNumber;
       this.undefinedPagination = true;
     } else {
       this.undefinedPagination = false;
@@ -116,11 +117,11 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     if (
       this.options.warnPageLimit &&
-      totalPages === this.options.maxPages &&
+      totalPages === this.options.maxPageNumber &&
       firstPage?.pagination?.pageSize &&
       firstPage?.pagination.totalElements
     ) {
-      const totalAllowedItems = this.options.maxPages * firstPage.pagination.pageSize;
+      const totalAllowedItems = this.options.maxPageNumber * firstPage.pagination.pageSize;
       const totalItems = firstPage.pagination.totalElements;
 
       if (totalItems > totalAllowedItems) {
@@ -128,7 +129,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
           '\n' +
             styleText('bgYellow', ' [WARNING] \n') +
             `The search results are limited to ${
-              this.options.maxPages * firstPage?.pagination?.pageSize
+              this.options.maxPageNumber * firstPage?.pagination?.pageSize
             } items (out of total ${
               firstPage.pagination.totalElements
             }) because LinkedIn does not allow to scrape more for one query. \n` +
@@ -199,10 +200,18 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       this.sqliteDatabaseOpenPromise = this.createSqliteDatabase();
     }
 
+    let lastPageNumber = totalPages;
+    if (this.options.takePages && this.options.takePages > 0) {
+      lastPageNumber = Math.min(startPageNumber + this.options.takePages - 1, totalPages);
+    }
+
     const promises: Promise<void>[] = [];
-    for (let page = 1; page <= totalPages; page++) {
+    for (let page = startPageNumber; page <= lastPageNumber; page++) {
       promises.push(
-        this.scrapePageQueue({ page, scrapedList: page === 1 ? firstPage : undefined }),
+        this.scrapePageQueue({
+          page,
+          scrapedList: page === startPageNumber ? firstPage : undefined,
+        }),
       );
     }
 

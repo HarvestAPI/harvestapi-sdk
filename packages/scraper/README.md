@@ -1039,6 +1039,14 @@ true
 
 > `optional` **addItemHeaders**: `Record`\<`string`, `string`\>
 
+##### takePages?
+
+> `optional` **takePages**: `number`
+
+##### startPage?
+
+> `optional` **startPage**: `number`
+
 ***
 
 ### ScraperOptions
