@@ -1,4 +1,4 @@
-import { ApiItemResponse, ApiListResponse } from '../types';
+import { ApiItemResponse, ApiListResponse, ApiPagination } from '../types';
 
 export type ListingScraperConfig<TItemShot, TItemDetails> = {
   outputType?: 'json' | 'sqlite' | 'callback';
@@ -16,6 +16,7 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
 
   onItemScraped?: (
     args: {
+      pagination: ApiPagination | null;
       item: TItemShot | TItemDetails;
       logger: Required<ScraperOptions>['logger'];
     } & Partial<ApiItemResponse<TItemShot | TItemDetails>>,

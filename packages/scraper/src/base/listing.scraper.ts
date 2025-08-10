@@ -2,13 +2,17 @@ import { randomUUID } from 'crypto';
 import fs from 'fs-extra';
 import { dirname, resolve } from 'path';
 import type { Database } from 'sqlite';
-import { ApiItemResponse, ApiListResponse } from '../types';
+import { ApiItemResponse, ApiListResponse, ApiPagination } from '../types';
 import { createConcurrentQueues } from '../utils';
 import { ListingScraperOptions } from './types';
 import { styleText } from 'node:util';
 
 type TFetchedItemDetails<TItemDetail> =
-  | (Partial<ApiItemResponse<TItemDetail>> & { skipped?: boolean; done?: boolean })
+  | (Partial<ApiItemResponse<TItemDetail>> & {
+      pagination: ApiPagination | null;
+      skipped?: boolean;
+      done?: boolean;
+    })
   | null
   | undefined;
 
@@ -81,6 +85,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
   private fetchItemQueue!: (args: {
     item: TItemShort;
+    pagination: ApiPagination | null;
   }) => Promise<TFetchedItemDetails<TItemDetail>>;
 
   private onItemScrapedQueue!: (
@@ -170,13 +175,13 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       this.options?.overridePageConcurrency || 2,
       (args) => this.scrapePage(args),
     );
-    this.fetchItemQueue = createConcurrentQueues(concurrency, async ({ item }) => {
+    this.fetchItemQueue = createConcurrentQueues(concurrency, async ({ item, pagination }) => {
       if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
         this.done = true;
         this.error = `Max items limit reached: ${this.options.maxItems}`;
         return null;
       }
-      return await this.options
+      const result = await this.options
         .fetchItem({
           item,
           addHeaders: this.options.addItemHeaders,
@@ -186,6 +191,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
           this.errorLog('Error scraping item', error);
           return null;
         });
+
+      if (!result) return null;
+      return {
+        ...result,
+        pagination,
+      };
     });
     this.onItemScrapedQueue = createConcurrentQueues(
       this.options.outputType === 'sqlite' ? 1 : concurrency,
@@ -322,7 +333,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       this.scrapedItems[item.id] = { found: true, scraped: false };
 
       if (this.options.scrapeDetails) {
-        itemDetails = await this.fetchItemQueue({ item });
+        itemDetails = await this.fetchItemQueue({ item, pagination: list.pagination });
 
         if (itemDetails?.status === 402) {
           this.done = true;
@@ -336,6 +347,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
           status: list.status,
           error: list.error,
           query: list.query,
+          pagination: list.pagination,
         };
       }
 
