@@ -509,6 +509,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **search**: `string`
 
+##### title?
+
+> `optional` **title**: `string`
+
 ##### firstName?
 
 > `optional` **firstName**: `string`

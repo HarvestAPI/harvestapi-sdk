@@ -5,6 +5,10 @@ export interface BaseFetchParams {
   cookie?: string;
   proxy?: string;
   userAgent?: string;
+  /** @internal */
+  desiredAccountId?: string;
+  /** @internal */
+  requiredAccountId?: string;
 }
 
 export interface GetLinkedInProfileParams {
@@ -30,6 +34,7 @@ export interface SearchLinkedInProfilesParams {
   location?: string | string[];
   industryId?: string | string[];
   search?: string;
+  title?: string;
   firstName?: string;
   lastName?: string;
   page?: number;
@@ -40,7 +45,7 @@ export interface SearchLinkedInSalesNavLeadsParams {
   currentCompanies?: string | string[];
   pastCompanies?: string | string[];
   schools?: string | string[];
-  location?: string | string[];
+  locations?: string | string[];
   search?: string;
   page?: number;
   salesNavUrl?: string;
