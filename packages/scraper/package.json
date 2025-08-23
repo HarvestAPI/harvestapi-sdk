@@ -1,6 +1,6 @@
 {
   "name": "@harvestapi/scraper",
-  "version": "1.4.15",
+  "version": "1.4.16",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -40,7 +40,6 @@
     "@types/fs-extra": "11.0.4",
     "@types/jest": "29.5.14",
     "@types/node": "22.13.4",
-    "@types/sqlite3": "5.1.0",
     "@typescript-eslint/eslint-plugin": "6.15.0",
     "@typescript-eslint/parser": "6.15.0",
     "eslint": "8.56.0",
@@ -62,9 +61,5 @@
   "dependencies": {
     "dotenv": "16.4.7",
     "fs-extra": "11.3.0"
-  },
-  "peerDependencies": {
-    "sqlite": "5.1.1",
-    "sqlite3": "5.1.7"
   }
 }
