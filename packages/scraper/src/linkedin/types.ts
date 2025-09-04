@@ -17,6 +17,7 @@ export interface GetLinkedInProfileParams {
   profileId?: string;
   query?: string;
   findEmail?: boolean;
+  skipSmtp?: boolean;
   short?: boolean;
 }
 

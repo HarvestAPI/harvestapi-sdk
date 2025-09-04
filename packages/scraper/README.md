@@ -371,6 +371,34 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
+##### searchSalesNavigatorLeads()
+
+> **searchSalesNavigatorLeads**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & `SearchLinkedInSalesNavLeadsParams`
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+##### scrapeSalesNavigatorLeads()
+
+> **scrapeSalesNavigatorLeads**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+###### Parameters
+
+###### \_\_namedParameters
+
+`ScrapeLinkedinSalesNavLeadsParams`
+
+###### Returns
+
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
 ##### getGroup()
 
 > **getGroup**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<\{ `name`: `string`; `url`: `string`; \}\>\>
@@ -446,6 +474,10 @@ For more detailed information on the available methods and their parameters, che
 ##### findEmail?
 
 > `optional` **findEmail**: `boolean`
+
+##### skipSmtp?
+
+> `optional` **skipSmtp**: `boolean`
 
 ##### short?
 
