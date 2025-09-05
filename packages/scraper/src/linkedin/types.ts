@@ -41,7 +41,6 @@ export interface SearchLinkedInProfilesParams {
   page?: number;
 }
 
-/** @internal */
 export interface SearchLinkedInSalesNavLeadsParams {
   currentCompanies?: string | string[];
   pastCompanies?: string | string[];
@@ -581,7 +580,6 @@ export type ScrapeLinkedinProfilesParams = {
   findEmail?: boolean;
 } & ListingScraperConfig<ProfileShort, Profile>;
 
-/** @internal */
 export type ScrapeLinkedinSalesNavLeadsParams = {
   query: SearchLinkedInSalesNavLeadsParams;
   findEmail?: boolean;

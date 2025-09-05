@@ -379,7 +379,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### params
 
-[`BaseFetchParams`](#basefetchparams) & `SearchLinkedInSalesNavLeadsParams`
+[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
 
 ###### Returns
 
@@ -393,7 +393,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### \_\_namedParameters
 
-`ScrapeLinkedinSalesNavLeadsParams`
+[`ScrapeLinkedinSalesNavLeadsParams`](#scrapelinkedinsalesnavleadsparams)
 
 ###### Returns
 
@@ -556,6 +556,60 @@ For more detailed information on the available methods and their parameters, che
 ##### page?
 
 > `optional` **page**: `number`
+
+***
+
+### SearchLinkedInSalesNavLeadsParams
+
+#### Properties
+
+##### currentCompanies?
+
+> `optional` **currentCompanies**: `string` \| `string`[]
+
+##### pastCompanies?
+
+> `optional` **pastCompanies**: `string` \| `string`[]
+
+##### schools?
+
+> `optional` **schools**: `string` \| `string`[]
+
+##### locations?
+
+> `optional` **locations**: `string` \| `string`[]
+
+##### search?
+
+> `optional` **search**: `string`
+
+##### page?
+
+> `optional` **page**: `number`
+
+##### salesNavUrl?
+
+> `optional` **salesNavUrl**: `string`
+
+##### currentJobTitles?
+
+> `optional` **currentJobTitles**: `string` \| `string`[]
+
+##### pastJobTitles?
+
+> `optional` **pastJobTitles**: `string` \| `string`[]
+
+##### firstNames?
+
+> `optional` **firstNames**: `string` \| `string`[]
+
+##### lastNames?
+
+> `optional` **lastNames**: `string` \| `string`[]
+
+##### industryIds?
+
+> `optional` **industryIds**: `string` \| `string`[]
 
 ***
 
@@ -2232,6 +2286,26 @@ true
 ##### findEmail?
 
 > `optional` **findEmail**: `boolean`
+
+***
+
+### ScrapeLinkedinSalesNavLeadsParams
+
+> **ScrapeLinkedinSalesNavLeadsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-3)\>
+
+#### Type declaration
+
+##### query
+
+> **query**: [`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
+
+##### findEmail?
+
+> `optional` **findEmail**: `boolean`
+
+##### warnPageLimit?
+
+> `optional` **warnPageLimit**: `boolean`
 
 ***
 
