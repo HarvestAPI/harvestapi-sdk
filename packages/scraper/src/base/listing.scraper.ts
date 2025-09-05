@@ -301,7 +301,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         return null;
       });
 
-    this.options.onPageFetched?.({ page: 1, data: result });
+    await this.options.onPageFetched?.({ page, data: result });
 
     if (result?.status === 402) {
       this.done = true;
