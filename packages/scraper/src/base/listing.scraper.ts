@@ -164,10 +164,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         this.errorLog(...errors);
       }
 
-      this.errorLog(
-        'Error fetching first page or no items found. Exiting.',
-        firstPage?.error ? JSON.stringify(firstPage?.error, null, 2) : '',
-      );
+      this.errorLog('Error fetching the first page or no items found. Exiting.');
       return;
     }
 
@@ -302,6 +299,13 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       });
 
     await this.options.onPageFetched?.({ page, data: result });
+
+    if (result?.error) {
+      this.errorLog(
+        `Error fetching ${this.options.entityName} page ${page}:`,
+        typeof result.error === 'object' ? JSON.stringify(result.error, null, 2) : result.error,
+      );
+    }
 
     if (result?.status === 402) {
       this.done = true;
