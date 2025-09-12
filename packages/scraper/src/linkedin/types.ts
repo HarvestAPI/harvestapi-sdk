@@ -528,6 +528,7 @@ export type PostShort = {
 export type PostReaction = {
   id: string;
   reactionType: string;
+  postId: string;
   actor: {
     id: string;
     name: string;
@@ -540,6 +541,21 @@ export type PostReaction = {
       expiresAt: number;
     };
   };
+};
+
+export type ProfileReaction = {
+  id: string;
+  action: string;
+  postId: string;
+  linkedinUrl: string;
+  createdAt: string;
+  createdAtTimestamp: number;
+  actor: {
+    id: string;
+    linkedinUrl: string;
+    picture: string;
+  };
+  post: PostShort;
 };
 
 export type PostComment = {
@@ -604,7 +620,7 @@ export type ScrapeLinkedinProfileCommentsParams = {
 
 export type ScrapeLinkedinProfileReactionsParams = {
   query: GetLinkedinProfileReactionsParams;
-} & ListingScraperConfig<PostReaction, PostReaction>;
+} & ListingScraperConfig<ProfileReaction, ProfileReaction>;
 
 export type ErrorResponse = {
   error: string;

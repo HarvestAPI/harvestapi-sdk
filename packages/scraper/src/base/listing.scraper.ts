@@ -169,7 +169,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
 
     this.scrapePageQueue = createConcurrentQueues(
-      this.options?.overridePageConcurrency || 2,
+      this.options?.overridePageConcurrency || 1,
       (args) => this.scrapePage(args),
     );
     this.fetchItemQueue = createConcurrentQueues(concurrency, async ({ item, pagination }) => {

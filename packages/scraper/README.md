@@ -247,7 +247,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getProfileReactions()
 
-> **getProfileReactions**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
+> **getProfileReactions**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileReaction`](#profilereaction)\>\>
 
 ###### Parameters
 
@@ -257,7 +257,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileReaction`](#profilereaction)\>\>
 
 ##### scrapeJobs()
 
@@ -2119,6 +2119,10 @@ true
 
 > **reactionType**: `string`
 
+##### postId
+
+> **postId**: `string`
+
 ##### actor
 
 > **actor**: `object`
@@ -2158,6 +2162,58 @@ true
 ###### actor.image.expiresAt
 
 > **expiresAt**: `number`
+
+***
+
+### ProfileReaction
+
+> **ProfileReaction**: `object`
+
+#### Type declaration
+
+##### id
+
+> **id**: `string`
+
+##### action
+
+> **action**: `string`
+
+##### postId
+
+> **postId**: `string`
+
+##### linkedinUrl
+
+> **linkedinUrl**: `string`
+
+##### createdAt
+
+> **createdAt**: `string`
+
+##### createdAtTimestamp
+
+> **createdAtTimestamp**: `number`
+
+##### actor
+
+> **actor**: `object`
+
+###### actor.id
+
+> **id**: `string`
+
+###### actor.linkedinUrl
+
+> **linkedinUrl**: `string`
+
+###### actor.picture
+
+> **picture**: `string`
+
+##### post
+
+> **post**: [`PostShort`](#postshort)
 
 ***
 
@@ -2359,7 +2415,7 @@ true
 
 ### ScrapeLinkedinProfileReactionsParams
 
-> **ScrapeLinkedinProfileReactionsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`PostReaction`](#postreaction), [`PostReaction`](#postreaction)\>
+> **ScrapeLinkedinProfileReactionsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileReaction`](#profilereaction), [`ProfileReaction`](#profilereaction)\>
 
 #### Type declaration
 

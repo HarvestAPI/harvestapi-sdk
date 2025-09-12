@@ -18,6 +18,7 @@ import {
   PostReaction,
   PostShort,
   Profile,
+  ProfileReaction,
   ProfileShort,
   ScrapeLinkedinCompaniesParams,
   ScrapeLinkedinJobsParams,
@@ -131,7 +132,7 @@ export class LinkedinScraper {
 
   async getProfileReactions(
     params: BaseFetchParams & GetLinkedinProfileReactionsParams,
-  ): Promise<ApiListResponse<PostReaction>> {
+  ): Promise<ApiListResponse<ProfileReaction>> {
     return this.scraper.fetchApi({ path: 'linkedin/profile-reactions', params });
   }
 
@@ -232,13 +233,13 @@ export class LinkedinScraper {
   }
 
   async scrapeProfileReactions({ query, ...options }: ScrapeLinkedinProfileReactionsParams) {
-    return new ListingScraper<PostReaction, PostReaction>({
+    return new ListingScraper<ProfileReaction, ProfileReaction>({
       fetchList: (fetchArgs) => {
         return this.getProfileReactions({ ...query, ...fetchArgs });
       },
       fetchItem: async ({ item }) =>
         item?.id
-          ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostReaction>)
+          ? ({ entityId: item?.id, element: item } as ApiItemResponse<ProfileReaction>)
           : { skipped: true },
       scrapeDetails: false,
       entityName: 'profile-reactions',
