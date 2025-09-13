@@ -1927,6 +1927,10 @@ true
 
 > `optional` **content**: `string`
 
+##### contentAttributes
+
+> **contentAttributes**: `object`[]
+
 ##### author
 
 > **author**: `object`
@@ -1987,9 +1991,25 @@ true
 
 > **article**: \{ `title`: `string` \| `null`; `subtitle`: `string` \| `null`; `link`: `string` \| `null`; `linkLabel`: `string` \| `null`; `description`: `string` \| `null`; `image`: `string` \| `null`; \} \| `null`
 
-##### postedAgo?
+##### postedAt
 
-> `optional` **postedAgo**: `string`
+> **postedAt**: `object`
+
+###### postedAt.timestamp
+
+> **timestamp**: `number`
+
+###### postedAt.date
+
+> **date**: `string`
+
+###### postedAt.postedAgoShort
+
+> **postedAgoShort**: `string`
+
+###### postedAt.postedAgoText
+
+> **postedAgoText**: `string`
 
 ##### postImages?
 
@@ -2102,6 +2122,14 @@ true
 ###### engagement.reactions
 
 > **reactions**: `object`[]
+
+##### comments?
+
+> `optional` **comments**: [`PostComment`](#postcomment)[]
+
+##### reactions?
+
+> `optional` **reactions**: [`PostReaction`](#postreaction)[]
 
 ***
 

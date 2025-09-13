@@ -459,6 +459,13 @@ export type JobShort = {
 export type PostShort = {
   id: string;
   content?: string;
+  contentAttributes: {
+    start: number;
+    end: number;
+    type: string;
+    hyperlink?: string;
+    textLink?: string;
+  }[];
   author: {
     universalName?: string | null;
     publicIdentifier?: string | null;
@@ -483,7 +490,12 @@ export type PostShort = {
     description: string | null;
     image: string | null;
   } | null;
-  postedAgo?: string;
+  postedAt: {
+    timestamp: number;
+    date: string;
+    postedAgoShort: string;
+    postedAgoText: string;
+  };
   postImages?: {
     url: string;
     width: number;
@@ -523,6 +535,8 @@ export type PostShort = {
       count: number;
     }[];
   };
+  comments?: PostComment[];
+  reactions?: PostReaction[];
 };
 
 export type PostReaction = {
