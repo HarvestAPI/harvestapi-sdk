@@ -458,6 +458,7 @@ export type JobShort = {
 
 export type PostShort = {
   id: string;
+  linkedinUrl: string;
   content?: string;
   contentAttributes: {
     start: number;

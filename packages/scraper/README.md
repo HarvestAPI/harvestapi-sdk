@@ -1923,6 +1923,10 @@ true
 
 > **id**: `string`
 
+##### linkedinUrl
+
+> **linkedinUrl**: `string`
+
 ##### content?
 
 > `optional` **content**: `string`
