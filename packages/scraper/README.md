@@ -611,6 +611,32 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **industryIds**: `string` \| `string`[]
 
+##### yearsAtCurrentCompanyIds?
+
+> `optional` **yearsAtCurrentCompanyIds**: `string` \| `string`[]
+
+Map:
+{
+ "1": "Less than 1 year",
+ "2": "1 to 2 years",
+ "3": "3 to 5 years",
+ "4": "6 to 10 years",
+ "5": "More than 10 years"
+}
+
+##### yearsOfExperienceIds?
+
+> `optional` **yearsOfExperienceIds**: `string` \| `string`[]
+
+Map:
+{
+ "1": "Less than 1 year",
+ "2": "1 to 2 years",
+ "3": "3 to 5 years",
+ "4": "6 to 10 years",
+ "5": "More than 10 years"
+}
+
 ***
 
 ### GetLinkedinCompanyParams
@@ -666,6 +692,10 @@ For more detailed information on the available methods and their parameters, che
 ##### companySize?
 
 > `optional` **companySize**: [`LinkedinCompanySize`](#linkedincompanysize) \| [`LinkedinCompanySize`](#linkedincompanysize)[]
+
+##### industryId?
+
+> `optional` **industryId**: `string` \| `number` \| `string`[] \| `number`[]
 
 ***
 
@@ -995,9 +1025,9 @@ For more detailed information on the available methods and their parameters, che
 
 > **payments**: `string`[]
 
-##### const
+##### cost
 
-> **const**: `number`
+> **cost**: `number`
 
 ## Type Aliases
 
@@ -1371,6 +1401,10 @@ true
 
 > **publications**: `object`[]
 
+##### honorsAndAwards
+
+> **honorsAndAwards**: `object`[]
+
 ##### featured
 
 > **featured**: `object`
@@ -1515,70 +1549,6 @@ true
 
 > `optional` **description**: `string`
 
-##### headquarter?
-
-> `optional` **headquarter**: `object`
-
-###### headquarter.geographicArea?
-
-> `optional` **geographicArea**: `string`
-
-###### headquarter.city?
-
-> `optional` **city**: `string`
-
-###### headquarter.country?
-
-> `optional` **country**: `string`
-
-###### headquarter.postalCode?
-
-> `optional` **postalCode**: `string`
-
-###### headquarter.line2?
-
-> `optional` **line2**: `string` \| `null`
-
-###### headquarter.line1?
-
-> `optional` **line1**: `string`
-
-###### headquarter.description?
-
-> `optional` **description**: `string`
-
-###### headquarter.parsed?
-
-> `optional` **parsed**: `object`
-
-###### headquarter.parsed.text?
-
-> `optional` **text**: `string`
-
-###### headquarter.parsed.countryCode?
-
-> `optional` **countryCode**: `string`
-
-###### headquarter.parsed.regionCode?
-
-> `optional` **regionCode**: `string` \| `null`
-
-###### headquarter.parsed.country?
-
-> `optional` **country**: `string`
-
-###### headquarter.parsed.countryFull?
-
-> `optional` **countryFull**: `string`
-
-###### headquarter.parsed.state?
-
-> `optional` **state**: `string`
-
-###### headquarter.parsed.city?
-
-> `optional` **city**: `string`
-
 ##### locations?
 
 > `optional` **locations**: `object`[]
@@ -1589,7 +1559,7 @@ true
 
 ##### industries?
 
-> `optional` **industries**: `string`[]
+> `optional` **industries**: `object`[]
 
 ##### logos?
 
@@ -1694,6 +1664,10 @@ true
 ##### pageVerified?
 
 > `optional` **pageVerified**: `boolean`
+
+##### similarOrganizations?
+
+> `optional` **similarOrganizations**: [`CompanyShort`](#companyshort)[]
 
 ***
 
@@ -2522,6 +2496,10 @@ true
 ##### paginationToken?
 
 > `optional` **paginationToken**: `string` \| `null`
+
+##### totalResultCount?
+
+> `optional` **totalResultCount**: `number`
 
 ***
 

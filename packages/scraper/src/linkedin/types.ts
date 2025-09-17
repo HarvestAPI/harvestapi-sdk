@@ -55,6 +55,29 @@ export interface SearchLinkedInSalesNavLeadsParams {
   lastNames?: string | string[];
   industryIds?: string | string[];
 
+  /**
+   * Map:
+  {
+    "1": "Less than 1 year",
+    "2": "1 to 2 years",
+    "3": "3 to 5 years",
+    "4": "6 to 10 years",
+    "5": "More than 10 years"
+  }
+   */
+  yearsAtCurrentCompanyIds?: string | string[];
+  /**
+   * Map:
+  {
+    "1": "Less than 1 year",
+    "2": "1 to 2 years",
+    "3": "3 to 5 years",
+    "4": "6 to 10 years",
+    "5": "More than 10 years"
+  }
+   */
+  yearsOfExperienceIds?: string | string[];
+
   /** @internal */
   skipSnRequest?: boolean;
 }
@@ -84,6 +107,7 @@ export interface SearchLinkedinCompaniesParams {
   search?: string;
   page?: number;
   companySize?: LinkedinCompanySize | LinkedinCompanySize[];
+  industryId?: string | string[] | number | number[];
 }
 
 export interface GetLinkedinJobParams {
@@ -270,6 +294,17 @@ export type Profile = {
     description: string;
     link: string;
   }>;
+  honorsAndAwards: {
+    title: string;
+    issuedBy: string | null;
+    issuedAt: string | null;
+    description: string | null;
+    mediaName?: string | null;
+    mediaDescription?: string | null;
+    mediaUrl?: string | null;
+    associatedWith: string | null;
+    associatedWithLink: string | null;
+  }[];
   featured: {
     images: string[];
     link: string;
@@ -312,14 +347,15 @@ export type Company = {
   };
   followerCount?: number;
   description?: string;
-  headquarter?: {
+  locations?: Array<{
+    headquarter?: boolean;
+    description?: string | null;
+    country?: string;
     geographicArea?: string;
     city?: string;
-    country?: string;
-    postalCode?: string;
+    postalCode?: string | null;
     line2?: string | null;
     line1?: string;
-    description?: string;
     parsed?: {
       text?: string;
       countryCode?: string;
@@ -329,20 +365,12 @@ export type Company = {
       state?: string;
       city?: string;
     };
-  };
-  locations?: Array<{
-    localizedName?: string;
-    headquarter?: boolean;
-    description?: string | null;
-    country?: string;
-    geographicArea?: string;
-    city?: string;
-    postalCode?: string | null;
-    line2?: string | null;
-    line1?: string;
   }>;
   specialities?: string[];
-  industries?: string[];
+  industries?: {
+    id: string;
+    name: string;
+  }[];
   logos?: Array<{
     url?: string;
     width?: number;
@@ -384,6 +412,7 @@ export type Company = {
     fundingRoundsUrl?: string;
   };
   pageVerified?: boolean;
+  similarOrganizations?: CompanyShort[];
 };
 
 export type CompanyShort = {

@@ -12,7 +12,7 @@ export interface BaseApiResponse {
     requestsConcurrency: number;
   };
   payments: string[];
-  const: number;
+  cost: number;
 }
 
 export type ApiItemResponse<TItem> = BaseApiResponse & {
@@ -26,6 +26,7 @@ export type ApiPagination = {
   previousElements: number;
   pageSize: number;
   paginationToken?: string | null;
+  totalResultCount?: number;
 };
 
 export type ApiListResponse<TItem> = BaseApiResponse & {
