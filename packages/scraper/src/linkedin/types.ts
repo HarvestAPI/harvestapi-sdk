@@ -54,7 +54,6 @@ export interface SearchLinkedInSalesNavLeadsParams {
   firstNames?: string | string[];
   lastNames?: string | string[];
   industryIds?: string | string[];
-
   /**
    * Map:
   {
@@ -77,6 +76,53 @@ export interface SearchLinkedInSalesNavLeadsParams {
   }
    */
   yearsOfExperienceIds?: string | string[];
+  /**
+   * Map: {
+  "100": "In Training",
+  "110": "Entry Level",
+  "120": "Senior",
+  "130": "Strategic",
+  "200": "Entry Level Manager",
+  "210": "Experienced Manager",
+  "220": "Director",
+  "300": "Vice President",
+  "310": "CXO",
+  "320": "Owner / Partner"
+}
+   */
+  seniorityLevelIds?: string | string[];
+  /**
+   * Map:
+   * {
+  "1": "Accounting",
+  "2": "Administrative",
+  "3": "Arts and Design",
+  "4": "Business Development",
+  "5": "Community and Social Services",
+  "6": "Consulting",
+  "7": "Education",
+  "8": "Engineering",
+  "9": "Entrepreneurship",
+  "10": "Finance",
+  "11": "Healthcare Services",
+  "12": "Human Resources",
+  "13": "Information Technology",
+  "14": "Legal",
+  "15": "Marketing",
+  "16": "Media and Communication",
+  "17": "Military and Protective Services",
+  "18": "Operations",
+  "19": "Product Management",
+  "20": "Program and Project Management",
+  "21": "Purchasing",
+  "22": "Quality Assurance",
+  "23": "Real Estate",
+  "24": "Research",
+  "25": "Sales",
+  "26": "Customer Success and Support"
+}
+   */
+  functionIds?: string | string[];
 
   /** @internal */
   skipSnRequest?: boolean;
@@ -172,6 +218,10 @@ export interface SearchLinkedinPostsParams {
   authorsCompanyId?: string | string[];
   group?: string;
   paginationToken?: string | null;
+}
+
+export interface GethLinkedinPostParams {
+  post?: string | number;
 }
 
 export interface GetLinkedinPostReactionsParams {
@@ -471,6 +521,7 @@ export type Job = {
   new?: boolean;
   jobApplicationLimitReached?: boolean;
   applicantTrackingSystem?: string;
+  experienceLevel?: string;
 };
 
 export type JobShort = {

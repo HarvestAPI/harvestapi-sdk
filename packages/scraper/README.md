@@ -637,6 +637,57 @@ Map:
  "5": "More than 10 years"
 }
 
+##### seniorityLevelIds?
+
+> `optional` **seniorityLevelIds**: `string` \| `string`[]
+
+Map: {
+"100": "In Training",
+"110": "Entry Level",
+"120": "Senior",
+"130": "Strategic",
+"200": "Entry Level Manager",
+"210": "Experienced Manager",
+"220": "Director",
+"300": "Vice President",
+"310": "CXO",
+"320": "Owner / Partner"
+}
+
+##### functionIds?
+
+> `optional` **functionIds**: `string` \| `string`[]
+
+Map:
+{
+"1": "Accounting",
+"2": "Administrative",
+"3": "Arts and Design",
+"4": "Business Development",
+"5": "Community and Social Services",
+"6": "Consulting",
+"7": "Education",
+"8": "Engineering",
+"9": "Entrepreneurship",
+"10": "Finance",
+"11": "Healthcare Services",
+"12": "Human Resources",
+"13": "Information Technology",
+"14": "Legal",
+"15": "Marketing",
+"16": "Media and Communication",
+"17": "Military and Protective Services",
+"18": "Operations",
+"19": "Product Management",
+"20": "Program and Project Management",
+"21": "Purchasing",
+"22": "Quality Assurance",
+"23": "Real Estate",
+"24": "Research",
+"25": "Sales",
+"26": "Customer Success and Support"
+}
+
 ***
 
 ### GetLinkedinCompanyParams
@@ -850,6 +901,16 @@ Map:
 ##### paginationToken?
 
 > `optional` **paginationToken**: `null` \| `string`
+
+***
+
+### GethLinkedinPostParams
+
+#### Properties
+
+##### post?
+
+> `optional` **post**: `string` \| `number`
 
 ***
 
@@ -1844,6 +1905,10 @@ true
 ##### applicantTrackingSystem?
 
 > `optional` **applicantTrackingSystem**: `string`
+
+##### experienceLevel?
+
+> `optional` **experienceLevel**: `string`
 
 ***
 
