@@ -196,7 +196,7 @@ export interface SearchLinkedinJobsParams {
   experienceLevel?: ExperienceLevel | ExperienceLevel[];
   under10Applicants?: boolean;
   easyApply?: boolean;
-  postedLimit?: '24h' | 'week' | 'month';
+  postedLimit?: '1h' | '24h' | 'week' | 'month';
   page?: number;
   salary?: LinkedinSalaryRange | LinkedinSalaryRange[];
 }
@@ -672,6 +672,7 @@ export type PostComment = {
       expiresAt: number;
     };
   };
+  replies?: PostComment[];
   createdAtTimestamp: number;
   pinned?: boolean | null;
   contributed?: boolean | null;

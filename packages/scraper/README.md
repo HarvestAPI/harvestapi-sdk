@@ -822,7 +822,7 @@ Map:
 
 ##### postedLimit?
 
-> `optional` **postedLimit**: `"24h"` \| `"week"` \| `"month"`
+> `optional` **postedLimit**: `"1h"` \| `"24h"` \| `"week"` \| `"month"`
 
 ##### page?
 
@@ -2357,6 +2357,10 @@ true
 ###### actor.picture.expiresAt
 
 > **expiresAt**: `number`
+
+##### replies?
+
+> `optional` **replies**: [`PostComment`](#postcomment)[]
 
 ##### createdAtTimestamp
 
