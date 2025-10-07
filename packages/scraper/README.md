@@ -688,6 +688,10 @@ Map:
 "26": "Customer Success and Support"
 }
 
+##### recentlyChangedJobs?
+
+> `optional` **recentlyChangedJobs**: `boolean`
+
 ***
 
 ### GetLinkedinCompanyParams
@@ -1227,6 +1231,26 @@ true
 ##### startPage?
 
 > `optional` **startPage**: `number`
+
+##### getFetchListParams()?
+
+> `optional` **getFetchListParams**: (`args`) => `Record`\<`string`, `any`\>
+
+###### Parameters
+
+###### args
+
+###### page
+
+`number`
+
+###### pagination
+
+[`ApiPagination`](#apipagination) \| `null`
+
+###### Returns
+
+`Record`\<`string`, `any`\>
 
 ***
 
@@ -2428,7 +2452,7 @@ true
 
 ##### query
 
-> **query**: [`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
+> **query**: [`BaseFetchParams`](#basefetchparams) & [`SearchLinkedInSalesNavLeadsParams`](#searchlinkedinsalesnavleadsparams)
 
 ##### findEmail?
 

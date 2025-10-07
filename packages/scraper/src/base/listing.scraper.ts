@@ -43,6 +43,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
   > = {};
   private paginationToken: string | null = null;
+  private pagination: ApiPagination | null = null;
   private undefinedPagination = false;
 
   constructor(private options: ListingScraperOptions<TItemShort, TItemDetail>) {
@@ -102,6 +103,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       requestsStartTime: new Date(),
     };
     this.paginationToken = null;
+    this.pagination = null;
     this.scrapePagesDone = false;
     const startPageNumber = this.options.startPage || 1;
     const firstPage = await this.fetchPage({ page: startPageNumber });
@@ -110,6 +112,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     let totalPages = firstPage?.pagination?.totalPages || 0;
     this.paginationToken = firstPage?.pagination?.paginationToken || null;
+    this.pagination = firstPage?.pagination || null;
+
     if (this.options.maxPageNumber && totalPages > this.options.maxPageNumber) {
       totalPages = this.options.maxPageNumber;
     }
@@ -250,6 +254,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     if (this.done) return;
 
     this.paginationToken = list?.pagination?.paginationToken || null;
+    this.pagination = list?.pagination || null;
 
     let details: TItemDetail[] = [];
 
@@ -292,6 +297,10 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         paginationToken: this.paginationToken,
         sessionId: this.options.sessionId,
         addHeaders: this.options.addListingHeaders,
+        ...this.options.getFetchListParams?.({
+          page,
+          pagination: this.pagination,
+        }),
       })
       .catch((error) => {
         this.errorLog('Error fetching page', page, error);

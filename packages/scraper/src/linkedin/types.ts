@@ -124,6 +124,8 @@ export interface SearchLinkedInSalesNavLeadsParams {
    */
   functionIds?: string | string[];
 
+  recentlyChangedJobs?: boolean;
+
   /** @internal */
   skipSnRequest?: boolean;
 }
@@ -693,7 +695,7 @@ export type ScrapeLinkedinProfilesParams = {
 } & ListingScraperConfig<ProfileShort, Profile>;
 
 export type ScrapeLinkedinSalesNavLeadsParams = {
-  query: SearchLinkedInSalesNavLeadsParams;
+  query: BaseFetchParams & SearchLinkedInSalesNavLeadsParams;
   findEmail?: boolean;
   warnPageLimit?: boolean;
 } & ListingScraperConfig<ProfileShort, Profile>;

@@ -34,6 +34,10 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
   addItemHeaders?: Record<string, string>;
   takePages?: number;
   startPage?: number;
+  getFetchListParams?: (args: {
+    page: number;
+    pagination: ApiPagination | null;
+  }) => Record<string, any>;
 };
 
 export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfig<

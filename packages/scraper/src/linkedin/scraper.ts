@@ -266,6 +266,7 @@ export class LinkedinScraper {
           ? this.getProfile({ profileId: item.id, findEmail, ...rest })
           : { skipped: true };
       },
+      getFetchListParams: () => ({}),
       scrapeDetails: true,
       entityName: 'profiles',
       warnPageLimit: true,
