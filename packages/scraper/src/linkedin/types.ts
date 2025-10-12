@@ -5,6 +5,7 @@ export interface BaseFetchParams {
   cookie?: string;
   proxy?: string;
   userAgent?: string;
+  sessionId?: string;
   /** @internal */
   desiredAccountId?: string;
   /** @internal */
@@ -125,6 +126,21 @@ export interface SearchLinkedInSalesNavLeadsParams {
   functionIds?: string | string[];
 
   recentlyChangedJobs?: boolean;
+
+  excludeCurrentCompanies?: string | string[];
+  excludePastCompanies?: string | string[];
+  excludeLocations?: string;
+  excludeGeoIds?: string | string[];
+  excludeSchools?: string | string[];
+  excludeCurrentJobTitles?: string[];
+  excludePastJobTitles?: string[];
+  excludeFirstNames?: string[];
+  excludeLastNames?: string[];
+  excludeIndustryIds?: string | string[];
+  excludeYearsAtCurrentCompanyIds?: string | string[];
+  excludeYearsOfExperienceIds?: string | string[];
+  excludeSeniorityLevelIds?: string | string[];
+  excludeFunctionIds?: string | string[];
 
   /** @internal */
   skipSnRequest?: boolean;

@@ -449,6 +449,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **userAgent**: `string`
 
+##### sessionId?
+
+> `optional` **sessionId**: `string`
+
 ***
 
 ### GetLinkedInProfileParams
@@ -691,6 +695,62 @@ Map:
 ##### recentlyChangedJobs?
 
 > `optional` **recentlyChangedJobs**: `boolean`
+
+##### excludeCurrentCompanies?
+
+> `optional` **excludeCurrentCompanies**: `string` \| `string`[]
+
+##### excludePastCompanies?
+
+> `optional` **excludePastCompanies**: `string` \| `string`[]
+
+##### excludeLocations?
+
+> `optional` **excludeLocations**: `string`
+
+##### excludeGeoIds?
+
+> `optional` **excludeGeoIds**: `string` \| `string`[]
+
+##### excludeSchools?
+
+> `optional` **excludeSchools**: `string` \| `string`[]
+
+##### excludeCurrentJobTitles?
+
+> `optional` **excludeCurrentJobTitles**: `string`[]
+
+##### excludePastJobTitles?
+
+> `optional` **excludePastJobTitles**: `string`[]
+
+##### excludeFirstNames?
+
+> `optional` **excludeFirstNames**: `string`[]
+
+##### excludeLastNames?
+
+> `optional` **excludeLastNames**: `string`[]
+
+##### excludeIndustryIds?
+
+> `optional` **excludeIndustryIds**: `string` \| `string`[]
+
+##### excludeYearsAtCurrentCompanyIds?
+
+> `optional` **excludeYearsAtCurrentCompanyIds**: `string` \| `string`[]
+
+##### excludeYearsOfExperienceIds?
+
+> `optional` **excludeYearsOfExperienceIds**: `string` \| `string`[]
+
+##### excludeSeniorityLevelIds?
+
+> `optional` **excludeSeniorityLevelIds**: `string` \| `string`[]
+
+##### excludeFunctionIds?
+
+> `optional` **excludeFunctionIds**: `string` \| `string`[]
 
 ***
 
