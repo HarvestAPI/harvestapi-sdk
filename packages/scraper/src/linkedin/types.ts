@@ -47,6 +47,7 @@ export interface SearchLinkedInSalesNavLeadsParams {
   pastCompanies?: string | string[];
   schools?: string | string[];
   locations?: string | string[];
+  geoIds?: string | string[];
   search?: string;
   page?: number;
   salesNavUrl?: string;
@@ -129,7 +130,7 @@ export interface SearchLinkedInSalesNavLeadsParams {
 
   excludeCurrentCompanies?: string | string[];
   excludePastCompanies?: string | string[];
-  excludeLocations?: string;
+  excludeLocations?: string | string[];
   excludeGeoIds?: string | string[];
   excludeSchools?: string | string[];
   excludeCurrentJobTitles?: string[];

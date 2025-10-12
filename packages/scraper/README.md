@@ -583,6 +583,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **locations**: `string` \| `string`[]
 
+##### geoIds?
+
+> `optional` **geoIds**: `string` \| `string`[]
+
 ##### search?
 
 > `optional` **search**: `string`
@@ -706,7 +710,7 @@ Map:
 
 ##### excludeLocations?
 
-> `optional` **excludeLocations**: `string`
+> `optional` **excludeLocations**: `string` \| `string`[]
 
 ##### excludeGeoIds?
 
