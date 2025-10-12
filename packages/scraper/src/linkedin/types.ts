@@ -135,11 +135,7 @@ export interface SearchLinkedInSalesNavLeadsParams {
   excludeSchools?: string | string[];
   excludeCurrentJobTitles?: string[];
   excludePastJobTitles?: string[];
-  excludeFirstNames?: string[];
-  excludeLastNames?: string[];
   excludeIndustryIds?: string | string[];
-  excludeYearsAtCurrentCompanyIds?: string | string[];
-  excludeYearsOfExperienceIds?: string | string[];
   excludeSeniorityLevelIds?: string | string[];
   excludeFunctionIds?: string | string[];
 

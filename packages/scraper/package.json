@@ -1,6 +1,6 @@
 {
   "name": "@harvestapi/scraper",
-  "version": "1.4.32",
+  "version": "1.4.33",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",

@@ -728,25 +728,9 @@ Map:
 
 > `optional` **excludePastJobTitles**: `string`[]
 
-##### excludeFirstNames?
-
-> `optional` **excludeFirstNames**: `string`[]
-
-##### excludeLastNames?
-
-> `optional` **excludeLastNames**: `string`[]
-
 ##### excludeIndustryIds?
 
 > `optional` **excludeIndustryIds**: `string` \| `string`[]
-
-##### excludeYearsAtCurrentCompanyIds?
-
-> `optional` **excludeYearsAtCurrentCompanyIds**: `string` \| `string`[]
-
-##### excludeYearsOfExperienceIds?
-
-> `optional` **excludeYearsOfExperienceIds**: `string` \| `string`[]
 
 ##### excludeSeniorityLevelIds?
 
