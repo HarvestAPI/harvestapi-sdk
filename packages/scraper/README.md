@@ -700,6 +700,10 @@ Map:
 
 > `optional` **recentlyChangedJobs**: `boolean`
 
+##### profileLanguages?
+
+> `optional` **profileLanguages**: `string` \| `string`[]
+
 ##### excludeCurrentCompanies?
 
 > `optional` **excludeCurrentCompanies**: `string` \| `string`[]

@@ -127,6 +127,7 @@ export interface SearchLinkedInSalesNavLeadsParams {
   functionIds?: string | string[];
 
   recentlyChangedJobs?: boolean;
+  profileLanguages?: string | string[];
 
   excludeCurrentCompanies?: string | string[];
   excludePastCompanies?: string | string[];
