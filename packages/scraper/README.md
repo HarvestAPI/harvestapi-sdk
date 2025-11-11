@@ -203,6 +203,20 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
 
+##### getPost()
+
+> **getPost**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostShort`](#postshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinPostParams`](#getlinkedinpostparams)
+
+###### Returns
+
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostShort`](#postshort)\>\>
+
 ##### getPostReactions()
 
 > **getPostReactions**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
@@ -556,6 +570,14 @@ For more detailed information on the available methods and their parameters, che
 ##### lastName?
 
 > `optional` **lastName**: `string`
+
+##### keywordsCompany?
+
+> `optional` **keywordsCompany**: `string`
+
+##### keywordsSchool?
+
+> `optional` **keywordsSchool**: `string`
 
 ##### page?
 
@@ -960,7 +982,7 @@ Map:
 
 ***
 
-### GethLinkedinPostParams
+### GetLinkedinPostParams
 
 #### Properties
 

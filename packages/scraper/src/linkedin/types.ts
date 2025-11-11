@@ -39,6 +39,8 @@ export interface SearchLinkedInProfilesParams {
   title?: string;
   firstName?: string;
   lastName?: string;
+  keywordsCompany?: string;
+  keywordsSchool?: string;
   page?: number;
 }
 
@@ -236,7 +238,7 @@ export interface SearchLinkedinPostsParams {
   paginationToken?: string | null;
 }
 
-export interface GethLinkedinPostParams {
+export interface GetLinkedinPostParams {
   post?: string | number;
 }
 

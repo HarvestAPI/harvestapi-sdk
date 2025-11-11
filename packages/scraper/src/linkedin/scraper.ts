@@ -8,6 +8,7 @@ import {
   GetLinkedinCompanyParams,
   GetLinkedinJobParams,
   GetLinkedinPostCommentsParams,
+  GetLinkedinPostParams,
   GetLinkedinPostReactionsParams,
   GetLinkedinProfileCommentsParams,
   GetLinkedInProfileParams,
@@ -110,6 +111,12 @@ export class LinkedinScraper {
     params: BaseFetchParams & SearchLinkedinPostsParams,
   ): Promise<ApiListResponse<PostShort>> {
     return this.scraper.fetchApi({ path: 'linkedin/post-search', params });
+  }
+
+  async getPost(
+    params: BaseFetchParams & GetLinkedinPostParams,
+  ): Promise<ApiItemResponse<PostShort>> {
+    return this.scraper.fetchApi({ path: 'linkedin/post', params });
   }
 
   async getPostReactions(
