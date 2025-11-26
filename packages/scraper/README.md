@@ -85,6 +85,70 @@ For more detailed information on the available methods and their parameters, che
 
 [`LinkedinScraper`](#linkedinscraper)
 
+***
+
+### createConcurrentQueues()
+
+> **createConcurrentQueues**\<`TArgs`, `TRes`\>(`concurrency`, `fn`, `opts`?): `AsyncFunction`\<`TArgs`, `TRes`\>
+
+#### Type Parameters
+
+• **TArgs** *extends* `any`[] = `any`[]
+
+• **TRes** = `any`
+
+#### Parameters
+
+##### concurrency
+
+`number`
+
+##### fn
+
+`AsyncFunction`\<`TArgs`, `TRes`\>
+
+##### opts?
+
+[`CreateConcurrentQueuesOptions`](#createconcurrentqueuesoptions)
+
+#### Returns
+
+`AsyncFunction`\<`TArgs`, `TRes`\>
+
+***
+
+### createConcurrentQueuesPerKey()
+
+> **createConcurrentQueuesPerKey**\<`TArgs`, `TRes`\>(`keyGetter`, `queuesNumber`, `fn`, `opts`?): `AsyncFunction`\<`TArgs`, `TRes`\>
+
+#### Type Parameters
+
+• **TArgs** *extends* `any`[]
+
+• **TRes** = `any`
+
+#### Parameters
+
+##### keyGetter
+
+(...`args`) => `string`
+
+##### queuesNumber
+
+`number`
+
+##### fn
+
+`AsyncFunction`\<`TArgs`, `TRes`\>
+
+##### opts?
+
+[`CreateConcurrentQueuesOptions`](#createconcurrentqueuesoptions)
+
+#### Returns
+
+`AsyncFunction`\<`TArgs`, `TRes`\>
+
 ## Classes
 
 ### LinkedinScraper
@@ -497,9 +561,9 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **skipSmtp**: `boolean`
 
-##### short?
+##### main?
 
-> `optional` **short**: `boolean`
+> `optional` **main**: `boolean`
 
 ***
 
@@ -989,6 +1053,10 @@ Map:
 ##### post?
 
 > `optional` **post**: `string` \| `number`
+
+##### targetUrl?
+
+> `optional` **targetUrl**: `string`
 
 ***
 
@@ -1587,6 +1655,10 @@ true
 ##### verified
 
 > **verified**: `boolean`
+
+##### moreProfiles
+
+> **moreProfiles**: `object`[]
 
 ***
 
@@ -2436,6 +2508,14 @@ true
 
 > **pictureUrl**: `string`
 
+###### actor.universalName?
+
+> `optional` **universalName**: `string` \| `null`
+
+###### actor.type
+
+> **type**: `"profile"` \| `"company"`
+
 ###### actor.picture
 
 > **picture**: `object`
@@ -2687,3 +2767,15 @@ true
 #### Type Parameters
 
 • **TItem**
+
+***
+
+### CreateConcurrentQueuesOptions
+
+> **CreateConcurrentQueuesOptions**: `object`
+
+#### Type declaration
+
+##### id?
+
+> `optional` **id**: `string`

@@ -19,7 +19,7 @@ export interface GetLinkedInProfileParams {
   query?: string;
   findEmail?: boolean;
   skipSmtp?: boolean;
-  short?: boolean;
+  main?: boolean;
 }
 
 export interface SearchLinkedInProfilesParams {
@@ -240,6 +240,7 @@ export interface SearchLinkedinPostsParams {
 
 export interface GetLinkedinPostParams {
   post?: string | number;
+  targetUrl?: string;
 }
 
 export interface GetLinkedinPostReactionsParams {
@@ -380,6 +381,14 @@ export type Profile = {
     subtitle: string;
   };
   verified: boolean;
+  moreProfiles: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    position: string | null;
+    publicIdentifier: string;
+    linkedinUrl: string;
+  }[];
 };
 
 export type ProfileShort = {
@@ -683,6 +692,8 @@ export type PostComment = {
     linkedinUrl: string;
     position: string;
     pictureUrl: string;
+    universalName?: string | null;
+    type: 'profile' | 'company';
     picture: {
       url: string;
       width: number;

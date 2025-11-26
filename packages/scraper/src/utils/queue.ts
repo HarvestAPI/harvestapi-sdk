@@ -2,7 +2,7 @@ export type AsyncFunction<TArgs extends any[] = any[], TRes = any> = (
   ...args: TArgs
 ) => Promise<TRes>;
 
-type CreateConcurrentQueuesOptions = {
+export type CreateConcurrentQueuesOptions = {
   id?: string;
 };
 
