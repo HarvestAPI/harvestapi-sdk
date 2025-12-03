@@ -505,6 +505,34 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `name`: `string`; `url`: `string`; \}\>\>
 
+##### searchServices()
+
+> **searchServices**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileServiceShort`](#profileserviceshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedinServicesParams`](#searchlinkedinservicesparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileServiceShort`](#profileserviceshort)\>\>
+
+##### scrapeServices()
+
+> **scrapeServices**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+###### Parameters
+
+###### \_\_namedParameters
+
+[`ScrapeLinkedinServicesParams`](#scrapelinkedinservicesparams)
+
+###### Returns
+
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
 ## Interfaces
 
 ### BaseFetchParams
@@ -829,6 +857,28 @@ Map:
 ##### excludeFunctionIds?
 
 > `optional` **excludeFunctionIds**: `string` \| `string`[]
+
+***
+
+### SearchLinkedinServicesParams
+
+#### Properties
+
+##### search?
+
+> `optional` **search**: `string`
+
+##### page?
+
+> `optional` **page**: `number`
+
+##### location?
+
+> `optional` **location**: `string`
+
+##### geoId?
+
+> `optional` **geoId**: `string`
 
 ***
 
@@ -1632,6 +1682,10 @@ true
 
 > **honorsAndAwards**: `object`[]
 
+##### courses
+
+> **courses**: `object`[]
+
 ##### featured
 
 > **featured**: `object`
@@ -1703,6 +1757,54 @@ true
 ##### hidden?
 
 > `optional` **hidden**: `boolean`
+
+***
+
+### ProfileServiceShort
+
+> **ProfileServiceShort**: `object`
+
+#### Type declaration
+
+##### id
+
+> **id**: `string`
+
+##### name?
+
+> `optional` **name**: `string`
+
+##### position?
+
+> `optional` **position**: `string`
+
+##### location?
+
+> `optional` **location**: `object`
+
+###### location.linkedinText?
+
+> `optional` **linkedinText**: `string`
+
+##### linkedinProfileUrl?
+
+> `optional` **linkedinProfileUrl**: `string`
+
+##### picture?
+
+> `optional` **picture**: `string`
+
+##### services
+
+> **services**: `string`[]
+
+##### summary?
+
+> `optional` **summary**: `string`
+
+##### objectUrn
+
+> **objectUrn**: `string`
 
 ***
 
@@ -2675,6 +2777,18 @@ true
 ##### query
 
 > **query**: [`GetLinkedinProfileReactionsParams`](#getlinkedinprofilereactionsparams)
+
+***
+
+### ScrapeLinkedinServicesParams
+
+> **ScrapeLinkedinServicesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileServiceShort`](#profileserviceshort), [`ProfileServiceShort`](#profileserviceshort) & [`Profile`](#profile-3)\>
+
+#### Type declaration
+
+##### query
+
+> **query**: [`SearchLinkedinServicesParams`](#searchlinkedinservicesparams)
 
 ***
 

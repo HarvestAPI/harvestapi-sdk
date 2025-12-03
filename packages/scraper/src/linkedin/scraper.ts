@@ -20,6 +20,7 @@ import {
   PostShort,
   Profile,
   ProfileReaction,
+  ProfileServiceShort,
   ProfileShort,
   ScrapeLinkedinCompaniesParams,
   ScrapeLinkedinJobsParams,
@@ -30,11 +31,13 @@ import {
   ScrapeLinkedinProfileReactionsParams,
   ScrapeLinkedinProfilesParams,
   ScrapeLinkedinSalesNavLeadsParams,
+  ScrapeLinkedinServicesParams,
   SearchLinkedinCompaniesParams,
   SearchLinkedinJobsParams,
   SearchLinkedinPostsParams,
   SearchLinkedInProfilesParams,
   SearchLinkedInSalesNavLeadsParams,
+  SearchLinkedinServicesParams,
 } from './types';
 
 export class LinkedinScraper {
@@ -292,6 +295,30 @@ export class LinkedinScraper {
     params: BaseFetchParams & { search: string; page?: number },
   ): Promise<ApiListResponse<{ name: string; url: string }>> {
     return this.scraper.fetchApi({ path: 'linkedin/group-search', params });
+  }
+
+  async searchServices(
+    params: BaseFetchParams & SearchLinkedinServicesParams,
+  ): Promise<ApiListResponse<ProfileServiceShort>> {
+    return this.scraper.fetchApi({ path: 'linkedin/service-search', params });
+  }
+
+  async scrapeServices({ query, ...options }: ScrapeLinkedinServicesParams) {
+    return new ListingScraper<ProfileServiceShort, ProfileServiceShort & Profile>({
+      fetchList: (listParams) => this.searchServices({ ...query, ...listParams }),
+      fetchItem: async ({ item }) => {
+        const profileResult = await this.getProfile({ url: item.linkedinProfileUrl });
+        profileResult.element = {
+          ...item,
+          ...profileResult.element,
+        };
+        return profileResult as ApiItemResponse<ProfileServiceShort & Profile>;
+      },
+      scrapeDetails: true,
+      entityName: 'services',
+      ...options,
+      maxPageNumber: 100,
+    }).scrapeStart();
   }
 
   /** @internal */

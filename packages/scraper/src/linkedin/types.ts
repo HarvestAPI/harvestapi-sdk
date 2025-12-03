@@ -146,6 +146,13 @@ export interface SearchLinkedInSalesNavLeadsParams {
   skipSnRequest?: boolean;
 }
 
+export interface SearchLinkedinServicesParams {
+  search?: string;
+  page?: number;
+  location?: string;
+  geoId?: string;
+}
+
 export interface GetLinkedinCompanyParams {
   universalName?: string;
   url?: string;
@@ -374,6 +381,11 @@ export type Profile = {
     associatedWith: string | null;
     associatedWithLink: string | null;
   }[];
+  courses: {
+    title: string;
+    associatedWith?: string | null;
+    associatedWithLink?: string | null;
+  }[];
   featured: {
     images: string[];
     link: string;
@@ -402,6 +414,20 @@ export type ProfileShort = {
   linkedinUrl?: string;
   photo?: string;
   hidden?: boolean;
+};
+
+export type ProfileServiceShort = {
+  id: string;
+  name?: string;
+  position?: string;
+  location?: {
+    linkedinText?: string;
+  };
+  linkedinProfileUrl?: string;
+  picture?: string;
+  services: string[];
+  summary?: string;
+  objectUrn: string;
 };
 
 export type Company = {
@@ -746,6 +772,10 @@ export type ScrapeLinkedinProfileCommentsParams = {
 export type ScrapeLinkedinProfileReactionsParams = {
   query: GetLinkedinProfileReactionsParams;
 } & ListingScraperConfig<ProfileReaction, ProfileReaction>;
+
+export type ScrapeLinkedinServicesParams = {
+  query: SearchLinkedinServicesParams;
+} & ListingScraperConfig<ProfileServiceShort, ProfileServiceShort & Profile>;
 
 export type ErrorResponse = {
   error: string;
