@@ -14,6 +14,12 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
    */
   scrapeDetails?: boolean;
 
+  /**
+   * Whether to  stop scraping when all items on a page are skipped.
+   * @default false
+   */
+  stopIfAllSkipped?: boolean;
+
   onItemScraped?: (
     args: {
       pagination: ApiPagination | null;
@@ -40,6 +46,13 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
   }) => Record<string, any>;
 };
 
+export type ItemDetailsExtendedProperties = {
+  skipResult?: boolean;
+  skipCount?: boolean;
+  done?: boolean;
+  stopIfAllSkipped?: boolean;
+};
+
 export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfig<
   TItemShot,
   TItemDetails
@@ -54,9 +67,7 @@ export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfi
     item: TItemShot;
     sessionId?: string;
     addHeaders?: Record<string, string>;
-  }) => Promise<
-    (ApiItemResponse<TItemDetails> | { skipped: boolean; done?: boolean }) | null
-  > | null;
+  }) => Promise<(ApiItemResponse<TItemDetails> | ItemDetailsExtendedProperties) | null> | null;
   maxPageNumber: number;
   entityName: string;
   warnPageLimit?: boolean;

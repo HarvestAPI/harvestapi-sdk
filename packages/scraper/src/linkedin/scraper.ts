@@ -150,7 +150,9 @@ export class LinkedinScraper {
     return new ListingScraper<JobShort, Job>({
       fetchList: (listParams) => this.searchJobs({ ...query, ...listParams }),
       fetchItem: async ({ item, ...rest }) =>
-        item?.id ? this.getJob({ jobId: item.id, ...rest }) : { skipped: true },
+        item?.id
+          ? this.getJob({ jobId: item.id, ...rest })
+          : { skipResult: true, stopIfAllSkipped: true },
       scrapeDetails: true,
       entityName: 'jobs',
       ...options,
@@ -164,7 +166,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item, ...rest }) =>
         item?.universalName
           ? this.getCompany({ universalName: item.universalName, ...rest })
-          : { skipped: true },
+          : { skipResult: true, stopIfAllSkipped: true },
       scrapeDetails: true,
       entityName: 'companies',
       ...options,
@@ -178,7 +180,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item, ...rest }) =>
         item?.publicIdentifier
           ? this.getProfile({ publicIdentifier: item.publicIdentifier, findEmail, ...rest })
-          : { skipped: true },
+          : { skipResult: true, stopIfAllSkipped: true },
       scrapeDetails: true,
       entityName: 'profiles',
       ...options,
@@ -192,7 +194,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostShort>)
-          : { skipped: true },
+          : { skipResult: true, stopIfAllSkipped: true },
       scrapeDetails: false,
       entityName: 'posts',
       ...options,
@@ -206,7 +208,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostReaction>)
-          : { skipped: true },
+          : { skipResult: true, stopIfAllSkipped: true },
       scrapeDetails: false,
       entityName: 'post-reactions',
       ...options,
@@ -220,7 +222,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostComment>)
-          : { skipped: true },
+          : { skipResult: true, stopIfAllSkipped: true },
       scrapeDetails: false,
       entityName: 'post-comments',
       ...options,
@@ -234,7 +236,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostComment>)
-          : { skipped: true },
+          : { skipResult: true, stopIfAllSkipped: true },
       scrapeDetails: false,
       entityName: 'profile-comments',
       ...options,
@@ -250,7 +252,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<ProfileReaction>)
-          : { skipped: true },
+          : { skipResult: true, stopIfAllSkipped: true },
       scrapeDetails: false,
       entityName: 'profile-reactions',
       ...options,
@@ -274,7 +276,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item, ...rest }) => {
         return item?.id
           ? this.getProfile({ profileId: item.id, findEmail, ...rest })
-          : { skipped: true };
+          : { skipResult: true, stopIfAllSkipped: true };
       },
       getFetchListParams: () => ({}),
       scrapeDetails: true,
@@ -303,11 +305,11 @@ export class LinkedinScraper {
     return this.scraper.fetchApi({ path: 'linkedin/service-search', params });
   }
 
-  async scrapeServices({ query, ...options }: ScrapeLinkedinServicesParams) {
+  async scrapeServices({ query, findEmail, ...options }: ScrapeLinkedinServicesParams) {
     return new ListingScraper<ProfileServiceShort, ProfileServiceShort & Profile>({
       fetchList: (listParams) => this.searchServices({ ...query, ...listParams }),
       fetchItem: async ({ item }) => {
-        const profileResult = await this.getProfile({ url: item.linkedinProfileUrl });
+        const profileResult = await this.getProfile({ url: item.linkedinProfileUrl, findEmail });
         profileResult.element = {
           ...item,
           ...profileResult.element,

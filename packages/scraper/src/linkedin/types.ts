@@ -775,6 +775,7 @@ export type ScrapeLinkedinProfileReactionsParams = {
 
 export type ScrapeLinkedinServicesParams = {
   query: SearchLinkedinServicesParams;
+  findEmail?: boolean;
 } & ListingScraperConfig<ProfileServiceShort, ProfileServiceShort & Profile>;
 
 export type ErrorResponse = {

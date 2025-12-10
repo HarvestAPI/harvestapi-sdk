@@ -1330,6 +1330,18 @@ Whether to make an additional request for each item details.
 true
 ```
 
+##### stopIfAllSkipped?
+
+> `optional` **stopIfAllSkipped**: `boolean`
+
+Whether to  stop scraping when all items on a page are skipped.
+
+###### Default
+
+```ts
+false
+```
+
 ##### onItemScraped()?
 
 > `optional` **onItemScraped**: (`args`) => `any`
@@ -2789,6 +2801,10 @@ true
 ##### query
 
 > **query**: [`SearchLinkedinServicesParams`](#searchlinkedinservicesparams)
+
+##### findEmail?
+
+> `optional` **findEmail**: `boolean`
 
 ***
 

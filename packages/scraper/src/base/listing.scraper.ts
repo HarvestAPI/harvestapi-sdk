@@ -4,15 +4,14 @@ import { dirname, resolve } from 'path';
 import type { Database } from 'sqlite';
 import { ApiItemResponse, ApiListResponse, ApiPagination } from '../types';
 import { createConcurrentQueues } from '../utils';
-import { ListingScraperOptions } from './types';
+import { ItemDetailsExtendedProperties, ListingScraperOptions } from './types';
 import { styleText } from 'node:util';
 
 type TFetchedItemDetails<TItemDetail> =
-  | (Partial<ApiItemResponse<TItemDetail>> & {
-      pagination: ApiPagination | null;
-      skipped?: boolean;
-      done?: boolean;
-    })
+  | (Partial<ApiItemResponse<TItemDetail>> &
+      ItemDetailsExtendedProperties & {
+        pagination: ApiPagination | null;
+      })
   | null
   | undefined;
 
@@ -335,6 +334,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
 
     const details: TItemDetail[] = [];
+    let skippedCounter = 0;
+    let stopIfAllSkippedLocal = false;
 
     const itemPromises = list.elements.map(async (item) => {
       let itemDetails: TFetchedItemDetails<TItemDetail> = null;
@@ -364,12 +365,21 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         };
       }
 
-      if (this.options.scrapeDetails && !itemDetails?.skipped) {
+      if (this.options.scrapeDetails && !itemDetails?.skipCount && !itemDetails?.skipResult) {
         this.stats.requests++;
       }
       if (itemDetails?.done) {
         this.scrapePagesDone = true;
         this.done = true;
+      }
+
+      if (itemDetails?.stopIfAllSkipped) {
+        stopIfAllSkippedLocal = true;
+      }
+
+      if (itemDetails?.skipResult) {
+        skippedCounter++;
+        return null;
       }
 
       if (itemDetails?.element && itemDetails.entityId) {
@@ -388,6 +398,15 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         }
       }
     });
+
+    if (
+      list.elements.length === skippedCounter &&
+      (this.options.stopIfAllSkipped || stopIfAllSkippedLocal)
+    ) {
+      this.scrapePagesDone = true;
+      this.done = true;
+      this.log(`All items on page were skipped. Stopping scraping as per configuration.`);
+    }
 
     await Promise.all(itemPromises).catch((error) => {
       this.errorLog('Error scraping items', error);
