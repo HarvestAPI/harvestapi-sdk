@@ -150,9 +150,7 @@ export class LinkedinScraper {
     return new ListingScraper<JobShort, Job>({
       fetchList: (listParams) => this.searchJobs({ ...query, ...listParams }),
       fetchItem: async ({ item, ...rest }) =>
-        item?.id
-          ? this.getJob({ jobId: item.id, ...rest })
-          : { skipResult: true, stopIfAllSkipped: true },
+        item?.id ? this.getJob({ jobId: item.id, ...rest }) : { skipResult: true },
       scrapeDetails: true,
       entityName: 'jobs',
       ...options,
@@ -166,7 +164,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item, ...rest }) =>
         item?.universalName
           ? this.getCompany({ universalName: item.universalName, ...rest })
-          : { skipResult: true, stopIfAllSkipped: true },
+          : { skipResult: true },
       scrapeDetails: true,
       entityName: 'companies',
       ...options,
@@ -180,7 +178,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item, ...rest }) =>
         item?.publicIdentifier
           ? this.getProfile({ publicIdentifier: item.publicIdentifier, findEmail, ...rest })
-          : { skipResult: true, stopIfAllSkipped: true },
+          : { skipResult: true },
       scrapeDetails: true,
       entityName: 'profiles',
       ...options,
@@ -194,7 +192,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostShort>)
-          : { skipResult: true, stopIfAllSkipped: true },
+          : { skipResult: true },
       scrapeDetails: false,
       entityName: 'posts',
       ...options,
@@ -208,7 +206,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostReaction>)
-          : { skipResult: true, stopIfAllSkipped: true },
+          : { skipResult: true },
       scrapeDetails: false,
       entityName: 'post-reactions',
       ...options,
@@ -222,7 +220,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostComment>)
-          : { skipResult: true, stopIfAllSkipped: true },
+          : { skipResult: true },
       scrapeDetails: false,
       entityName: 'post-comments',
       ...options,
@@ -236,7 +234,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostComment>)
-          : { skipResult: true, stopIfAllSkipped: true },
+          : { skipResult: true },
       scrapeDetails: false,
       entityName: 'profile-comments',
       ...options,
@@ -252,7 +250,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item }) =>
         item?.id
           ? ({ entityId: item?.id, element: item } as ApiItemResponse<ProfileReaction>)
-          : { skipResult: true, stopIfAllSkipped: true },
+          : { skipResult: true },
       scrapeDetails: false,
       entityName: 'profile-reactions',
       ...options,
@@ -276,7 +274,7 @@ export class LinkedinScraper {
       fetchItem: async ({ item, ...rest }) => {
         return item?.id
           ? this.getProfile({ profileId: item.id, findEmail, ...rest })
-          : { skipResult: true, stopIfAllSkipped: true };
+          : { skipResult: true };
       },
       getFetchListParams: () => ({}),
       scrapeDetails: true,

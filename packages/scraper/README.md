@@ -1330,11 +1330,11 @@ Whether to make an additional request for each item details.
 true
 ```
 
-##### stopIfAllSkipped?
+##### keepScrapingIfAllSkippedOnPage?
 
-> `optional` **stopIfAllSkipped**: `boolean`
+> `optional` **keepScrapingIfAllSkippedOnPage**: `boolean`
 
-Whether to  stop scraping when all items on a page are skipped.
+Whether to keep scraping further pages if all items on the current page were skipped.
 
 ###### Default
 

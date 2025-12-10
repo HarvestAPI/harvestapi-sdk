@@ -15,10 +15,10 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
   scrapeDetails?: boolean;
 
   /**
-   * Whether to  stop scraping when all items on a page are skipped.
+   * Whether to keep scraping further pages if all items on the current page were skipped.
    * @default false
    */
-  stopIfAllSkipped?: boolean;
+  keepScrapingIfAllSkippedOnPage?: boolean;
 
   onItemScraped?: (
     args: {
@@ -50,7 +50,7 @@ export type ItemDetailsExtendedProperties = {
   skipResult?: boolean;
   skipCount?: boolean;
   done?: boolean;
-  stopIfAllSkipped?: boolean;
+  keepScrapingIfAllSkippedOnPage?: boolean;
 };
 
 export type ListingScraperOptions<TItemShot, TItemDetails> = ListingScraperConfig<

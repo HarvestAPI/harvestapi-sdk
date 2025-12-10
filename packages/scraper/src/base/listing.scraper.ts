@@ -255,17 +255,25 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     this.paginationToken = list?.pagination?.paginationToken || null;
     this.pagination = list?.pagination || null;
 
-    let details: TItemDetail[] = [];
+    let detailsResult: {
+      details: TItemDetail[];
+      skippedCounter?: number;
+      keepScrapingIfAllSkippedOnPage?: boolean;
+    } | null = null;
 
     if (list?.elements?.length) {
-      details = await this.scrapePageItems({ list });
+      detailsResult = await this.scrapePageItems({ list });
     } else {
       this.scrapePagesDone = true;
     }
     if (this.done) return;
 
-    if (!details?.length) {
+    if (!detailsResult?.details?.length) {
       this.scrapePagesDone = true;
+
+      if (detailsResult?.skippedCounter && detailsResult.keepScrapingIfAllSkippedOnPage) {
+        this.scrapePagesDone = false;
+      }
     } else {
       this.scrapePagesDone = false;
     }
@@ -278,9 +286,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     // }
 
     this.log(
-      `Scraped ${this.options.entityName} page ${page}. Items found: ${
-        details.length
-      }. Requests/second: ${(
+      `Scraped ${this.options.entityName} page ${page}. Items found: ${detailsResult?.details
+        .length}. Requests/second: ${(
         this.stats.requests /
         ((Date.now() - this.stats.requestsStartTime.getTime()) / 1000)
       ).toFixed(2)}`,
@@ -328,14 +335,18 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     return result;
   }
 
-  private async scrapePageItems({ list }: { list: ApiListResponse<TItemShort> }) {
+  private async scrapePageItems({ list }: { list: ApiListResponse<TItemShort> }): Promise<{
+    details: TItemDetail[];
+    skippedCounter?: number;
+    keepScrapingIfAllSkippedOnPage?: boolean;
+  }> {
     if (!list?.elements) {
-      return [];
+      return { details: [] };
     }
 
     const details: TItemDetail[] = [];
     let skippedCounter = 0;
-    let stopIfAllSkippedLocal = false;
+    let keepScrapingIfAllSkippedOnPageLocal = false;
 
     const itemPromises = list.elements.map(async (item) => {
       let itemDetails: TFetchedItemDetails<TItemDetail> = null;
@@ -373,8 +384,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         this.done = true;
       }
 
-      if (itemDetails?.stopIfAllSkipped) {
-        stopIfAllSkippedLocal = true;
+      if (itemDetails?.keepScrapingIfAllSkippedOnPage) {
+        keepScrapingIfAllSkippedOnPageLocal = true;
       }
 
       if (itemDetails?.skipResult) {
@@ -400,8 +411,10 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     });
 
     if (
+      skippedCounter &&
       list.elements.length === skippedCounter &&
-      (this.options.stopIfAllSkipped || stopIfAllSkippedLocal)
+      !this.options.keepScrapingIfAllSkippedOnPage &&
+      !keepScrapingIfAllSkippedOnPageLocal
     ) {
       this.scrapePagesDone = true;
       this.done = true;
@@ -417,7 +430,12 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       this.error = `Max items limit reached: ${this.options.maxItems}`;
     }
 
-    return details;
+    return {
+      details,
+      skippedCounter,
+      keepScrapingIfAllSkippedOnPage:
+        this.options.keepScrapingIfAllSkippedOnPage || keepScrapingIfAllSkippedOnPageLocal,
+    };
   }
 
   private onItemScraped = async ({
