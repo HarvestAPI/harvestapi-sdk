@@ -28,7 +28,13 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
     } & Partial<ApiItemResponse<TItemShot | TItemDetails>>,
   ) => any;
   onFirstPageFetched?: (args: { data: ApiListResponse<TItemShot> | null }) => any;
-  onPageFetched?: (args: { page: number; data: ApiListResponse<TItemShot> | null }) => any;
+  onPageFetched?: (args: {
+    page: number;
+    data: ApiListResponse<TItemShot> | null;
+  }) =>
+    | Promise<{ doneAll?: boolean; donePages?: boolean } | void>
+    | { doneAll?: boolean; donePages?: boolean }
+    | void;
   overrideConcurrency?: number;
   overridePageConcurrency?: number;
   maxItems?: number;

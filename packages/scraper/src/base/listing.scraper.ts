@@ -248,7 +248,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     page: number;
     scrapedList?: ApiListResponse<TItemShort>;
   }) {
-    if (this.done || this.scrapePagesDone) return;
+    if (this.done || (this.scrapePagesDone && !scrapedList)) return;
     const list = scrapedList ? scrapedList : await this.fetchPage({ page });
     if (this.done) return;
 
@@ -313,7 +313,13 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         return null;
       });
 
-    await this.options.onPageFetched?.({ page, data: result });
+    const onFetchedResult = await this.options.onPageFetched?.({ page, data: result });
+    if (onFetchedResult?.doneAll) {
+      this.done = true;
+    }
+    if (onFetchedResult?.donePages) {
+      this.scrapePagesDone = true;
+    }
 
     if (result?.error) {
       this.errorLog(

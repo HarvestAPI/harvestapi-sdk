@@ -1374,7 +1374,7 @@ false
 
 ##### onPageFetched()?
 
-> `optional` **onPageFetched**: (`args`) => `any`
+> `optional` **onPageFetched**: (`args`) => `Promise`\<\{ `doneAll`: `boolean`; `donePages`: `boolean`; \} \| `void`\> \| \{ `doneAll`: `boolean`; `donePages`: `boolean`; \} \| `void`
 
 ###### Parameters
 
@@ -1390,7 +1390,7 @@ false
 
 ###### Returns
 
-`any`
+`Promise`\<\{ `doneAll`: `boolean`; `donePages`: `boolean`; \} \| `void`\> \| \{ `doneAll`: `boolean`; `donePages`: `boolean`; \} \| `void`
 
 ##### overrideConcurrency?
 
