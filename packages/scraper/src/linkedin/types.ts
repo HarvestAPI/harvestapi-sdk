@@ -129,6 +129,34 @@ export interface SearchLinkedInSalesNavLeadsParams {
   functionIds?: string | string[];
 
   recentlyChangedJobs?: boolean;
+
+  /**
+   * Map:
+   * {
+  "ar": "Arabic",
+  "en": "English",
+  "es": "Spanish",
+  "pt": "Portuguese",
+  "zh": "Chinese",
+  "fr": "French",
+  "it": "Italian",
+  "ru": "Russian",
+  "de": "German",
+  "nl": "Dutch",
+  "tr": "Turkish",
+  "tl": "Tagalog",
+  "pl": "Polish",
+  "ko": "Korean",
+  "ja": "Japanese",
+  "ms": "Malay",
+  "no": "Norwegian",
+  "da": "Danish",
+  "ro": "Romanian",
+  "sv": "Swedish",
+  "in": "Bahasa Indonesia",
+  "cs": "Czech"
+}
+   */
   profileLanguages?: string | string[];
 
   excludeCurrentCompanies?: string | string[];
