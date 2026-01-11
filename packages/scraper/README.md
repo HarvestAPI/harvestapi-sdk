@@ -157,7 +157,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getProfile()
 
-> **getProfile**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-3)\>\>
+> **getProfile**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-4)\>\>
 
 ###### Parameters
 
@@ -167,7 +167,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-3)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-4)\>\>
 
 ##### getProfileId()
 
@@ -199,7 +199,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getCompany()
 
-> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
+> **getCompany**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-5)\>\>
 
 ###### Parameters
 
@@ -209,7 +209,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-4)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Company`](#company-5)\>\>
 
 ##### searchCompanies()
 
@@ -267,6 +267,34 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
 
+##### getProfilePosts()
+
+> **getProfilePosts**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetProfilePostsParams`](#getprofilepostsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
+
+##### getCompanyPosts()
+
+> **getCompanyPosts**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetCompanyPostsParams`](#getcompanypostsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostShort`](#postshort)\>\>
+
 ##### getPost()
 
 > **getPost**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostShort`](#postshort)\>\>
@@ -308,6 +336,20 @@ For more detailed information on the available methods and their parameters, che
 ###### Returns
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+##### getCommentReactions()
+
+> **getCommentReactions**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinPostCommentReactionsParams`](#getlinkedinpostcommentreactionsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
 
 ##### getProfileComments()
 
@@ -532,6 +574,34 @@ For more detailed information on the available methods and their parameters, che
 ###### Returns
 
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+##### searchAds()
+
+> **searchAds**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `id`: `string`; \}\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedinAdsParams`](#searchlinkedinadsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `id`: `string`; \}\>\>
+
+##### getAd()
+
+> **getAd**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `id`: `string`; \}\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinAdParams`](#getlinkedinadparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `id`: `string`; \}\>\>
 
 ## Interfaces
 
@@ -938,6 +1008,58 @@ Map:
 
 ***
 
+### SearchLinkedinAdsParams
+
+#### Properties
+
+##### searchUrl?
+
+> `optional` **searchUrl**: `string`
+
+##### accountOwner?
+
+> `optional` **accountOwner**: `null` \| `string`
+
+##### keyword?
+
+> `optional` **keyword**: `null` \| `string`
+
+##### countries?
+
+> `optional` **countries**: `null` \| `string` \| `string`[]
+
+##### dateOption?
+
+> `optional` **dateOption**: `null` \| `"last-30-days"` \| `"current-month"` \| `"current-year"` \| `"last-year"` \| `"custom-date-range"`
+
+##### startdate?
+
+> `optional` **startdate**: `null` \| `string`
+
+##### enddate?
+
+> `optional` **enddate**: `null` \| `string`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `null` \| `string`
+
+***
+
+### GetLinkedinAdParams
+
+#### Properties
+
+##### adId?
+
+> `optional` **adId**: `string`
+
+##### url?
+
+> `optional` **url**: `string`
+
+***
+
 ### SearchLinkedinCompaniesParams
 
 #### Properties
@@ -1076,6 +1198,10 @@ Map:
 
 > `optional` **targetUrl**: `string` \| `string`[]
 
+##### scrapePostedLimit?
+
+> `optional` **scrapePostedLimit**: [`ScrapePostedLimitOptions`](#scrapepostedlimitoptions)
+
 ##### profile?
 
 > `optional` **profile**: `string` \| `string`[]
@@ -1122,6 +1248,66 @@ Map:
 
 ***
 
+### GetProfilePostsParams
+
+#### Properties
+
+##### profile?
+
+> `optional` **profile**: `string`
+
+##### profileId?
+
+> `optional` **profileId**: `string`
+
+##### profilePublicIdentifier?
+
+> `optional` **profilePublicIdentifier**: `string`
+
+##### page?
+
+> `optional` **page**: `number`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `string`
+
+##### scrapePostedLimit?
+
+> `optional` **scrapePostedLimit**: [`ScrapePostedLimitOptions`](#scrapepostedlimitoptions)
+
+***
+
+### GetCompanyPostsParams
+
+#### Properties
+
+##### company?
+
+> `optional` **company**: `string`
+
+##### companyId?
+
+> `optional` **companyId**: `string`
+
+##### companyUniversalName?
+
+> `optional` **companyUniversalName**: `string`
+
+##### page?
+
+> `optional` **page**: `number`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `string`
+
+##### scrapePostedLimit?
+
+> `optional` **scrapePostedLimit**: [`ScrapePostedLimitOptions`](#scrapepostedlimitoptions)
+
+***
+
 ### GetLinkedinPostParams
 
 #### Properties
@@ -1143,6 +1329,20 @@ Map:
 ##### post
 
 > **post**: `string` \| `number`
+
+##### page?
+
+> `optional` **page**: `number`
+
+***
+
+### GetLinkedinPostCommentReactionsParams
+
+#### Properties
+
+##### url
+
+> **url**: `string` \| `number`
 
 ##### page?
 
@@ -1563,6 +1763,12 @@ false
 ### ExperienceLevel
 
 > **ExperienceLevel**: `"internship"` \| `"entry"` \| `"associate"` \| `"mid-senior"` \| `"director"` \| `"executive"`
+
+***
+
+### ScrapePostedLimitOptions
+
+> **ScrapePostedLimitOptions**: `"1h"` \| `"24h"` \| `"week"` \| `"month"` \| `"3months"` \| `"6months"` \| `"year"`
 
 ***
 
@@ -2190,7 +2396,7 @@ false
 
 ##### company
 
-> **company**: [`Company`](#company-4)
+> **company**: [`Company`](#company-5)
 
 ##### salary
 
@@ -2712,7 +2918,7 @@ false
 
 ### ScrapeLinkedinCompaniesParams
 
-> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-4)\>
+> **ScrapeLinkedinCompaniesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`CompanyShort`](#companyshort), [`Company`](#company-5)\>
 
 #### Type declaration
 
@@ -2724,7 +2930,7 @@ false
 
 ### ScrapeLinkedinProfilesParams
 
-> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-3)\>
+> **ScrapeLinkedinProfilesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-4)\>
 
 #### Type declaration
 
@@ -2740,7 +2946,7 @@ false
 
 ### ScrapeLinkedinSalesNavLeadsParams
 
-> **ScrapeLinkedinSalesNavLeadsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-3)\>
+> **ScrapeLinkedinSalesNavLeadsParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileShort`](#profileshort), [`Profile`](#profile-4)\>
 
 #### Type declaration
 
@@ -2820,7 +3026,7 @@ false
 
 ### ScrapeLinkedinServicesParams
 
-> **ScrapeLinkedinServicesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileServiceShort`](#profileserviceshort), [`ProfileServiceShort`](#profileserviceshort) & [`Profile`](#profile-3)\>
+> **ScrapeLinkedinServicesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`ProfileServiceShort`](#profileserviceshort), [`ProfileServiceShort`](#profileserviceshort) & [`Profile`](#profile-4)\>
 
 #### Type declaration
 

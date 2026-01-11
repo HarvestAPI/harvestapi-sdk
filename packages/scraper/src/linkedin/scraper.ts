@@ -5,14 +5,18 @@ import {
   BaseFetchParams,
   Company,
   CompanyShort,
+  GetCompanyPostsParams,
+  GetLinkedinAdParams,
   GetLinkedinCompanyParams,
   GetLinkedinJobParams,
+  GetLinkedinPostCommentReactionsParams,
   GetLinkedinPostCommentsParams,
   GetLinkedinPostParams,
   GetLinkedinPostReactionsParams,
   GetLinkedinProfileCommentsParams,
   GetLinkedInProfileParams,
   GetLinkedinProfileReactionsParams,
+  GetProfilePostsParams,
   Job,
   JobShort,
   PostComment,
@@ -32,6 +36,7 @@ import {
   ScrapeLinkedinProfilesParams,
   ScrapeLinkedinSalesNavLeadsParams,
   ScrapeLinkedinServicesParams,
+  SearchLinkedinAdsParams,
   SearchLinkedinCompaniesParams,
   SearchLinkedinJobsParams,
   SearchLinkedinPostsParams,
@@ -116,6 +121,18 @@ export class LinkedinScraper {
     return this.scraper.fetchApi({ path: 'linkedin/post-search', params });
   }
 
+  async getProfilePosts(
+    params: BaseFetchParams & GetProfilePostsParams,
+  ): Promise<ApiListResponse<PostShort>> {
+    return this.scraper.fetchApi({ path: 'linkedin/profile-posts', params });
+  }
+
+  async getCompanyPosts(
+    params: BaseFetchParams & GetCompanyPostsParams,
+  ): Promise<ApiListResponse<PostShort>> {
+    return this.scraper.fetchApi({ path: 'linkedin/company-posts', params });
+  }
+
   async getPost(
     params: BaseFetchParams & GetLinkedinPostParams,
   ): Promise<ApiItemResponse<PostShort>> {
@@ -132,6 +149,12 @@ export class LinkedinScraper {
     params: BaseFetchParams & GetLinkedinPostCommentsParams,
   ): Promise<ApiListResponse<PostComment>> {
     return this.scraper.fetchApi({ path: 'linkedin/post-comments', params });
+  }
+
+  async getCommentReactions(
+    params: BaseFetchParams & GetLinkedinPostCommentReactionsParams,
+  ): Promise<ApiListResponse<PostReaction>> {
+    return this.scraper.fetchApi({ path: 'linkedin/comment-reactions', params });
   }
 
   async getProfileComments(
@@ -319,6 +342,60 @@ export class LinkedinScraper {
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
+  }
+
+  async searchAds(
+    params: BaseFetchParams & SearchLinkedinAdsParams,
+  ): Promise<ApiListResponse<{ id: string }>> {
+    return this.scraper.fetchApi({ path: 'linkedin/ad-search', params });
+  }
+
+  async getAd(
+    params: BaseFetchParams & GetLinkedinAdParams,
+  ): Promise<ApiListResponse<{ id: string }>> {
+    return this.scraper.fetchApi({ path: 'linkedin/ad', params });
+  }
+
+  /**
+   * @internal
+   */
+  async sendConnection(
+    params: BaseFetchParams & { profile: string },
+  ): Promise<ApiListResponse<PostComment>> {
+    return this.scraper.fetchApi({ path: 'linkedin/send-connection', params });
+  }
+
+  /**
+   * @internal
+   */
+  async getMyReceivedConnections(params: BaseFetchParams): Promise<ApiListResponse<ProfileShort>> {
+    return this.scraper.fetchApi({ path: 'linkedin/my-received-connections', params });
+  }
+  /**
+   * @internal
+   */
+  async getMySentConnections(params: BaseFetchParams): Promise<ApiListResponse<ProfileShort>> {
+    return this.scraper.fetchApi({ path: 'linkedin/my-sent-connections', params });
+  }
+  /**
+   * @internal
+   */
+  async acceptMyConnectionInvitation(
+    params: BaseFetchParams & {
+      sender?: string;
+      invitationId?: string;
+      sharedSecret?: string;
+      senderId?: string;
+    },
+  ): Promise<ApiListResponse<PostComment>> {
+    return this.scraper.fetchApi({ path: 'linkedin/accept-my-connection-invitation', params });
+  }
+
+  /**
+   * @internal
+   */
+  async getMyProfile(params: BaseFetchParams): Promise<ApiItemResponse<Profile>> {
+    return this.scraper.fetchApi({ path: 'linkedin/my-profile', params });
   }
 
   /** @internal */

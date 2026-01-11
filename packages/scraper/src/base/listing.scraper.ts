@@ -162,12 +162,17 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     if (!firstPage?.elements?.length) {
       this.done = true;
-      if (this.error) {
+      if (this.error || !Array.isArray(firstPage?.elements)) {
         const errors = Array.isArray(this.error) ? this.error : [this.error];
+        if (!errors.length && firstPage?.error) {
+          errors.push(firstPage.error);
+        }
         this.errorLog(...errors);
+        this.log('Error fetching the first page. Exiting.');
+      } else {
+        this.log(`No items found. Exiting.`);
       }
 
-      this.log('Error fetching the first page or no items found. Exiting.');
       return;
     }
 

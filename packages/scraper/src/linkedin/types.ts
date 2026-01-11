@@ -190,6 +190,27 @@ export interface GetLinkedinCompanyParams {
   location?: string;
 }
 
+export interface SearchLinkedinAdsParams {
+  searchUrl?: string;
+  accountOwner?: string | null;
+  keyword?: string | null;
+  countries?: string[] | string | null;
+  dateOption?:
+    | 'last-30-days'
+    | 'current-month'
+    | 'current-year'
+    | 'last-year'
+    | 'custom-date-range'
+    | null;
+  startdate?: string | null;
+  enddate?: string | null;
+  paginationToken?: string | null;
+}
+export interface GetLinkedinAdParams {
+  adId?: string;
+  url?: string;
+}
+
 export type LinkedinCompanySize =
   | '1-10'
   | '11-50'
@@ -254,12 +275,22 @@ export interface SearchLinkedinJobsParams {
   salary?: LinkedinSalaryRange | LinkedinSalaryRange[];
 }
 
+export type ScrapePostedLimitOptions =
+  | '1h'
+  | '24h'
+  | 'week'
+  | 'month'
+  | '3months'
+  | '6months'
+  | 'year';
+
 export interface SearchLinkedinPostsParams {
   search?: string;
   page?: number;
   sortBy?: 'date' | 'relevance';
   postedLimit?: '24h' | 'week' | 'month';
   targetUrl?: string | string[];
+  scrapePostedLimit?: ScrapePostedLimitOptions;
   profile?: string | string[];
   companyId?: string | string[];
   profileId?: string | string[];
@@ -273,6 +304,24 @@ export interface SearchLinkedinPostsParams {
   paginationToken?: string | null;
 }
 
+export interface GetProfilePostsParams {
+  profile?: string;
+  profileId?: string;
+  profilePublicIdentifier?: string;
+  page?: number;
+  paginationToken?: string;
+  scrapePostedLimit?: ScrapePostedLimitOptions;
+}
+
+export interface GetCompanyPostsParams {
+  company?: string;
+  companyId?: string;
+  companyUniversalName?: string;
+  page?: number;
+  paginationToken?: string;
+  scrapePostedLimit?: ScrapePostedLimitOptions;
+}
+
 export interface GetLinkedinPostParams {
   post?: string | number;
   targetUrl?: string;
@@ -280,6 +329,11 @@ export interface GetLinkedinPostParams {
 
 export interface GetLinkedinPostReactionsParams {
   post: string | number;
+  page?: number;
+}
+
+export interface GetLinkedinPostCommentReactionsParams {
+  url: string | number;
   page?: number;
 }
 
