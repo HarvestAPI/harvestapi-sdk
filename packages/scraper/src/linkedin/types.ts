@@ -865,3 +865,75 @@ export type ErrorResponse = {
   message: string;
   status: number;
 };
+
+export type LinkedInAd = {
+  id: string;
+  variants: {
+    advertiser: {
+      name: string | null;
+      linkedinUrl: string | undefined;
+      imageUrl: string | null;
+      headline: string | null;
+    };
+    content: {
+      commentary: string | null;
+      imageUrl: string | null;
+      videoThumbnailUrl?: string | null;
+      videoSource?: any;
+      targetUrl: string | null;
+      headline: string | null;
+      ctaLabel: string | null;
+      slides?: {
+        imageUrl: string | null;
+        targetUrl: string | null;
+        title?: string | null;
+      }[];
+    };
+    creativeType: string | null;
+  }[];
+  about: {
+    format: string | null;
+    advertiserName: string | null;
+    advertiserUrl: string | null;
+    paidBy: string | null;
+    ranFrom?: string | null;
+    ranTo?: string | null;
+  };
+  impressions: {
+    total?: string | null;
+    byCountry?: {
+      name: string | null;
+      percentage: string | null;
+    }[];
+  };
+  targeting: {
+    segments: {
+      name: string;
+      includes: string[];
+      excludes: string[];
+    }[];
+    parameters: {
+      name: string;
+      targeted: boolean;
+      excluded: boolean;
+    }[];
+  };
+};
+
+export type LinkedinAdShort = {
+  id: string;
+  advertiser: {
+    name: string;
+    imageUrl: string;
+    headline: string;
+  };
+  content: {
+    headline: string | null;
+    commentary: string | null;
+    pageUrl: string;
+    imageUrl: string | null;
+    message?: string;
+    messageAuthor?: string;
+  };
+  creativeType: string;
+};

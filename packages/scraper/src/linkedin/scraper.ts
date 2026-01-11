@@ -19,6 +19,8 @@ import {
   GetProfilePostsParams,
   Job,
   JobShort,
+  LinkedInAd,
+  LinkedinAdShort,
   PostComment,
   PostReaction,
   PostShort,
@@ -346,13 +348,11 @@ export class LinkedinScraper {
 
   async searchAds(
     params: BaseFetchParams & SearchLinkedinAdsParams,
-  ): Promise<ApiListResponse<{ id: string }>> {
+  ): Promise<ApiListResponse<LinkedinAdShort>> {
     return this.scraper.fetchApi({ path: 'linkedin/ad-search', params });
   }
 
-  async getAd(
-    params: BaseFetchParams & GetLinkedinAdParams,
-  ): Promise<ApiListResponse<{ id: string }>> {
+  async getAd(params: BaseFetchParams & GetLinkedinAdParams): Promise<ApiItemResponse<LinkedInAd>> {
     return this.scraper.fetchApi({ path: 'linkedin/ad', params });
   }
 

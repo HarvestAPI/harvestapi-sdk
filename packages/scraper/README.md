@@ -577,7 +577,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### searchAds()
 
-> **searchAds**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `id`: `string`; \}\>\>
+> **searchAds**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`LinkedinAdShort`](#linkedinadshort)\>\>
 
 ###### Parameters
 
@@ -587,11 +587,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `id`: `string`; \}\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`LinkedinAdShort`](#linkedinadshort)\>\>
 
 ##### getAd()
 
-> **getAd**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `id`: `string`; \}\>\>
+> **getAd**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`LinkedInAd`](#linkedinad)\>\>
 
 ###### Parameters
 
@@ -601,7 +601,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<\{ `id`: `string`; \}\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`LinkedInAd`](#linkedinad)\>\>
 
 ## Interfaces
 
@@ -3057,6 +3057,134 @@ false
 ##### status
 
 > **status**: `number`
+
+***
+
+### LinkedInAd
+
+> **LinkedInAd**: `object`
+
+#### Type declaration
+
+##### id
+
+> **id**: `string`
+
+##### variants
+
+> **variants**: `object`[]
+
+##### about
+
+> **about**: `object`
+
+###### about.format
+
+> **format**: `string` \| `null`
+
+###### about.advertiserName
+
+> **advertiserName**: `string` \| `null`
+
+###### about.advertiserUrl
+
+> **advertiserUrl**: `string` \| `null`
+
+###### about.paidBy
+
+> **paidBy**: `string` \| `null`
+
+###### about.ranFrom?
+
+> `optional` **ranFrom**: `string` \| `null`
+
+###### about.ranTo?
+
+> `optional` **ranTo**: `string` \| `null`
+
+##### impressions
+
+> **impressions**: `object`
+
+###### impressions.total?
+
+> `optional` **total**: `string` \| `null`
+
+###### impressions.byCountry?
+
+> `optional` **byCountry**: `object`[]
+
+##### targeting
+
+> **targeting**: `object`
+
+###### targeting.segments
+
+> **segments**: `object`[]
+
+###### targeting.parameters
+
+> **parameters**: `object`[]
+
+***
+
+### LinkedinAdShort
+
+> **LinkedinAdShort**: `object`
+
+#### Type declaration
+
+##### id
+
+> **id**: `string`
+
+##### advertiser
+
+> **advertiser**: `object`
+
+###### advertiser.name
+
+> **name**: `string`
+
+###### advertiser.imageUrl
+
+> **imageUrl**: `string`
+
+###### advertiser.headline
+
+> **headline**: `string`
+
+##### content
+
+> **content**: `object`
+
+###### content.headline
+
+> **headline**: `string` \| `null`
+
+###### content.commentary
+
+> **commentary**: `string` \| `null`
+
+###### content.pageUrl
+
+> **pageUrl**: `string`
+
+###### content.imageUrl
+
+> **imageUrl**: `string` \| `null`
+
+###### content.message?
+
+> `optional` **message**: `string`
+
+###### content.messageAuthor?
+
+> `optional` **messageAuthor**: `string`
+
+##### creativeType
+
+> **creativeType**: `string`
 
 ***
 
