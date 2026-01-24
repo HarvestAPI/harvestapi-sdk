@@ -309,6 +309,7 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostShort`](#postshort)\>\>
 
+
 ##### getPostReactions()
 
 > **getPostReactions**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostReaction`](#postreaction)\>\>
@@ -925,10 +926,10 @@ Map:
 "C": "11-50",
 "D": "51-200",
 "E": "201-500",
-"F": "501-1,000",
-"G": "1,001-5,000",
-"H": "5,001-10,000",
-"I": "10,001+"
+"F": "501-1000",
+"G": "1001-5000",
+"H": "5001-10000",
+"I": "10001+"
 }
 
 ##### excludeCurrentCompanies?
