@@ -44,6 +44,17 @@ export interface SearchLinkedInProfilesParams {
   page?: number;
 }
 
+type LsnCompanyHeadcount =
+  | 'self-employed'
+  | '1-10'
+  | '11-50'
+  | '51-200'
+  | '201-500'
+  | '501-1000'
+  | '1001-5000'
+  | '5001-10000'
+  | '10001+';
+
 export interface SearchLinkedInSalesNavLeadsParams {
   currentCompanies?: string | string[];
   pastCompanies?: string | string[];
@@ -158,6 +169,22 @@ export interface SearchLinkedInSalesNavLeadsParams {
 }
    */
   profileLanguages?: string | string[];
+
+  /**
+   * Map:
+  {
+  "A": "self-employed",
+  "B": "1-10",
+  "C": "11-50",
+  "D": "51-200",
+  "E": "201-500",
+  "F": "501-1,000",
+  "G": "1,001-5,000",
+  "H": "5,001-10,000",
+  "I": "10,001+"
+}
+   */
+  companyHeadcount?: LsnCompanyHeadcount | LsnCompanyHeadcount[];
 
   excludeCurrentCompanies?: string | string[];
   excludePastCompanies?: string | string[];
@@ -325,6 +352,9 @@ export interface GetCompanyPostsParams {
 export interface GetLinkedinPostParams {
   post?: string | number;
   targetUrl?: string;
+}
+export interface GetLinkedinPostCommentParams {
+  url?: string | number;
 }
 
 export interface GetLinkedinPostReactionsParams {

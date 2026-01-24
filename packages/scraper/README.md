@@ -914,6 +914,23 @@ Map:
 "cs": "Czech"
 }
 
+##### companyHeadcount?
+
+> `optional` **companyHeadcount**: `LsnCompanyHeadcount` \| `LsnCompanyHeadcount`[]
+
+Map:
+{
+"A": "self-employed",
+"B": "1-10",
+"C": "11-50",
+"D": "51-200",
+"E": "201-500",
+"F": "501-1,000",
+"G": "1,001-5,000",
+"H": "5,001-10,000",
+"I": "10,001+"
+}
+
 ##### excludeCurrentCompanies?
 
 > `optional` **excludeCurrentCompanies**: `string` \| `string`[]
@@ -1319,6 +1336,16 @@ Map:
 ##### targetUrl?
 
 > `optional` **targetUrl**: `string`
+
+***
+
+### GetLinkedinPostCommentParams
+
+#### Properties
+
+##### url?
+
+> `optional` **url**: `string` \| `number`
 
 ***
 
