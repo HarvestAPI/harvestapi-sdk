@@ -9,7 +9,9 @@ import {
   GetLinkedinAdParams,
   GetLinkedinCompanyParams,
   GetLinkedinJobParams,
+  GetLinkedinPostCommentParams,
   GetLinkedinPostCommentReactionsParams,
+  GetLinkedinPostCommentRepliesParams,
   GetLinkedinPostCommentsParams,
   GetLinkedinPostParams,
   GetLinkedinPostReactionsParams,
@@ -141,6 +143,12 @@ export class LinkedinScraper {
     return this.scraper.fetchApi({ path: 'linkedin/post', params });
   }
 
+  async getSinglePostComment(
+    params: BaseFetchParams & GetLinkedinPostCommentParams,
+  ): Promise<ApiItemResponse<PostShort>> {
+    return this.scraper.fetchApi({ path: 'linkedin/post-comment', params });
+  }
+
   async getPostReactions(
     params: BaseFetchParams & GetLinkedinPostReactionsParams,
   ): Promise<ApiListResponse<PostReaction>> {
@@ -151,6 +159,12 @@ export class LinkedinScraper {
     params: BaseFetchParams & GetLinkedinPostCommentsParams,
   ): Promise<ApiListResponse<PostComment>> {
     return this.scraper.fetchApi({ path: 'linkedin/post-comments', params });
+  }
+
+  async getPostCommentReplies(
+    params: BaseFetchParams & GetLinkedinPostCommentRepliesParams,
+  ): Promise<ApiListResponse<PostComment>> {
+    return this.scraper.fetchApi({ path: 'linkedin/post-comment-replies', params });
   }
 
   async getCommentReactions(

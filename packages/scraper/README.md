@@ -309,6 +309,19 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostShort`](#postshort)\>\>
 
+##### getSinglePostComment()
+
+> **getSinglePostComment**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostShort`](#postshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinPostCommentParams`](#getlinkedinpostcommentparams)
+
+###### Returns
+
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostShort`](#postshort)\>\>
 
 ##### getPostReactions()
 
@@ -333,6 +346,20 @@ For more detailed information on the available methods and their parameters, che
 ###### params
 
 [`BaseFetchParams`](#basefetchparams) & [`GetLinkedinPostCommentsParams`](#getlinkedinpostcommentsparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+##### getPostCommentReplies()
+
+> **getPostCommentReplies**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinPostCommentRepliesParams`](#getlinkedinpostcommentrepliesparams)
 
 ###### Returns
 
@@ -917,7 +944,7 @@ Map:
 
 ##### companyHeadcount?
 
-> `optional` **companyHeadcount**: `LsnCompanyHeadcount` \| `LsnCompanyHeadcount`[]
+> `optional` **companyHeadcount**: [`LsnCompanyHeadcount`](#lsncompanyheadcount) \| [`LsnCompanyHeadcount`](#lsncompanyheadcount)[]
 
 Map:
 {
@@ -1404,6 +1431,28 @@ Map:
 
 ***
 
+### GetLinkedinPostCommentRepliesParams
+
+#### Properties
+
+##### url
+
+> **url**: `string` \| `number`
+
+##### page?
+
+> `optional` **page**: `number`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `null` \| `string`
+
+##### postedLimit?
+
+> `optional` **postedLimit**: `"24h"` \| `"week"` \| `"month"`
+
+***
+
 ### GetLinkedinProfileCommentsParams
 
 #### Properties
@@ -1761,6 +1810,12 @@ false
 ###### Returns
 
 `void`
+
+***
+
+### LsnCompanyHeadcount
+
+> **LsnCompanyHeadcount**: `"self-employed"` \| `"1-10"` \| `"11-50"` \| `"51-200"` \| `"201-500"` \| `"501-1000"` \| `"1001-5000"` \| `"5001-10000"` \| `"10001+"`
 
 ***
 

@@ -44,7 +44,7 @@ export interface SearchLinkedInProfilesParams {
   page?: number;
 }
 
-type LsnCompanyHeadcount =
+export type LsnCompanyHeadcount =
   | 'self-employed'
   | '1-10'
   | '11-50'
@@ -372,6 +372,12 @@ export interface GetLinkedinPostCommentsParams {
   page?: number;
   paginationToken?: string | null;
   sortBy?: 'date' | 'relevance';
+  postedLimit?: '24h' | 'week' | 'month';
+}
+export interface GetLinkedinPostCommentRepliesParams {
+  url: string | number;
+  page?: number;
+  paginationToken?: string | null;
   postedLimit?: '24h' | 'week' | 'month';
 }
 
