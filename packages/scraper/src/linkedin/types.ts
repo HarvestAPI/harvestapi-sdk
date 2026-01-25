@@ -883,6 +883,10 @@ export type ScrapeLinkedinPostCommentsParams = {
   query: GetLinkedinPostCommentsParams;
 } & ListingScraperConfig<PostComment, PostComment>;
 
+export type ScrapeLinkedinPostCommentRepliesParams = {
+  query: GetLinkedinPostCommentRepliesParams;
+} & ListingScraperConfig<PostComment, PostComment>;
+
 export type ScrapeLinkedinProfileCommentsParams = {
   query: GetLinkedinProfileCommentsParams;
 } & ListingScraperConfig<PostComment, PostComment>;

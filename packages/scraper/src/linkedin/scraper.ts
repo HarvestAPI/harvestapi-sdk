@@ -32,6 +32,7 @@ import {
   ProfileShort,
   ScrapeLinkedinCompaniesParams,
   ScrapeLinkedinJobsParams,
+  ScrapeLinkedinPostCommentRepliesParams,
   ScrapeLinkedinPostCommentsParams,
   ScrapeLinkedinPostReactionsParams,
   ScrapeLinkedinPostsParams,
@@ -262,6 +263,20 @@ export class LinkedinScraper {
           : { skipResult: true },
       scrapeDetails: false,
       entityName: 'post-comments',
+      ...options,
+      maxPageNumber: 100,
+    }).scrapeStart();
+  }
+
+  async scrapePostCommentReplies({ query, ...options }: ScrapeLinkedinPostCommentRepliesParams) {
+    return new ListingScraper<PostComment, PostComment>({
+      fetchList: (fetchArgs) => this.getPostCommentReplies({ ...query, ...fetchArgs }),
+      fetchItem: async ({ item }) =>
+        item?.id
+          ? ({ entityId: item?.id, element: item } as ApiItemResponse<PostComment>)
+          : { skipResult: true },
+      scrapeDetails: false,
+      entityName: 'post-comment-reply',
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();

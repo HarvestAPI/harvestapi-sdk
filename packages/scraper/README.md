@@ -491,6 +491,20 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
+##### scrapePostCommentReplies()
+
+> **scrapePostCommentReplies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
+###### Parameters
+
+###### \_\_namedParameters
+
+[`ScrapeLinkedinPostCommentRepliesParams`](#scrapelinkedinpostcommentrepliesparams)
+
+###### Returns
+
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+
 ##### scrapeProfileComments()
 
 > **scrapeProfileComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
@@ -3080,6 +3094,18 @@ false
 ##### query
 
 > **query**: [`GetLinkedinPostCommentsParams`](#getlinkedinpostcommentsparams)
+
+***
+
+### ScrapeLinkedinPostCommentRepliesParams
+
+> **ScrapeLinkedinPostCommentRepliesParams**: `object` & [`ListingScraperConfig`](#listingscraperconfigtitemshot-titemdetails)\<[`PostComment`](#postcomment), [`PostComment`](#postcomment)\>
+
+#### Type declaration
+
+##### query
+
+> **query**: [`GetLinkedinPostCommentRepliesParams`](#getlinkedinpostcommentrepliesparams)
 
 ***
 
