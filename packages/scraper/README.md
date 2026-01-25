@@ -311,7 +311,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getSinglePostComment()
 
-> **getSinglePostComment**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostShort`](#postshort)\>\>
+> **getSinglePostComment**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostComment`](#postcomment)\>\>
 
 ###### Parameters
 
@@ -321,7 +321,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostShort`](#postshort)\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`PostComment`](#postcomment)\>\>
 
 ##### getPostReactions()
 
@@ -1452,10 +1452,6 @@ Map:
 ##### url
 
 > **url**: `string` \| `number`
-
-##### page?
-
-> `optional` **page**: `number`
 
 ##### paginationToken?
 

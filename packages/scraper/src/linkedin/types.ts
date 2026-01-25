@@ -374,9 +374,9 @@ export interface GetLinkedinPostCommentsParams {
   sortBy?: 'date' | 'relevance';
   postedLimit?: '24h' | 'week' | 'month';
 }
+
 export interface GetLinkedinPostCommentRepliesParams {
   url: string | number;
-  page?: number;
   paginationToken?: string | null;
   postedLimit?: '24h' | 'week' | 'month';
 }

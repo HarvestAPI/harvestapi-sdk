@@ -146,7 +146,7 @@ export class LinkedinScraper {
 
   async getSinglePostComment(
     params: BaseFetchParams & GetLinkedinPostCommentParams,
-  ): Promise<ApiItemResponse<PostShort>> {
+  ): Promise<ApiItemResponse<PostComment>> {
     return this.scraper.fetchApi({ path: 'linkedin/post-comment', params });
   }
 
