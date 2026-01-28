@@ -74,7 +74,7 @@ export class BaseScraper {
       },
       body: body ? JSON.stringify(body) : undefined,
     }).catch((e) => {
-      this.logger.error('Error fetching API:', e);
+      this.logger.error('Error fetching API:', e, apiUrl);
       error = e;
       return null;
     });
