@@ -1,5 +1,7 @@
 import { ApiItemResponse, ApiListResponse, ApiPagination } from '../types';
 
+type OnPageFetchedCallbackRes = { doneAll?: boolean; donePages?: boolean; retryPage?: boolean };
+
 export type ListingScraperConfig<TItemShot, TItemDetails> = {
   outputType?: 'json' | 'sqlite' | 'callback';
   outputDir?: string;
@@ -31,10 +33,7 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
   onPageFetched?: (args: {
     page: number;
     data: ApiListResponse<TItemShot> | null;
-  }) =>
-    | Promise<{ doneAll?: boolean; donePages?: boolean } | void>
-    | { doneAll?: boolean; donePages?: boolean }
-    | void;
+  }) => Promise<OnPageFetchedCallbackRes | void> | OnPageFetchedCallbackRes | void;
   overrideConcurrency?: number;
   overridePageConcurrency?: number;
   maxItems?: number;

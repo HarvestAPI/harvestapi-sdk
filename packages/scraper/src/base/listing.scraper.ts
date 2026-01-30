@@ -335,9 +335,15 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     if (result?.status === 402) {
       this.done = true;
-      this.error = result.error || 'Request limit exceeded - upgrade your plan';
+      this.error = result.error || 'Request limit exceeded - please upgrade your plan';
       return null;
     }
+
+    if (onFetchedResult?.retryPage) {
+      this.log(`Retrying page ${page} of ${this.options.entityName}...`);
+      return this.fetchPage({ page });
+    }
+
     this.stats.pages++;
     this.stats.requests++;
     if (result?.entityId) {

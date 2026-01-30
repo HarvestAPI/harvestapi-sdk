@@ -1687,7 +1687,7 @@ false
 
 ##### onPageFetched()?
 
-> `optional` **onPageFetched**: (`args`) => `Promise`\<\{ `doneAll`: `boolean`; `donePages`: `boolean`; \} \| `void`\> \| \{ `doneAll`: `boolean`; `donePages`: `boolean`; \} \| `void`
+> `optional` **onPageFetched**: (`args`) => `Promise`\<`OnPageFetchedCallbackRes` \| `void`\> \| `OnPageFetchedCallbackRes` \| `void`
 
 ###### Parameters
 
@@ -1703,7 +1703,7 @@ false
 
 ###### Returns
 
-`Promise`\<\{ `doneAll`: `boolean`; `donePages`: `boolean`; \} \| `void`\> \| \{ `doneAll`: `boolean`; `donePages`: `boolean`; \} \| `void`
+`Promise`\<`OnPageFetchedCallbackRes` \| `void`\> \| `OnPageFetchedCallbackRes` \| `void`
 
 ##### overrideConcurrency?
 
