@@ -203,7 +203,11 @@ export class LinkedinScraper {
       fetchList: (listParams) => this.searchCompanies({ ...query, ...listParams }),
       fetchItem: async ({ item, ...rest }) =>
         item?.universalName
-          ? this.getCompany({ universalName: item.universalName, ...rest })
+          ? this.getCompany({
+              universalName: item.universalName,
+              scrapePeopleTab: options?.scrapePeopleTab,
+              ...rest,
+            })
           : { skipResult: true },
       scrapeDetails: true,
       entityName: 'companies',

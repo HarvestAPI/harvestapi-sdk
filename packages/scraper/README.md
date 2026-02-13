@@ -3027,6 +3027,10 @@ false
 
 > **query**: [`SearchLinkedinCompaniesParams`](#searchlinkedincompaniesparams)
 
+##### scrapePeopleTab?
+
+> `optional` **scrapePeopleTab**: `boolean`
+
 ***
 
 ### ScrapeLinkedinProfilesParams

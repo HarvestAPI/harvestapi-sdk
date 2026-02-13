@@ -860,6 +860,7 @@ export type ScrapeLinkedinJobsParams = {
 
 export type ScrapeLinkedinCompaniesParams = {
   query: SearchLinkedinCompaniesParams;
+  scrapePeopleTab?: boolean;
 } & ListingScraperConfig<CompanyShort, Company>;
 
 export type ScrapeLinkedinProfilesParams = {
