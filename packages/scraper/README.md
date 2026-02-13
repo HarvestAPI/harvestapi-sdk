@@ -671,6 +671,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **sessionId**: `string`
 
+##### usePrivatePool?
+
+> `optional` **usePrivatePool**: `boolean`
+
 ***
 
 ### GetLinkedInProfileParams
@@ -1064,6 +1068,10 @@ Map:
 ##### location?
 
 > `optional` **location**: `string`
+
+##### scrapePeopleTab?
+
+> `optional` **scrapePeopleTab**: `boolean`
 
 ***
 

@@ -10,6 +10,7 @@ export interface BaseFetchParams {
   desiredAccountId?: string;
   /** @internal */
   requiredAccountId?: string;
+  usePrivatePool?: boolean;
 }
 
 export interface GetLinkedInProfileParams {
@@ -215,6 +216,7 @@ export interface GetLinkedinCompanyParams {
   search?: string;
   query?: string;
   location?: string;
+  scrapePeopleTab?: boolean;
 }
 
 export interface SearchLinkedinAdsParams {
