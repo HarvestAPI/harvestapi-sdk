@@ -331,6 +331,16 @@ export interface SearchLinkedinPostsParams {
   authorsCompanyId?: string | string[];
   group?: string;
   paginationToken?: string | null;
+  mentioningMember?: string | string[];
+  mentioningCompany?: string | string[];
+  contentType?:
+    | 'videos'
+    | 'images'
+    | 'jobs'
+    | 'live_videos'
+    | 'documents'
+    | 'collaborative_articles';
+  authorsIndustryId?: string | string[];
 }
 
 export interface GetProfilePostsParams {

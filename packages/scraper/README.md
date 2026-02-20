@@ -1313,6 +1313,22 @@ Map:
 
 > `optional` **paginationToken**: `null` \| `string`
 
+##### mentioningMember?
+
+> `optional` **mentioningMember**: `string` \| `string`[]
+
+##### mentioningCompany?
+
+> `optional` **mentioningCompany**: `string` \| `string`[]
+
+##### contentType?
+
+> `optional` **contentType**: `"videos"` \| `"images"` \| `"jobs"` \| `"live_videos"` \| `"documents"` \| `"collaborative_articles"`
+
+##### authorsIndustryId?
+
+> `optional` **authorsIndustryId**: `string` \| `string`[]
+
 ***
 
 ### GetProfilePostsParams
