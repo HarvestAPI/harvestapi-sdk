@@ -341,6 +341,7 @@ export interface SearchLinkedinPostsParams {
     | 'documents'
     | 'collaborative_articles';
   authorsIndustryId?: string | string[];
+  authorKeywords?: string;
 }
 
 export interface GetProfilePostsParams {

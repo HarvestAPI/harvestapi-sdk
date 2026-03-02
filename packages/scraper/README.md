@@ -645,6 +645,90 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`LinkedInAd`](#linkedinad)\>\>
 
+##### sendConnection()
+
+> **sendConnection**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & `object`
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+##### getMyReceivedConnections()
+
+> **getMyReceivedConnections**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+##### getMySentConnections()
+
+> **getMySentConnections**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+##### acceptMyConnectionInvitation()
+
+> **acceptMyConnectionInvitation**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & `object`
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+##### getMyProfile()
+
+> **getMyProfile**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-4)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams)
+
+###### Returns
+
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Profile`](#profile-4)\>\>
+
+##### sendMessage()
+
+> **sendMessage**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & `object`
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+
 ## Interfaces
 
 ### BaseFetchParams
@@ -1328,6 +1412,10 @@ Map:
 ##### authorsIndustryId?
 
 > `optional` **authorsIndustryId**: `string` \| `string`[]
+
+##### authorKeywords?
+
+> `optional` **authorKeywords**: `string`
 
 ***
 

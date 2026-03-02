@@ -389,46 +389,44 @@ export class LinkedinScraper {
     return this.scraper.fetchApi({ path: 'linkedin/ad', params });
   }
 
-  /**
-   * @internal
-   */
   async sendConnection(
     params: BaseFetchParams & { profile: string },
   ): Promise<ApiListResponse<PostComment>> {
-    return this.scraper.fetchApi({ path: 'linkedin/send-connection', params });
+    return this.scraper.fetchApi({ path: 'linkedin/send-connection', params, method: 'POST' });
   }
 
-  /**
-   * @internal
-   */
   async getMyReceivedConnections(params: BaseFetchParams): Promise<ApiListResponse<ProfileShort>> {
-    return this.scraper.fetchApi({ path: 'linkedin/my-received-connections', params });
+    return this.scraper.fetchApi({ path: 'linkedin/received-connections', params });
   }
-  /**
-   * @internal
-   */
+
   async getMySentConnections(params: BaseFetchParams): Promise<ApiListResponse<ProfileShort>> {
-    return this.scraper.fetchApi({ path: 'linkedin/my-sent-connections', params });
+    return this.scraper.fetchApi({ path: 'linkedin/sent-connections', params });
   }
-  /**
-   * @internal
-   */
+
   async acceptMyConnectionInvitation(
     params: BaseFetchParams & {
-      sender?: string;
       invitationId?: string;
       sharedSecret?: string;
-      senderId?: string;
     },
   ): Promise<ApiListResponse<PostComment>> {
-    return this.scraper.fetchApi({ path: 'linkedin/accept-my-connection-invitation', params });
+    return this.scraper.fetchApi({
+      path: 'linkedin/accept-connection',
+      params,
+      method: 'POST',
+    });
   }
 
-  /**
-   * @internal
-   */
   async getMyProfile(params: BaseFetchParams): Promise<ApiItemResponse<Profile>> {
     return this.scraper.fetchApi({ path: 'linkedin/my-profile', params });
+  }
+
+  async sendMessage(
+    params: BaseFetchParams & {
+      recipientProfile: string;
+      message: string;
+    },
+  ): Promise<ApiListResponse<PostComment>> {
+    return this.scraper.fetchApi({ path: 'linkedin/send-message', params, method: 'POST' });
   }
 
   /** @internal */
