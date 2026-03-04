@@ -186,6 +186,7 @@ export interface SearchLinkedInSalesNavLeadsParams {
 }
    */
   companyHeadcount?: LsnCompanyHeadcount | LsnCompanyHeadcount[];
+  companyHeadquarterLocations?: string | string[];
 
   excludeCurrentCompanies?: string | string[];
   excludePastCompanies?: string | string[];
@@ -197,6 +198,7 @@ export interface SearchLinkedInSalesNavLeadsParams {
   excludeIndustryIds?: string | string[];
   excludeSeniorityLevelIds?: string | string[];
   excludeFunctionIds?: string | string[];
+  excludeCompanyHeadquarterLocations?: string | string[];
 
   /** @internal */
   skipSnRequest?: boolean;

@@ -1061,6 +1061,10 @@ Map:
 "I": "10001+"
 }
 
+##### companyHeadquarterLocations?
+
+> `optional` **companyHeadquarterLocations**: `string` \| `string`[]
+
 ##### excludeCurrentCompanies?
 
 > `optional` **excludeCurrentCompanies**: `string` \| `string`[]
@@ -1100,6 +1104,10 @@ Map:
 ##### excludeFunctionIds?
 
 > `optional` **excludeFunctionIds**: `string` \| `string`[]
+
+##### excludeCompanyHeadquarterLocations?
+
+> `optional` **excludeCompanyHeadquarterLocations**: `string` \| `string`[]
 
 ***
 
