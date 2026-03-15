@@ -1849,6 +1849,26 @@ false
 
 > `optional` **optionsOverride**: `Partial`\<`ListingScraperOptions`\<`TItemShot`, `TItemDetails`\>\>
 
+##### disableLogTimestamps?
+
+> `optional` **disableLogTimestamps**: `boolean`
+
+##### onLog()?
+
+> `optional` **onLog**: (`args`) => `undefined` \| \{ `skip`: `boolean`; `overrideArgs`: `any`[]; \}
+
+###### Parameters
+
+###### args
+
+###### args
+
+`any`[]
+
+###### Returns
+
+`undefined` \| \{ `skip`: `boolean`; `overrideArgs`: `any`[]; \}
+
 ##### sessionId?
 
 > `optional` **sessionId**: `string`

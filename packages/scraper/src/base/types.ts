@@ -1,6 +1,6 @@
 import { ApiItemResponse, ApiListResponse, ApiPagination } from '../types';
 
-type OnPageFetchedCallbackRes = { doneAll?: boolean; donePages?: boolean; retryPage?: boolean };
+export type OnPageFetchedCallbackRes = { doneAll?: boolean; donePages?: boolean; retryPage?: boolean };
 
 export type ListingScraperConfig<TItemShot, TItemDetails> = {
   outputType?: 'json' | 'sqlite' | 'callback';
@@ -40,6 +40,8 @@ export type ListingScraperConfig<TItemShot, TItemDetails> = {
   disableLog?: boolean;
   disableErrorLog?: boolean;
   optionsOverride?: Partial<ListingScraperOptions<TItemShot, TItemDetails>>;
+  disableLogTimestamps?: boolean;
+  onLog?: (args: { args: any[] }) => undefined | { skip: boolean; overrideArgs?: any[] };
   sessionId?: string;
   addListingHeaders?: Record<string, string>;
   addItemHeaders?: Record<string, string>;

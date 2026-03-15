@@ -3,8 +3,12 @@ import fs from 'fs-extra';
 import { dirname, resolve } from 'path';
 import type { Database } from 'sqlite';
 import { ApiItemResponse, ApiListResponse, ApiPagination } from '../types';
-import { createConcurrentQueues } from '../utils';
-import { ItemDetailsExtendedProperties, ListingScraperOptions } from './types';
+import { createConcurrentQueues, sleep } from '../utils';
+import {
+  ItemDetailsExtendedProperties,
+  ListingScraperOptions,
+  OnPageFetchedCallbackRes,
+} from './types';
 import { styleText } from 'node:util';
 
 type TFetchedItemDetails<TItemDetail> =
@@ -69,12 +73,33 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
   log(...args: any[]) {
     if (!this.options.disableLog) {
-      console.log(`[${new Date().toISOString()}]`, ...args); // eslint-disable-line no-console
+      const onLogResult = this.options.onLog?.({ args });
+      if (onLogResult?.skip) {
+        return;
+      }
+      if (onLogResult?.overrideArgs) {
+        args = onLogResult.overrideArgs;
+      }
+      // eslint-disable-next-line no-console
+      console.log(
+        `${this.options.disableLogTimestamps ? '' : `[${new Date().toISOString()}]`}`,
+        ...args,
+      );
     }
   }
   errorLog(...args: any[]) {
     if (!this.options.disableErrorLog) {
-      console.error(`[${new Date().toISOString()}]`, ...args);
+      const onLogResult = this.options.onLog?.({ args });
+      if (onLogResult?.skip) {
+        return;
+      }
+      if (onLogResult?.overrideArgs) {
+        args = onLogResult.overrideArgs;
+      }
+      console.error(
+        `${this.options.disableLogTimestamps ? '' : `[${new Date().toISOString()}]`}`,
+        ...args,
+      );
     }
   }
 
@@ -152,14 +177,6 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     const concurrency =
       this.options?.overrideConcurrency || firstPage?.user?.requestsConcurrency || 1;
 
-    this.log(
-      `Scraping ${this.options.entityName} with ${concurrency} concurrent ${
-        concurrency === 1 ? 'worker' : 'workers'
-      }... Total pages: ${totalPages}. Total items: ${
-        firstPage?.pagination?.totalElements || firstPage?.elements?.length || 0
-      }`,
-    );
-
     if (!firstPage?.elements?.length) {
       this.done = true;
       if (this.error || !Array.isArray(firstPage?.elements)) {
@@ -182,6 +199,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     );
     this.fetchItemQueue = createConcurrentQueues(concurrency, async ({ item, pagination }) => {
       if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
+        this.log(`Max items limit of ${this.options.maxItems} reached. Stopping scraping.`);
         this.done = true;
         this.error = `Max items limit reached: ${this.options.maxItems}`;
         return null;
@@ -220,6 +238,14 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     if (this.options.takePages && this.options.takePages > 0) {
       lastPageNumber = Math.min(startPageNumber + this.options.takePages - 1, totalPages);
     }
+
+    this.log(
+      `Total pages: ${totalPages}. Total items: ${
+        firstPage?.pagination?.totalElements || firstPage?.elements?.length || 0
+      }. Scraping up to page ${lastPageNumber}${
+        this.options.maxItems ? ` or until ${this.options.maxItems} items are scraped` : ''
+      }.`,
+    );
 
     const promises: Promise<void>[] = [];
     for (let page = startPageNumber; page <= lastPageNumber; page++) {
@@ -269,6 +295,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     if (list?.elements?.length) {
       detailsResult = await this.scrapePageItems({ list });
     } else {
+      this.log(`No items found on page ${page}. Marking pages scraping as done.`);
       this.scrapePagesDone = true;
     }
     if (this.done) return;
@@ -278,6 +305,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
       if (detailsResult?.skippedCounter && detailsResult.keepScrapingIfAllSkippedOnPage) {
         this.scrapePagesDone = false;
+      } else {
+        this.log(`No items scraped from page ${page}. Marking pages scraping as done.`);
       }
     } else {
       this.scrapePagesDone = false;
@@ -291,38 +320,76 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     // }
 
     this.log(
-      `Scraped ${this.options.entityName} page ${page}. Items found: ${detailsResult?.details
-        .length}. Requests/second: ${(
-        this.stats.requests /
-        ((Date.now() - this.stats.requestsStartTime.getTime()) / 1000)
-      ).toFixed(2)}`,
+      `Scraped ${this.options.entityName} page ${page}. Items found: ${detailsResult?.details.length}.`,
     );
   }
 
   private async fetchPage({ page }: { page: number }) {
     this.log(`Scraping page ${page} of ${this.options.entityName}...`);
 
-    const result = await this.options
-      .fetchList({
-        page,
-        paginationToken: this.paginationToken,
-        sessionId: this.options.sessionId,
-        addHeaders: this.options.addListingHeaders,
-        ...this.options.getFetchListParams?.({
-          page,
-          pagination: this.pagination,
-        }),
-      })
-      .catch((error) => {
-        this.errorLog('Error fetching page', page, error);
-        return null;
-      });
+    let result: ApiListResponse<TItemShort> | null = null as any;
 
-    const onFetchedResult = await this.options.onPageFetched?.({ page, data: result });
+    const runFetcher = async () => {
+      result = await this.options
+        .fetchList({
+          page,
+          paginationToken: this.paginationToken,
+          sessionId: this.options.sessionId,
+          addHeaders: this.options.addListingHeaders,
+          ...this.options.getFetchListParams?.({
+            page,
+            pagination: this.pagination,
+          }),
+        })
+        .catch((error) => {
+          this.errorLog('Error fetching page', page, error);
+          return null;
+        });
+    };
+
+    await runFetcher();
+
+    if (!result?.pagination || (this.pagination?.totalPages && !result?.pagination?.totalPages)) {
+      this.log(`Page ${page} failed. Retrying...`);
+      await sleep(5000);
+      await runFetcher();
+    }
+    if (this.pagination?.totalPages && !result?.pagination?.totalPages) {
+      this.log(`Page ${page} failed. Retrying...`);
+      await sleep(5000);
+      await runFetcher();
+    }
+
+    let onPageFetchedPromise:
+      | Promise<OnPageFetchedCallbackRes | void>
+      | OnPageFetchedCallbackRes
+      | void
+      | null = null;
+
+    if (this.options.onPageFetched) {
+      try {
+        onPageFetchedPromise = this.options.onPageFetched({ page, data: result });
+      } catch (error) {
+        this.errorLog('Error in onPageFetched callback', error);
+      }
+      if (
+        typeof (onPageFetchedPromise as Promise<OnPageFetchedCallbackRes | void>)?.catch ===
+        'function'
+      ) {
+        (onPageFetchedPromise as Promise<OnPageFetchedCallbackRes | void>).catch((error) => {
+          this.errorLog('Error in onPageFetched callback', error);
+          return null;
+        });
+      }
+    }
+    const onFetchedResult = await onPageFetchedPromise;
+
     if (onFetchedResult?.doneAll) {
+      this.log(`Marking scraping as done based on onPageFetched result.`);
       this.done = true;
     }
     if (onFetchedResult?.donePages) {
+      this.log(`Marking pages scraping as done based on onPageFetched result.`);
       this.scrapePagesDone = true;
     }
 
@@ -334,6 +401,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     }
 
     if (result?.status === 402) {
+      this.log(`Request limit exceeded - please upgrade your plan. Marking scraping as done.`);
       this.done = true;
       this.error = result.error || 'Request limit exceeded - please upgrade your plan';
       return null;
@@ -378,8 +446,9 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         itemDetails = await this.fetchItemQueue({ item, pagination: list.pagination });
 
         if (itemDetails?.status === 402) {
+          this.log(`Request limit exceeded - please upgrade your plan. Marking scraping as done.`);
           this.done = true;
-          this.error = itemDetails?.error || 'Request limit exceeded - upgrade your plan';
+          this.error = itemDetails?.error || 'Request limit exceeded - please upgrade your plan';
           return null;
         }
       } else {
@@ -397,6 +466,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
         this.stats.requests++;
       }
       if (itemDetails?.done) {
+        this.log(`Marking pages scraping as done based on item details for item ${item.id}.`);
         this.scrapePagesDone = true;
         this.done = true;
       }
@@ -412,6 +482,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
       if (itemDetails?.element && itemDetails.entityId) {
         if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
+          this.log(`Max items limit of ${this.options.maxItems} reached. Stopping scraping.`);
           this.done = true;
           this.error = `Max items limit reached: ${this.options.maxItems}`;
           return null;
@@ -443,6 +514,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     });
 
     if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
+      this.log(`Max items limit of ${this.options.maxItems} reached. Stopping scraping.`);
       this.done = true;
       this.error = `Max items limit reached: ${this.options.maxItems}`;
     }
@@ -495,6 +567,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       );
     } catch (error) {
       this.error = ['Error creating SQLite database:', error];
+      this.errorLog(...this.error);
       this.done = true;
     }
   }
