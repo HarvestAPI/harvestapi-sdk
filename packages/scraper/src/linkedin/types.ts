@@ -11,6 +11,8 @@ export interface BaseFetchParams {
   /** @internal */
   requiredAccountId?: string;
   usePrivatePool?: boolean;
+  /** @internal */
+  overridePath?: string;
 }
 
 export interface GetLinkedInProfileParams {

@@ -35,6 +35,10 @@ export class BaseScraper {
         error: 'API Key is required to fetch API',
       };
     }
+    if (params?.overridePath) {
+      path = params?.overridePath;
+      delete params.overridePath;
+    }
     if (!path) {
       this.logger.error('Path is required');
       return {
