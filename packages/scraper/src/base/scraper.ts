@@ -32,13 +32,12 @@ export class BaseScraper {
       return { error: 'API Key is required to fetch API' };
     }
 
-    // 1. Clone params so we don't mutate the original args across retries!
     const params = args.params ? { ...args.params } : {};
     let path = args.path;
 
     if (params.overridePath) {
       path = params.overridePath;
-      delete params.overridePath; // Safe because we cloned `params`
+      delete params.overridePath;
     }
 
     if (!path) {
@@ -84,10 +83,10 @@ export class BaseScraper {
       let data;
       try {
         data = await response.json();
-      } catch (jsonError) {
+      } catch (jsonError: any) {
         this.logger.error('Error parsing response:', jsonError);
         return {
-          error: 'Failed to parse JSON response',
+          error: jsonError,
           status: response.status,
         };
       }
