@@ -391,15 +391,15 @@ export class LinkedinScraper {
 
   async sendConnection(
     params: BaseFetchParams & { profile: string },
-  ): Promise<ApiListResponse<PostComment>> {
+  ): Promise<ApiListResponse<any>> {
     return this.scraper.fetchApi({ path: 'linkedin/send-connection', params, method: 'POST' });
   }
 
-  async getMyReceivedConnections(params: BaseFetchParams): Promise<ApiListResponse<ProfileShort>> {
+  async getMyReceivedConnections(params: BaseFetchParams): Promise<ApiListResponse<any>> {
     return this.scraper.fetchApi({ path: 'linkedin/received-connections', params });
   }
 
-  async getMySentConnections(params: BaseFetchParams): Promise<ApiListResponse<ProfileShort>> {
+  async getMySentConnections(params: BaseFetchParams): Promise<ApiListResponse<any>> {
     return this.scraper.fetchApi({ path: 'linkedin/sent-connections', params });
   }
 
@@ -408,7 +408,7 @@ export class LinkedinScraper {
       invitationId?: string;
       sharedSecret?: string;
     },
-  ): Promise<ApiListResponse<PostComment>> {
+  ): Promise<ApiListResponse<any>> {
     return this.scraper.fetchApi({
       path: 'linkedin/accept-connection',
       params,
@@ -425,8 +425,16 @@ export class LinkedinScraper {
       recipientProfile: string;
       message: string;
     },
-  ): Promise<ApiListResponse<PostComment>> {
+  ): Promise<ApiListResponse<any>> {
     return this.scraper.fetchApi({ path: 'linkedin/send-message', params, method: 'POST' });
+  }
+
+  async follow(
+    params: BaseFetchParams & {
+      targetUrl: string;
+    },
+  ): Promise<ApiListResponse<any>> {
+    return this.scraper.fetchApi({ path: 'linkedin/follow', params, method: 'POST' });
   }
 
   /** @internal */

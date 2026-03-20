@@ -647,7 +647,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### sendConnection()
 
-> **sendConnection**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+> **sendConnection**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ###### Parameters
 
@@ -657,11 +657,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ##### getMyReceivedConnections()
 
-> **getMyReceivedConnections**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+> **getMyReceivedConnections**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ###### Parameters
 
@@ -671,11 +671,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ##### getMySentConnections()
 
-> **getMySentConnections**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+> **getMySentConnections**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ###### Parameters
 
@@ -685,11 +685,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ##### acceptMyConnectionInvitation()
 
-> **acceptMyConnectionInvitation**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+> **acceptMyConnectionInvitation**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ###### Parameters
 
@@ -699,7 +699,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ##### getMyProfile()
 
@@ -717,7 +717,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### sendMessage()
 
-> **sendMessage**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+> **sendMessage**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ###### Parameters
 
@@ -727,7 +727,21 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`PostComment`](#postcomment)\>\>
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
+
+##### follow()
+
+> **follow**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & `object`
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ## Interfaces
 
