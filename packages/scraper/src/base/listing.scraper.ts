@@ -198,22 +198,40 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       (args) => this.scrapePage(args),
     );
     this.fetchItemQueue = createConcurrentQueues(concurrency, async ({ item, pagination }) => {
+      if (this.done) return null;
+
       if (this.options.maxItems && this.stats.itemsSuccess + 1 > this.options.maxItems) {
         this.log(`Max items limit of ${this.options.maxItems} reached. Stopping scraping.`);
         this.done = true;
         this.error = `Max items limit reached: ${this.options.maxItems}`;
         return null;
       }
-      const result = await this.options
-        .fetchItem({
-          item,
-          addHeaders: this.options.addItemHeaders,
-          // sessionId: this.options.sessionId,
-        })
-        ?.catch((error) => {
-          this.errorLog('Error scraping item', error);
-          return null;
-        });
+
+      let doneCheckInterval: NodeJS.Timeout | null = null;
+
+      const result = await Promise.race([
+        this.options
+          .fetchItem({
+            item,
+            addHeaders: this.options.addItemHeaders,
+            // sessionId: this.options.sessionId,
+          })
+          ?.catch((error) => {
+            this.errorLog('Error scraping item', error);
+            return null;
+          }),
+        new Promise<null>((resolve) => {
+          doneCheckInterval = setInterval(() => {
+            if (this.done) {
+              resolve(null);
+            }
+          });
+        }),
+      ]);
+
+      if (doneCheckInterval) {
+        clearInterval(doneCheckInterval);
+      }
 
       if (!result) return null;
       return {
@@ -426,6 +444,9 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     keepScrapingIfAllSkippedOnPage?: boolean;
   }> {
     if (!list?.elements) {
+      return { details: [] };
+    }
+    if (this.done) {
       return { details: [] };
     }
 
