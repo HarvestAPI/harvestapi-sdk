@@ -44,6 +44,7 @@ export interface SearchLinkedInProfilesParams {
   lastName?: string;
   keywordsCompany?: string;
   keywordsSchool?: string;
+  followerOf?: string | string[];
   page?: number;
 }
 

@@ -885,6 +885,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **keywordsSchool**: `string`
 
+##### followerOf?
+
+> `optional` **followerOf**: `string` \| `string`[]
+
 ##### page?
 
 > `optional` **page**: `number`
