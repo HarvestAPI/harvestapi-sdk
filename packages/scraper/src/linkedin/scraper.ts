@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { BaseScraper, ScraperOptions } from '../base';
 import { ListingScraper } from '../base/listing.scraper';
 import { ApiItemResponse, ApiListResponse } from '../types';
@@ -193,6 +194,7 @@ export class LinkedinScraper {
         item?.id ? this.getJob({ jobId: item.id, ...rest }) : { skipResult: true },
       scrapeDetails: true,
       entityName: 'jobs',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 40,
     }).scrapeStart();
@@ -211,6 +213,7 @@ export class LinkedinScraper {
           : { skipResult: true },
       scrapeDetails: true,
       entityName: 'companies',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
@@ -225,6 +228,7 @@ export class LinkedinScraper {
           : { skipResult: true },
       scrapeDetails: true,
       entityName: 'profiles',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
@@ -239,6 +243,7 @@ export class LinkedinScraper {
           : { skipResult: true },
       scrapeDetails: false,
       entityName: 'posts',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
@@ -253,6 +258,7 @@ export class LinkedinScraper {
           : { skipResult: true },
       scrapeDetails: false,
       entityName: 'post-reactions',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
@@ -267,6 +273,7 @@ export class LinkedinScraper {
           : { skipResult: true },
       scrapeDetails: false,
       entityName: 'post-comments',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
@@ -281,6 +288,7 @@ export class LinkedinScraper {
           : { skipResult: true },
       scrapeDetails: false,
       entityName: 'post-comment-reply',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
@@ -295,6 +303,7 @@ export class LinkedinScraper {
           : { skipResult: true },
       scrapeDetails: false,
       entityName: 'profile-comments',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
@@ -311,6 +320,7 @@ export class LinkedinScraper {
           : { skipResult: true },
       scrapeDetails: false,
       entityName: 'profile-reactions',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
@@ -338,6 +348,7 @@ export class LinkedinScraper {
       scrapeDetails: true,
       entityName: 'profiles',
       warnPageLimit: true,
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
@@ -374,6 +385,7 @@ export class LinkedinScraper {
       },
       scrapeDetails: true,
       entityName: 'services',
+      sessionId: crypto.randomUUID(),
       ...options,
       maxPageNumber: 100,
     }).scrapeStart();
