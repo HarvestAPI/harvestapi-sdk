@@ -47,6 +47,7 @@ import {
   SearchLinkedinJobsParams,
   SearchLinkedinPostsParams,
   SearchLinkedInProfilesParams,
+  SearchLinkedInSalesNavAccountParams,
   SearchLinkedInSalesNavLeadsParams,
   SearchLinkedinServicesParams,
 } from './types';
@@ -354,6 +355,12 @@ export class LinkedinScraper {
     }).scrapeStart();
   }
 
+  async searchSalesNavigatorAccounts(
+    params: BaseFetchParams & SearchLinkedInSalesNavAccountParams,
+  ): Promise<ApiListResponse<ProfileShort>> {
+    return this.scraper.fetchApi({ path: 'linkedin-sales-nav/account-search', params });
+  }
+
   async getGroup(
     params: BaseFetchParams & { groupId?: string; url?: string },
   ): Promise<ApiItemResponse<{ name: string; url: string }>> {
@@ -407,7 +414,7 @@ export class LinkedinScraper {
     return this.scraper.fetchApi({ path: 'linkedin/send-connection', params, method: 'POST' });
   }
 
-  async getMyReceivedConnections(params: BaseFetchParams): Promise<ApiListResponse<any>> {
+  async getMyReceivedConnections(params: BaseFetchParams): Promise<ApiItemResponse<any>> {
     return this.scraper.fetchApi({ path: 'linkedin/received-connections', params });
   }
 

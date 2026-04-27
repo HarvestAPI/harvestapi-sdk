@@ -144,6 +144,7 @@ export interface SearchLinkedInSalesNavLeadsParams {
   functionIds?: string | string[];
 
   recentlyChangedJobs?: boolean;
+  postedOnLinkedin?: boolean;
 
   /**
    * Map:
@@ -202,6 +203,90 @@ export interface SearchLinkedInSalesNavLeadsParams {
   excludeSeniorityLevelIds?: string | string[];
   excludeFunctionIds?: string | string[];
   excludeCompanyHeadquarterLocations?: string | string[];
+
+  /** @internal */
+  skipSnRequest?: boolean;
+}
+
+export type LinkedinLsnSearchAccountQueryRange = {
+  min?: number;
+  max?: number;
+};
+
+export interface SearchLinkedInSalesNavAccountParams {
+  search?: string;
+  page?: number;
+
+  headquarterLocations?: string | string[];
+  headquarterGeoIds?: string | string[];
+  industryIds?: string | string[];
+
+  /**
+   * Available options:
+   * "self-employed", "1-10", "11-50", "51-200", "201-500", "501-1000", "1001-5000", "5001-10000", "10001+"
+   */
+  companyHeadcount?: string | string[];
+
+  /**
+   * Format: `min-max`. Example: `1-10`
+   */
+  companyHeadcountGrowth?: string;
+  /**
+   * Format: `min-max;currency`. Example: `1-10;USD`
+   */
+  annualRevenue?: string;
+
+  /**
+   * Available options:
+   * "1-50", "51-100", "101-1000", "1001-5000", "5001+",
+   */
+  numOfFollowers?: string | string[];
+
+  /**
+   * Format: `min-max;department`. Example: `1-10;Accounting`.
+   *
+   * Full department list:
+   * 'Accounting', 'Administrative', 'Arts and Design', 'Business Development', 'Community and Social Services', 'Consulting', 'Education', 'Engineering', 'Entrepreneurship', 'Finance', 'Healthcare Services', 'Human Resources', 'Information Technology', 'Legal', 'Marketing', 'Media and Communication', 'Military and Protective Services', 'Operations', 'Product Management', 'Program and Project Management', 'Purchasing', 'Quality Assurance', 'Real Estate', 'Research', 'Sales', 'Support'
+   */
+  departmentHeadcount?: string;
+  /**
+   * Format: `min-max;department`. Example: `1-10;Accounting`
+   */
+  departmentHeadcountGrowth?: string;
+
+  /**
+   * Available options:
+   * "HIRING_ON_LINKEDIN"
+   */
+  jobOpportunities?: string | string[];
+
+  /**
+   * Available options:
+   * "SENIOR_LEADERSHIP_CHANGES_LAST_3_MONTHS", "FUNDING_EVENTS_PAST_12_MONTHS"
+   */
+  accountActivities?: string | string[];
+
+  /**
+   * Available options:
+   * "MODERATE_OR_HIGH_INTENT"
+   */
+  buyerIntentRelation?: string | string[];
+
+  /**
+   * Available options:
+   * "50", "51_100", "101_250", "251_500"
+   */
+  fortune?: string | string[];
+
+  postalCodes?: string | string[];
+  technologiesUsed?: string | string[];
+
+  excludeHeadquarterLocations?: string | string[];
+  excludeHeadquarterGeoIds?: string | string[];
+  excludeIndustryIds?: string | string[];
+  excludeCompanyHeadcount?: string | string[];
+
+  salesNavUrl?: string;
 
   /** @internal */
   skipSnRequest?: boolean;
@@ -307,6 +392,7 @@ export interface SearchLinkedinJobsParams {
   postedLimit?: '1h' | '24h' | 'week' | 'month';
   page?: number;
   salary?: LinkedinSalaryRange | LinkedinSalaryRange[];
+  functionId?: string | string[];
 }
 
 export type ScrapePostedLimitOptions =

@@ -561,6 +561,20 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
+##### searchSalesNavigatorAccounts()
+
+> **searchSalesNavigatorAccounts**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`SearchLinkedInSalesNavAccountParams`](#searchlinkedinsalesnavaccountparams)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
 ##### getGroup()
 
 > **getGroup**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<\{ `name`: `string`; `url`: `string`; \}\>\>
@@ -661,7 +675,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### getMyReceivedConnections()
 
-> **getMyReceivedConnections**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
+> **getMyReceivedConnections**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<`any`\>\>
 
 ###### Parameters
 
@@ -671,7 +685,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
+`Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<`any`\>\>
 
 ##### getMySentConnections()
 
@@ -1032,6 +1046,10 @@ Map:
 
 > `optional` **recentlyChangedJobs**: `boolean`
 
+##### postedOnLinkedin?
+
+> `optional` **postedOnLinkedin**: `boolean`
+
 ##### profileLanguages?
 
 > `optional` **profileLanguages**: `string` \| `string`[]
@@ -1126,6 +1144,129 @@ Map:
 ##### excludeCompanyHeadquarterLocations?
 
 > `optional` **excludeCompanyHeadquarterLocations**: `string` \| `string`[]
+
+***
+
+### SearchLinkedInSalesNavAccountParams
+
+#### Properties
+
+##### search?
+
+> `optional` **search**: `string`
+
+##### page?
+
+> `optional` **page**: `number`
+
+##### headquarterLocations?
+
+> `optional` **headquarterLocations**: `string` \| `string`[]
+
+##### headquarterGeoIds?
+
+> `optional` **headquarterGeoIds**: `string` \| `string`[]
+
+##### industryIds?
+
+> `optional` **industryIds**: `string` \| `string`[]
+
+##### companyHeadcount?
+
+> `optional` **companyHeadcount**: `string` \| `string`[]
+
+Available options:
+"self-employed", "1-10", "11-50", "51-200", "201-500", "501-1000", "1001-5000", "5001-10000", "10001+"
+
+##### companyHeadcountGrowth?
+
+> `optional` **companyHeadcountGrowth**: `string`
+
+Format: `min-max`. Example: `1-10`
+
+##### annualRevenue?
+
+> `optional` **annualRevenue**: `string`
+
+Format: `min-max;currency`. Example: `1-10;USD`
+
+##### numOfFollowers?
+
+> `optional` **numOfFollowers**: `string` \| `string`[]
+
+Available options:
+"1-50", "51-100", "101-1000", "1001-5000", "5001+",
+
+##### departmentHeadcount?
+
+> `optional` **departmentHeadcount**: `string`
+
+Format: `min-max;department`. Example: `1-10;Accounting`.
+
+Full department list:
+'Accounting', 'Administrative', 'Arts and Design', 'Business Development', 'Community and Social Services', 'Consulting', 'Education', 'Engineering', 'Entrepreneurship', 'Finance', 'Healthcare Services', 'Human Resources', 'Information Technology', 'Legal', 'Marketing', 'Media and Communication', 'Military and Protective Services', 'Operations', 'Product Management', 'Program and Project Management', 'Purchasing', 'Quality Assurance', 'Real Estate', 'Research', 'Sales', 'Support'
+
+##### departmentHeadcountGrowth?
+
+> `optional` **departmentHeadcountGrowth**: `string`
+
+Format: `min-max;department`. Example: `1-10;Accounting`
+
+##### jobOpportunities?
+
+> `optional` **jobOpportunities**: `string` \| `string`[]
+
+Available options:
+"HIRING_ON_LINKEDIN"
+
+##### accountActivities?
+
+> `optional` **accountActivities**: `string` \| `string`[]
+
+Available options:
+"SENIOR_LEADERSHIP_CHANGES_LAST_3_MONTHS", "FUNDING_EVENTS_PAST_12_MONTHS"
+
+##### buyerIntentRelation?
+
+> `optional` **buyerIntentRelation**: `string` \| `string`[]
+
+Available options:
+"MODERATE_OR_HIGH_INTENT"
+
+##### fortune?
+
+> `optional` **fortune**: `string` \| `string`[]
+
+Available options:
+"50", "51_100", "101_250", "251_500"
+
+##### postalCodes?
+
+> `optional` **postalCodes**: `string` \| `string`[]
+
+##### technologiesUsed?
+
+> `optional` **technologiesUsed**: `string` \| `string`[]
+
+##### excludeHeadquarterLocations?
+
+> `optional` **excludeHeadquarterLocations**: `string` \| `string`[]
+
+##### excludeHeadquarterGeoIds?
+
+> `optional` **excludeHeadquarterGeoIds**: `string` \| `string`[]
+
+##### excludeIndustryIds?
+
+> `optional` **excludeIndustryIds**: `string` \| `string`[]
+
+##### excludeCompanyHeadcount?
+
+> `optional` **excludeCompanyHeadcount**: `string` \| `string`[]
+
+##### salesNavUrl?
+
+> `optional` **salesNavUrl**: `string`
 
 ***
 
@@ -1348,6 +1489,10 @@ Map:
 ##### salary?
 
 > `optional` **salary**: [`LinkedinSalaryRange`](#linkedinsalaryrange) \| [`LinkedinSalaryRange`](#linkedinsalaryrange)[]
+
+##### functionId?
+
+> `optional` **functionId**: `string` \| `string`[]
 
 ***
 
@@ -1984,6 +2129,22 @@ false
 ### LsnCompanyHeadcount
 
 > **LsnCompanyHeadcount**: `"self-employed"` \| `"1-10"` \| `"11-50"` \| `"51-200"` \| `"201-500"` \| `"501-1000"` \| `"1001-5000"` \| `"5001-10000"` \| `"10001+"`
+
+***
+
+### LinkedinLsnSearchAccountQueryRange
+
+> **LinkedinLsnSearchAccountQueryRange**: `object`
+
+#### Type declaration
+
+##### min?
+
+> `optional` **min**: `number`
+
+##### max?
+
+> `optional` **max**: `number`
 
 ***
 
