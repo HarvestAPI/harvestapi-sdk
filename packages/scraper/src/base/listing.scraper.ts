@@ -30,6 +30,16 @@ function formatItemError(error: any): string {
   }
 }
 
+function describeFailedItem(itemDetails: TFetchedItemDetails<any>): string {
+  if (!itemDetails) return 'fetchItem returned no result.';
+  if (itemDetails.element && !itemDetails.entityId) {
+    return `the response has an element but no entityId (status ${
+      itemDetails.status ?? 'unknown'
+    }).`;
+  }
+  return `status ${itemDetails.status ?? 'unknown'}, error: ${formatItemError(itemDetails.error)}.`;
+}
+
 export class ListingScraper<TItemShort extends { id: string }, TItemDetail extends { id: string }> {
   private id = randomUUID();
   private startTime = new Date();
@@ -40,6 +50,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     items: 0,
     itemsSuccess: 0,
     itemsFailed: 0,
+    itemsSkipped: 0,
+    itemsDuplicate: 0,
     requests: 0,
     requestsStartTime: new Date(),
   };
@@ -136,6 +148,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       items: 0,
       itemsSuccess: 0,
       itemsFailed: 0,
+      itemsSkipped: 0,
+      itemsDuplicate: 0,
       requests: 0,
       requestsStartTime: new Date(),
     };
@@ -293,6 +307,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     this.log(
       `Finished scraping ${this.options.entityName}. Scraped pages: ${this.stats.pages}. Scraped items: ${this.stats.itemsSuccess}.` +
+        (this.stats.itemsSkipped ? ` Skipped items: ${this.stats.itemsSkipped}.` : '') +
+        (this.stats.itemsDuplicate ? ` Duplicate items: ${this.stats.itemsDuplicate}.` : '') +
         (this.stats.itemsFailed ? ` Failed items: ${this.stats.itemsFailed}.` : '') +
         ` Total requests: ${this.stats.requests}.`,
     );
@@ -322,6 +338,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     let detailsResult: {
       details: TItemDetail[];
       skippedCounter?: number;
+      duplicateCounter?: number;
+      noIdCounter?: number;
       failedCounter?: number;
       keepScrapingIfAllSkippedOnPage?: boolean;
     } | null = null;
@@ -355,7 +373,10 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     this.log(
       `Scraped ${this.options.entityName} page ${page}. Items found: ${detailsResult?.details.length}.` +
-        (detailsResult?.failedCounter ? ` Failed items: ${detailsResult.failedCounter}.` : ''),
+        (detailsResult?.skippedCounter ? ` Skipped: ${detailsResult.skippedCounter}.` : '') +
+        (detailsResult?.duplicateCounter ? ` Duplicates: ${detailsResult.duplicateCounter}.` : '') +
+        (detailsResult?.noIdCounter ? ` Without id: ${detailsResult.noIdCounter}.` : '') +
+        (detailsResult?.failedCounter ? ` Failed: ${detailsResult.failedCounter}.` : ''),
     );
   }
 
@@ -458,6 +479,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   private async scrapePageItems({ list }: { list: ApiListResponse<TItemShort> }): Promise<{
     details: TItemDetail[];
     skippedCounter?: number;
+    duplicateCounter?: number;
+    noIdCounter?: number;
     failedCounter?: number;
     keepScrapingIfAllSkippedOnPage?: boolean;
   }> {
@@ -470,6 +493,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     const details: TItemDetail[] = [];
     let skippedCounter = 0;
+    let duplicateCounter = 0;
+    let noIdCounter = 0;
     let failedCounter = 0;
     let keepScrapingIfAllSkippedOnPageLocal = false;
 
@@ -477,7 +502,20 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       let itemDetails: TFetchedItemDetails<TItemDetail> = null;
       this.stats.items++;
 
-      if (!item?.id || this.scrapedItems[item.id]) {
+      if (!item?.id) {
+        noIdCounter++;
+        this.stats.itemsSkipped++;
+        this.log(
+          `Skipping an item without id on page ${list.pagination?.pageNumber ?? 'unknown'}.`,
+        );
+        return null;
+      }
+      if (this.scrapedItems[item.id]) {
+        duplicateCounter++;
+        this.stats.itemsDuplicate++;
+        this.log(
+          `Skipping duplicate item ${item.id}, it was already returned by the search earlier.`,
+        );
         return null;
       }
       this.scrapedItems[item.id] = { found: true, scraped: false };
@@ -517,6 +555,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
       if (itemDetails?.skipResult) {
         skippedCounter++;
+        this.stats.itemsSkipped++;
         return null;
       }
 
@@ -536,14 +575,9 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
           details.push(itemDetails.element);
         }
       } else if (!this.done) {
-        // The item details request returned no usable data (non-OK response, missing element, etc.).
         failedCounter++;
         this.stats.itemsFailed++;
-        this.errorLog(
-          `Failed to scrape item ${item.id}. Status: ${
-            itemDetails?.status ?? 'unknown'
-          }. Error: ${formatItemError(itemDetails?.error)}`,
-        );
+        this.errorLog(`Failed to scrape item ${item.id}: ${describeFailedItem(itemDetails)}`);
       }
     });
 
@@ -571,6 +605,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     return {
       details,
       skippedCounter,
+      duplicateCounter,
+      noIdCounter,
       failedCounter,
       keepScrapingIfAllSkippedOnPage:
         this.options.keepScrapingIfAllSkippedOnPage || keepScrapingIfAllSkippedOnPageLocal,
