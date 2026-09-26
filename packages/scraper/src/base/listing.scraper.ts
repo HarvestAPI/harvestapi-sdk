@@ -19,6 +19,17 @@ type TFetchedItemDetails<TItemDetail> =
   | null
   | undefined;
 
+function formatItemError(error: any): string {
+  if (!error) return 'no item data returned';
+  if (typeof error === 'string') return error;
+  if (error?.message) return String(error.message);
+  try {
+    return JSON.stringify(error);
+  } catch {
+    return String(error);
+  }
+}
+
 export class ListingScraper<TItemShort extends { id: string }, TItemDetail extends { id: string }> {
   private id = randomUUID();
   private startTime = new Date();
@@ -28,6 +39,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     pagesSuccess: 0,
     items: 0,
     itemsSuccess: 0,
+    itemsFailed: 0,
     requests: 0,
     requestsStartTime: new Date(),
   };
@@ -123,6 +135,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
       pagesSuccess: 0,
       items: 0,
       itemsSuccess: 0,
+      itemsFailed: 0,
       requests: 0,
       requestsStartTime: new Date(),
     };
@@ -279,7 +292,9 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     await this.finalize();
 
     this.log(
-      `Finished scraping ${this.options.entityName}. Scraped pages: ${this.stats.pages}. Scraped items: ${this.stats.itemsSuccess}. Total requests: ${this.stats.requests}.`,
+      `Finished scraping ${this.options.entityName}. Scraped pages: ${this.stats.pages}. Scraped items: ${this.stats.itemsSuccess}.` +
+        (this.stats.itemsFailed ? ` Failed items: ${this.stats.itemsFailed}.` : '') +
+        ` Total requests: ${this.stats.requests}.`,
     );
 
     if (this.error) {
@@ -307,6 +322,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     let detailsResult: {
       details: TItemDetail[];
       skippedCounter?: number;
+      failedCounter?: number;
       keepScrapingIfAllSkippedOnPage?: boolean;
     } | null = null;
 
@@ -338,7 +354,8 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     // }
 
     this.log(
-      `Scraped ${this.options.entityName} page ${page}. Items found: ${detailsResult?.details.length}.`,
+      `Scraped ${this.options.entityName} page ${page}. Items found: ${detailsResult?.details.length}.` +
+        (detailsResult?.failedCounter ? ` Failed items: ${detailsResult.failedCounter}.` : ''),
     );
   }
 
@@ -441,6 +458,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
   private async scrapePageItems({ list }: { list: ApiListResponse<TItemShort> }): Promise<{
     details: TItemDetail[];
     skippedCounter?: number;
+    failedCounter?: number;
     keepScrapingIfAllSkippedOnPage?: boolean;
   }> {
     if (!list?.elements) {
@@ -452,6 +470,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     const details: TItemDetail[] = [];
     let skippedCounter = 0;
+    let failedCounter = 0;
     let keepScrapingIfAllSkippedOnPageLocal = false;
 
     const itemPromises = list.elements.map(async (item) => {
@@ -516,6 +535,15 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
           await this.onItemScrapedQueue({ item: itemDetails.element, ...itemDetails });
           details.push(itemDetails.element);
         }
+      } else if (!this.done) {
+        // The item details request returned no usable data (non-OK response, missing element, etc.).
+        failedCounter++;
+        this.stats.itemsFailed++;
+        this.errorLog(
+          `Failed to scrape item ${item.id}. Status: ${
+            itemDetails?.status ?? 'unknown'
+          }. Error: ${formatItemError(itemDetails?.error)}`,
+        );
       }
     });
 
@@ -543,6 +571,7 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
     return {
       details,
       skippedCounter,
+      failedCounter,
       keepScrapingIfAllSkippedOnPage:
         this.options.keepScrapingIfAllSkippedOnPage || keepScrapingIfAllSkippedOnPageLocal,
     };

@@ -1,8 +1,8 @@
 export { createLinkedinScraper } from './linkedin/utils';
 export { LinkedinScraper } from './linkedin/scraper';
-export * from './linkedin/types';
-export * from './types';
-export { ScraperOptions, ListingScraperConfig } from './base/types';
+export type * from './linkedin/types';
+export type * from './types';
+export type { ScraperOptions, ListingScraperConfig } from './base/types';
 export {
   createConcurrentQueues,
   createConcurrentQueuesPerKey,

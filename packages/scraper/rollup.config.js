@@ -30,6 +30,9 @@ export default {
     typescript({
       tsconfig: './tsconfig.json',
       useTsconfigDeclarationDir: true,
+      // rpt2's default include globs use the `+(|x)` extglob, which picomatch >= 2.3.2 no longer matches,
+      // leaving .ts files untransformed. Spell the patterns out explicitly.
+      include: ['*.ts', '**/*.ts', '*.tsx', '**/*.tsx'],
     }),
   ],
   external: (id) => /node_modules/.test(id) && !matchPackage(id),

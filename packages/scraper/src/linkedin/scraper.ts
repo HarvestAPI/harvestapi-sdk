@@ -457,7 +457,7 @@ export class LinkedinScraper {
   }
 
   /** @internal */
-  async test() {
-    return this.scraper.fetchApi({ path: 'linkedin/test' });
+  async test(params?: Record<string, any>) {
+    return this.scraper.fetchApi({ path: 'linkedin/test', params });
   }
 }

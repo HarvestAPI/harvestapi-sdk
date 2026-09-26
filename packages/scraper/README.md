@@ -409,7 +409,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### scrapeJobs()
 
-> **scrapeJobs**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeJobs**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -419,11 +419,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapeCompanies()
 
-> **scrapeCompanies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeCompanies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -433,11 +433,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapeProfiles()
 
-> **scrapeProfiles**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeProfiles**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -447,11 +447,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapePosts()
 
-> **scrapePosts**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapePosts**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -461,11 +461,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapePostReactions()
 
-> **scrapePostReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapePostReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -475,11 +475,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapePostComments()
 
-> **scrapePostComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapePostComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -489,11 +489,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapePostCommentReplies()
 
-> **scrapePostCommentReplies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapePostCommentReplies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -503,11 +503,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapeProfileComments()
 
-> **scrapeProfileComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeProfileComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -517,11 +517,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapeProfileReactions()
 
-> **scrapeProfileReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeProfileReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -531,7 +531,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### searchSalesNavigatorLeads()
 
@@ -549,7 +549,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### scrapeSalesNavigatorLeads()
 
-> **scrapeSalesNavigatorLeads**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeSalesNavigatorLeads**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -559,7 +559,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### searchSalesNavigatorAccounts()
 
@@ -619,7 +619,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### scrapeServices()
 
-> **scrapeServices**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeServices**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -629,7 +629,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### searchAds()
 
@@ -787,6 +787,10 @@ For more detailed information on the available methods and their parameters, che
 
 > `optional` **usePrivatePool**: `boolean`
 
+##### includeFields?
+
+> `optional` **includeFields**: `string`[]
+
 ***
 
 ### GetLinkedInProfileParams
@@ -902,6 +906,10 @@ For more detailed information on the available methods and their parameters, che
 ##### followerOf?
 
 > `optional` **followerOf**: `string` \| `string`[]
+
+##### connectionOf?
+
+> `optional` **connectionOf**: `string` \| `string`[]
 
 ##### page?
 
@@ -1588,6 +1596,10 @@ Available options:
 
 > `optional` **authorKeywords**: `string`
 
+##### contextCountry?
+
+> `optional` **contextCountry**: `"us"` \| `"gb"` \| `"de"` \| `"fr"`
+
 ***
 
 ### GetProfilePostsParams
@@ -1618,6 +1630,10 @@ Available options:
 
 > `optional` **scrapePostedLimit**: [`ScrapePostedLimitOptions`](#scrapepostedlimitoptions)
 
+##### contextCountry?
+
+> `optional` **contextCountry**: `"us"` \| `"gb"` \| `"de"` \| `"fr"`
+
 ***
 
 ### GetCompanyPostsParams
@@ -1647,6 +1663,10 @@ Available options:
 ##### scrapePostedLimit?
 
 > `optional` **scrapePostedLimit**: [`ScrapePostedLimitOptions`](#scrapepostedlimitoptions)
+
+##### contextCountry?
+
+> `optional` **contextCountry**: `"us"` \| `"gb"` \| `"de"` \| `"fr"`
 
 ***
 
@@ -1685,6 +1705,14 @@ Available options:
 ##### page?
 
 > `optional` **page**: `number`
+
+##### paginationToken?
+
+> `optional` **paginationToken**: `null` \| `string`
+
+##### sortBy?
+
+> `optional` **sortBy**: `"date"` \| `"relevance"`
 
 ***
 

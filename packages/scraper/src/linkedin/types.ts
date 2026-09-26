@@ -13,6 +13,7 @@ export interface BaseFetchParams {
   usePrivatePool?: boolean;
   /** @internal */
   overridePath?: string;
+  includeFields?: string[];
 }
 
 export interface GetLinkedInProfileParams {
@@ -45,6 +46,7 @@ export interface SearchLinkedInProfilesParams {
   keywordsCompany?: string;
   keywordsSchool?: string;
   followerOf?: string | string[];
+  connectionOf?: string | string[];
   page?: number;
 }
 
@@ -433,6 +435,7 @@ export interface SearchLinkedinPostsParams {
     | 'collaborative_articles';
   authorsIndustryId?: string | string[];
   authorKeywords?: string;
+  contextCountry?: 'us' | 'gb' | 'de' | 'fr';
 }
 
 export interface GetProfilePostsParams {
@@ -442,6 +445,7 @@ export interface GetProfilePostsParams {
   page?: number;
   paginationToken?: string;
   scrapePostedLimit?: ScrapePostedLimitOptions;
+  contextCountry?: 'us' | 'gb' | 'de' | 'fr';
 }
 
 export interface GetCompanyPostsParams {
@@ -451,6 +455,7 @@ export interface GetCompanyPostsParams {
   page?: number;
   paginationToken?: string;
   scrapePostedLimit?: ScrapePostedLimitOptions;
+  contextCountry?: 'us' | 'gb' | 'de' | 'fr';
 }
 
 export interface GetLinkedinPostParams {
@@ -464,6 +469,8 @@ export interface GetLinkedinPostCommentParams {
 export interface GetLinkedinPostReactionsParams {
   post: string | number;
   page?: number;
+  paginationToken?: string | null;
+  sortBy?: 'date' | 'relevance';
 }
 
 export interface GetLinkedinPostCommentReactionsParams {

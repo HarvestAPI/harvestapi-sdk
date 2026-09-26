@@ -67,7 +67,6 @@ export class BaseScraper {
     }
 
     const apiUrl = `${this.apiBaseUrl}${path}`;
-
     try {
       const response = await fetch(apiUrl, {
         method: args.method || 'GET',
@@ -92,15 +91,18 @@ export class BaseScraper {
       }
 
       if (!response.ok || !data) {
+        const error = data?.error?.error || data?.error || 'Unknown API Error';
+        this.logger.error(`API request failed with status ${response.status}:`, error, path);
+
         return {
-          error: data?.error?.error || data?.error || 'Unknown API Error',
+          error,
           status: response.status,
         };
       }
 
       return data;
     } catch (error: any) {
-      this.logger.error('Error fetching API:', error.message || error, path);
+      this.logger.error('Error fetching API:', error.message || error, error, path);
 
       return { error };
     }
