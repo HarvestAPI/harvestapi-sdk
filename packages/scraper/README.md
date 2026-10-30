@@ -225,6 +225,20 @@ For more detailed information on the available methods and their parameters, che
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`CompanyShort`](#companyshort)\>\>
 
+##### getCompanyPeopleStats()
+
+> **getCompanyPeopleStats**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`CompanyPeopleStats`](#companypeoplestats)\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinCompanyPeopleStats`](#getlinkedincompanypeoplestats)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`CompanyPeopleStats`](#companypeoplestats)\>\>
+
 ##### getJob()
 
 > **getJob**(`params`): `Promise`\<[`ApiItemResponse`](#apiitemresponsetitem)\<[`Job`](#job)\>\>
@@ -409,7 +423,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### scrapeJobs()
 
-> **scrapeJobs**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeJobs**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -419,11 +433,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapeCompanies()
 
-> **scrapeCompanies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeCompanies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -433,11 +447,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapeProfiles()
 
-> **scrapeProfiles**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeProfiles**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -447,11 +461,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapePosts()
 
-> **scrapePosts**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapePosts**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -461,11 +475,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapePostReactions()
 
-> **scrapePostReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapePostReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -475,11 +489,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapePostComments()
 
-> **scrapePostComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapePostComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -489,11 +503,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapePostCommentReplies()
 
-> **scrapePostCommentReplies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapePostCommentReplies**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -503,11 +517,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapeProfileComments()
 
-> **scrapeProfileComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeProfileComments**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -517,11 +531,11 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### scrapeProfileReactions()
 
-> **scrapeProfileReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeProfileReactions**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -531,7 +545,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### searchSalesNavigatorLeads()
 
@@ -549,7 +563,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### scrapeSalesNavigatorLeads()
 
-> **scrapeSalesNavigatorLeads**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeSalesNavigatorLeads**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -559,7 +573,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### searchSalesNavigatorAccounts()
 
@@ -574,6 +588,20 @@ For more detailed information on the available methods and their parameters, che
 ###### Returns
 
 `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<[`ProfileShort`](#profileshort)\>\>
+
+##### getSalesNavigatorAccount()
+
+> **getSalesNavigatorAccount**(`params`): `Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
+
+###### Parameters
+
+###### params
+
+[`BaseFetchParams`](#basefetchparams) & [`GetLinkedinSalesNavigatorAccount`](#getlinkedinsalesnavigatoraccount)
+
+###### Returns
+
+`Promise`\<[`ApiListResponse`](#apilistresponsetitem)\<`any`\>\>
 
 ##### getGroup()
 
@@ -619,7 +647,7 @@ For more detailed information on the available methods and their parameters, che
 
 ##### scrapeServices()
 
-> **scrapeServices**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+> **scrapeServices**(`__namedParameters`): `Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ###### Parameters
 
@@ -629,7 +657,7 @@ For more detailed information on the available methods and their parameters, che
 
 ###### Returns
 
-`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
+`Promise`\<`undefined` \| \{ `pages`: `number`; `pagesSuccess`: `number`; `items`: `number`; `itemsSuccess`: `number`; `itemsFailed`: `number`; `itemsSkipped`: `number`; `itemsDuplicate`: `number`; `requests`: `number`; `requestsStartTime`: `Date`; \}\>
 
 ##### searchAds()
 
@@ -1413,6 +1441,36 @@ Available options:
 ##### industryId?
 
 > `optional` **industryId**: `string` \| `number` \| `string`[] \| `number`[]
+
+***
+
+### GetLinkedinCompanyPeopleStats
+
+#### Properties
+
+##### query?
+
+> `optional` **query**: `string`
+
+***
+
+### GetLinkedinCompanyInsights
+
+#### Properties
+
+##### query?
+
+> `optional` **query**: `string`
+
+***
+
+### GetLinkedinSalesNavigatorAccount
+
+#### Properties
+
+##### query?
+
+> `optional` **query**: `string`
 
 ***
 
@@ -2234,6 +2292,12 @@ false
 
 > **firstName**: `string`
 
+##### pronoun
+
+> **pronoun**: `string` \| `null`
+
+The member's pronouns, e.g. "he/him"; null when not set.
+
 ##### headline
 
 > **headline**: `string`
@@ -2736,6 +2800,30 @@ false
 
 ***
 
+### CompanyPeopleStats
+
+> **CompanyPeopleStats**: `object`
+
+#### Type declaration
+
+##### id
+
+> **id**: `string`
+
+##### universalName
+
+> **universalName**: `string`
+
+##### linkedinUrl
+
+> **linkedinUrl**: `string`
+
+##### peopleStats?
+
+> `optional` **peopleStats**: `object`[]
+
+***
+
 ### Job
 
 > **Job**: `object`
@@ -2933,6 +3021,10 @@ false
 ##### author
 
 > **author**: `object`
+
+###### author.id?
+
+> `optional` **id**: `string` \| `null`
 
 ###### author.universalName?
 

@@ -40,6 +40,14 @@ function describeFailedItem(itemDetails: TFetchedItemDetails<any>): string {
   return `status ${itemDetails.status ?? 'unknown'}, error: ${formatItemError(itemDetails.error)}.`;
 }
 
+/**
+ * A 4xx answer rejects the request itself (invalid input, no credits, a bad API key), so
+ * sending it again gets the same answer. 408 and 429 are the exceptions.
+ */
+function isClientError(status: number | undefined): boolean {
+  return !!status && status >= 400 && status < 500 && status !== 408 && status !== 429;
+}
+
 export class ListingScraper<TItemShort extends { id: string }, TItemDetail extends { id: string }> {
   private id = randomUUID();
   private startTime = new Date();
@@ -405,12 +413,19 @@ export class ListingScraper<TItemShort extends { id: string }, TItemDetail exten
 
     await runFetcher();
 
-    if (!result?.pagination || (this.pagination?.totalPages && !result?.pagination?.totalPages)) {
+    if (
+      !isClientError(result?.status) &&
+      (!result?.pagination || (this.pagination?.totalPages && !result?.pagination?.totalPages))
+    ) {
       this.log(`Page ${page} failed. Retrying...`);
       await sleep(5000);
       await runFetcher();
     }
-    if (this.pagination?.totalPages && !result?.pagination?.totalPages) {
+    if (
+      !isClientError(result?.status) &&
+      this.pagination?.totalPages &&
+      !result?.pagination?.totalPages
+    ) {
       this.log(`Page ${page} failed. Retrying...`);
       await sleep(5000);
       await runFetcher();

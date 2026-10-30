@@ -351,6 +351,18 @@ export interface SearchLinkedinCompaniesParams {
   industryId?: string | string[] | number | number[];
 }
 
+export interface GetLinkedinCompanyPeopleStats {
+  query?: string;
+}
+
+export interface GetLinkedinCompanyInsights {
+  query?: string;
+}
+
+export interface GetLinkedinSalesNavigatorAccount {
+  query?: string;
+}
+
 export interface GetLinkedinJobParams {
   jobId?: string;
   url?: string;
@@ -522,6 +534,8 @@ export type Profile = {
   publicIdentifier: string;
   lastName: string;
   firstName: string;
+  /** The member's pronouns, e.g. "he/him"; null when not set. */
+  pronoun: string | null;
   headline: string;
   about: string;
   linkedinUrl: string;
@@ -555,11 +569,25 @@ export type Profile = {
     duration: string;
     position: string;
     location: string;
+    /** LinkedIn geo id of the position's location ("102194656"); null when it has none. */
+    geoId?: string | null;
     companyLink: string;
     description: string;
     startDate: { text: string; month?: string; year?: number } | null;
     endDate: { text: string; month?: string; year?: number } | null;
     employmentType: string;
+    /**
+     * The title in every language the member wrote it in, on profiles with more than one
+     * language; absent for a single language. `position` is the English title, else the one in
+     * the profile's primary language.
+     */
+    multiLocalePosition?: Array<{ position: string; locale: string }>;
+    /** The description in every language the member wrote it in, as `multiLocalePosition`. */
+    multiLocaleDescription?: Array<{ description: string; locale: string }>;
+    /** The company name the member wrote per language, when the languages differ. */
+    multiLocaleCompanyName?: Array<{ companyName: string; locale: string }>;
+    /** The location the member wrote per language, when the languages differ. */
+    multiLocaleLocation?: Array<{ location: string; locale: string }>;
   }>;
   education: Array<{
     title: string;
@@ -761,6 +789,19 @@ export type CompanyShort = {
   logo?: string;
 };
 
+export type CompanyPeopleStats = {
+  id: string;
+  universalName: string;
+  linkedinUrl: string;
+  peopleStats?: {
+    statTitle?: string;
+    values?: {
+      title?: string;
+      count?: number;
+    }[];
+  }[];
+};
+
 export type Job = {
   id: string;
   title?: string;
@@ -830,6 +871,7 @@ export type PostShort = {
     textLink?: string;
   }[];
   author: {
+    id?: string | null;
     universalName?: string | null;
     publicIdentifier?: string | null;
     type?: 'company' | 'profile';

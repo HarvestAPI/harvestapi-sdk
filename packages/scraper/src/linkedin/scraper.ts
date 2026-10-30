@@ -5,10 +5,13 @@ import { ApiItemResponse, ApiListResponse } from '../types';
 import {
   BaseFetchParams,
   Company,
+  CompanyPeopleStats,
   CompanyShort,
   GetCompanyPostsParams,
   GetLinkedinAdParams,
+  GetLinkedinCompanyInsights,
   GetLinkedinCompanyParams,
+  GetLinkedinCompanyPeopleStats,
   GetLinkedinJobParams,
   GetLinkedinPostCommentParams,
   GetLinkedinPostCommentReactionsParams,
@@ -19,6 +22,7 @@ import {
   GetLinkedinProfileCommentsParams,
   GetLinkedInProfileParams,
   GetLinkedinProfileReactionsParams,
+  GetLinkedinSalesNavigatorAccount,
   GetProfilePostsParams,
   Job,
   JobShort,
@@ -108,6 +112,12 @@ export class LinkedinScraper {
     params: BaseFetchParams & SearchLinkedinCompaniesParams,
   ): Promise<ApiListResponse<CompanyShort>> {
     return this.scraper.fetchApi({ path: 'linkedin/company-search', params });
+  }
+
+  async getCompanyPeopleStats(
+    params: BaseFetchParams & GetLinkedinCompanyPeopleStats,
+  ): Promise<ApiListResponse<CompanyPeopleStats>> {
+    return this.scraper.fetchApi({ path: 'linkedin/company-people-stats', params });
   }
 
   async getJob(params: BaseFetchParams & GetLinkedinJobParams): Promise<ApiItemResponse<Job>> {
@@ -359,6 +369,12 @@ export class LinkedinScraper {
     params: BaseFetchParams & SearchLinkedInSalesNavAccountParams,
   ): Promise<ApiListResponse<ProfileShort>> {
     return this.scraper.fetchApi({ path: 'linkedin-sales-nav/account-search', params });
+  }
+
+  async getSalesNavigatorAccount(
+    params: BaseFetchParams & GetLinkedinSalesNavigatorAccount,
+  ): Promise<ApiListResponse<any>> {
+    return this.scraper.fetchApi({ path: 'linkedin/account-insights', params });
   }
 
   async getGroup(
